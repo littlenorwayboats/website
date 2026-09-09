@@ -1,0 +1,123 @@
+import Link from "next/link";
+import { Logo } from "./Logo";
+import { bookingHref, navLinks } from "@/lib/nav";
+
+const footerLinks = [
+  ...navLinks,
+  { href: bookingHref, label: "Book Now" },
+  { href: "/#packages", label: "Packages" },
+];
+
+export function Footer() {
+  return (
+    <footer className="border-t border-iron/50 bg-norse-950 texture-noise">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <Link href="/" className="inline-block rounded-sm">
+            <Logo />
+          </Link>
+          <p className="mt-4 max-w-xs text-sm text-mist">
+            Viking-themed electric boat rentals. Quiet longships for harbor
+            cruises, sunsets, and small crews.
+          </p>
+        </div>
+        <div>
+          <h2 className="text-sm font-bold tracking-[0.2em] text-gold uppercase">
+            Address
+          </h2>
+          <address className="mt-3 not-italic text-sm text-parchment">
+            Harbor Landing Dock
+            <br />
+            Newport Beach, CA
+            <br />
+            <a className="mt-2 inline-block hover:text-gold" href="tel:+19495550142">
+              (949) 555-0142
+            </a>
+            <br />
+            <a
+              className="hover:text-gold"
+              href="mailto:hello@littlenorwayboats.com"
+            >
+              hello@littlenorwayboats.com
+            </a>
+          </address>
+        </div>
+        <nav aria-label="Footer">
+          <h2 className="text-sm font-bold tracking-[0.2em] text-gold uppercase">
+            Links
+          </h2>
+          <ul className="mt-3 columns-2 gap-6 text-sm">
+            {footerLinks.map((link) => (
+              <li key={link.href} className="mb-2">
+                {link.href.startsWith("/#") ? (
+                  <a className="text-parchment hover:text-gold" href={link.href}>
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link className="text-parchment hover:text-gold" href={link.href}>
+                    {link.label}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div>
+          <h2 className="text-sm font-bold tracking-[0.2em] text-gold uppercase">
+            Social
+          </h2>
+          <ul className="mt-3 flex gap-3">
+            <li>
+              <a
+                className="inline-flex size-10 items-center justify-center rounded-full border border-parchment/70 text-parchment hover:border-gold hover:text-gold"
+                href="https://www.instagram.com"
+                rel="noreferrer noopener"
+              >
+                <span className="sr-only">Instagram</span>
+                <svg viewBox="0 0 24 24" className="size-4" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 4.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 2A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5zM17.2 6.8a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"
+                  />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                className="inline-flex size-10 items-center justify-center rounded-full border border-parchment/70 text-parchment hover:border-gold hover:text-gold"
+                href="https://www.facebook.com"
+                rel="noreferrer noopener"
+              >
+                <span className="sr-only">Facebook</span>
+                <svg viewBox="0 0 24 24" className="size-4" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-2c0-.6.4-1 1-1z"
+                  />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                className="inline-flex size-10 items-center justify-center rounded-full border border-parchment/70 text-parchment hover:border-gold hover:text-gold"
+                href="https://x.com"
+                rel="noreferrer noopener"
+              >
+                <span className="sr-only">X</span>
+                <svg viewBox="0 0 24 24" className="size-4" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="m4 4 6.7 8.4L4.3 20H6l5.2-6.2L15.8 20H20l-7-8.8L19.4 4H17.7l-4.8 5.7L8.3 4z"
+                  />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p className="border-t border-black bg-black py-3 text-center text-xs text-mist">
+        © {new Date().getFullYear()} Little Norway Boats. All rights reserved.
+      </p>
+    </footer>
+  );
+}
