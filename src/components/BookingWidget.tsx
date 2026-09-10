@@ -43,7 +43,7 @@ export function BookingWidget({ namespace, calLink }: BookingWidgetProps) {
           dark: { "cal-brand": "#00eaff" },
           light: { "cal-brand": "#00eaff" },
         },
-        hideEventTypeDetails: true,
+        hideEventTypeDetails: false,
         layout: "month_view",
       });
       cal("on", { action: "linkReady", callback: onSettled });
