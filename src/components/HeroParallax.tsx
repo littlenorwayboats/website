@@ -19,10 +19,6 @@ export function HeroParallax({
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const imageNode = imageRef.current;
-    const textNode = textRef.current;
-    if (!imageNode || !textNode) return;
-
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (motion.matches) return;
 
@@ -30,6 +26,10 @@ export function HeroParallax({
 
     function update() {
       frame = 0;
+      const imageNode = imageRef.current;
+      const textNode = textRef.current;
+      if (!imageNode || !textNode) return;
+
       const scrolled = window.scrollY;
       imageNode.style.transform = `translate3d(0, ${scrolled * IMAGE_SHIFT}px, 0)`;
       textNode.style.transform = `translate3d(0, ${scrolled * TEXT_SHIFT}px, 0)`;
