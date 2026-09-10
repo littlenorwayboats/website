@@ -1,3 +1,5 @@
+import { withBasePath } from "./paths";
+
 export const PACKAGE_PARAM = "package";
 
 export const voyagePackages = [
@@ -41,5 +43,5 @@ export function getVoyagePackage(
 }
 
 export function bookingHrefForPackage(slug: VoyagePackageSlug): string {
-  return `/?${PACKAGE_PARAM}=${slug}#booking`;
+  return withBasePath(`/?${PACKAGE_PARAM}=${slug}#booking`);
 }

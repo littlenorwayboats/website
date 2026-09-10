@@ -1,3 +1,5 @@
+import { withBasePath } from "@/lib/paths";
+
 export function Logo({
   className = "h-[4.25rem] w-auto sm:h-20",
   priority = false,
@@ -8,9 +10,9 @@ export function Logo({
   return (
     <span className="inline-flex">
       <picture>
-        <source srcSet="/images/logo.webp" type="image/webp" />
+        <source srcSet={withBasePath("/images/logo.webp")} type="image/webp" />
         <img
-          src="/images/logo.png"
+          src={withBasePath("/images/logo.png")}
           alt="Little Norway Boats"
           width={256}
           height={256}

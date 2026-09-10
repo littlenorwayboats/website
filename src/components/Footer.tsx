@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { bookingHref, navLinks } from "@/lib/nav";
+import { bookingHref, navLinks, packagesHref } from "@/lib/nav";
+import { withBasePath } from "@/lib/paths";
 
 const footerLinks = [
   ...navLinks,
   { href: bookingHref, label: "Book Now" },
-  { href: "/#packages", label: "Packages" },
+  { href: packagesHref, label: "Packages" },
 ];
 
 export function Footer() {
@@ -47,7 +48,7 @@ export function Footer() {
             {footerLinks.map((link) => (
               <li key={link.href} className="mb-2">
                 {link.href.startsWith("/#") ? (
-                  <a className="text-parchment hover:text-gold" href={link.href}>
+                  <a className="text-parchment hover:text-gold" href={withBasePath(link.href)}>
                     {link.label}
                   </a>
                 ) : (

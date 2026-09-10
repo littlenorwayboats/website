@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { bookingHref } from "@/lib/nav";
+import { withBasePath } from "@/lib/paths";
 import { HeroParallax } from "./HeroParallax";
 
 export function Hero() {
@@ -12,7 +14,7 @@ export function Hero() {
         className="w-full text-center will-change-transform md:w-[54%] md:pr-6 lg:w-[48%]"
         image={
           <Image
-            src="/images/hero.jpg"
+            src={withBasePath("/images/hero.jpg")}
             alt="A quiet harbor at sunset with boats at rest on still water"
             fill
             priority
@@ -37,7 +39,7 @@ export function Hero() {
         </p>
         <div className="mt-7">
           <a
-            href="/#booking"
+            href={withBasePath(bookingHref)}
             className="neon-btn inline-flex rounded-sm px-7 py-2.5 font-display text-xl tracking-[0.06em] uppercase"
           >
             Book Your Odyssey

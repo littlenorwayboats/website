@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/paths";
 
 const photos = [
   {
@@ -50,7 +51,7 @@ export function Gallery() {
             <li key={photo.src}>
               <figure className="overflow-hidden stone-frame">
                 <Image
-                  src={photo.src}
+                  src={withBasePath(photo.src)}
                   alt={photo.alt}
                   width={1200}
                   height={900}

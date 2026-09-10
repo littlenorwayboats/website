@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { Logo } from "./Logo";
 import { bookingHref, navLinks } from "@/lib/nav";
+import { withBasePath } from "@/lib/paths";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -37,7 +38,9 @@ export function Header() {
   }
 
   function isCurrent(href: string) {
-    return href === "/" ? pathname === "/" : pathname === href;
+    const current = pathname.replace(/\/$/, "") || "/";
+    const target = href.replace(/\/$/, "") || "/";
+    return current === target;
   }
 
   return (
@@ -76,7 +79,7 @@ export function Header() {
         </nav>
 
         <a
-          href={bookingHref}
+          href={withBasePath(bookingHref)}
           className="neon-btn ml-3 hidden rounded-sm px-3.5 py-1.5 font-display text-lg tracking-[0.06em] uppercase lg:inline-flex"
         >
           Book Now
@@ -129,7 +132,7 @@ export function Header() {
             ))}
             <li>
               <a
-                href={bookingHref}
+                href={withBasePath(bookingHref)}
                 onClick={close}
                 className="neon-btn mt-2 inline-flex w-full justify-center rounded-sm px-4 py-3 font-display text-xl tracking-[0.06em] uppercase"
               >

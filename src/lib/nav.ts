@@ -6,3 +6,4 @@ export const navLinks = [
 ] as const;
 
 export const bookingHref = "/#booking";
+export const packagesHref = "/#packages";
