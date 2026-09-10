@@ -1,48 +1,35 @@
-const packages = [
-  {
-    name: "Sunset Sail",
-    length: "2 hours",
-    detail: "Golden hour on the harbor with room for up to 10 guests.",
-  },
-  {
-    name: "Harbor Raid",
-    length: "90 minutes",
-    detail: "A shorter loop past the docks, coves, and waterfront lights.",
-  },
-  {
-    name: "Feast Afloat",
-    length: "3 hours",
-    detail: "Extra time for picnics, playlists, and a slower Norse pace.",
-  },
-];
+import {
+  bookingHrefForPackage,
+  voyagePackages,
+} from "@/lib/packages";
 
 export function Packages() {
   return (
     <section
       id="packages"
       aria-labelledby="packages-heading"
-      className="bg-norse-950 px-4 py-16 texture-noise"
+      className="content-auto bg-norse-950 px-4 py-16 texture-noise"
     >
-      <div className="stone-frame wood-panel mx-auto max-w-6xl px-6 py-12 md:px-12">
+      <div className="stone-frame wood-panel mx-auto max-w-6xl px-6 py-14 md:px-12">
         <h2
           id="packages-heading"
-          className="text-center font-display text-3xl text-gold uppercase md:text-4xl"
+          className="text-center font-display text-3xl text-gold-bright uppercase [text-shadow:0_2px_6px_rgba(0,0,0,0.65)] md:text-4xl"
         >
           Popular Voyages &amp; Packages
         </h2>
         <ul className="mt-10 grid gap-4 md:grid-cols-3">
-          {packages.map((item) => (
-            <li key={item.name}>
-              <article className="h-full rounded-sm border border-gold/25 bg-norse-950/50 p-6">
-                <h3 className="font-display text-xl tracking-wide text-gold uppercase">
+          {voyagePackages.map((item) => (
+            <li key={item.slug}>
+              <article className="h-full rounded-xl border border-white/10 bg-[#1a1a1a]/90 p-6 shadow-[0_8px_24px_rgba(0,0,0,0.45)]">
+                <h3 className="font-display text-xl tracking-wide text-parchment uppercase">
                   {item.name}
                 </h3>
                 <p className="mt-2 text-sm font-semibold tracking-widest text-neon uppercase">
                   {item.length}
                 </p>
-                <p className="mt-3 text-mist">{item.detail}</p>
+                <p className="mt-3 text-mist/90">{item.detail}</p>
                 <a
-                  href="/#booking"
+                  href={bookingHrefForPackage(item.slug)}
                   className="mt-6 inline-flex text-sm font-semibold tracking-[0.16em] text-gold uppercase underline-offset-4 hover:underline"
                 >
                   Reserve {item.name}

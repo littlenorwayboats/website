@@ -10,9 +10,8 @@ export default function Home() {
     <main id="main-content" className="flex-1">
       <HashScroll />
       <Hero />
-      <Packages />
-      <IronDivider />
       <Features />
+      <Packages />
       <Booking />
     </main>
   );

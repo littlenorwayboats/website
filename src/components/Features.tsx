@@ -29,7 +29,7 @@ const features = [
 
 function LeafMark() {
   return (
-    <div className="flex aspect-16/10 items-center justify-center rounded-xl border border-gold/40 bg-norse-800">
+    <div className="flex aspect-16/10 items-center justify-center stone-frame bg-norse-800">
       <svg
         viewBox="0 0 64 64"
         className="h-20 w-20 text-emerald-400"
@@ -54,7 +54,7 @@ export function Features() {
   return (
     <section
       aria-labelledby="features-heading"
-      className="bg-norse-900 px-4 py-16 texture-noise"
+      className="content-auto bg-norse-900 px-4 py-16 texture-noise"
     >
       <div className="mx-auto max-w-6xl">
         <h2
@@ -68,13 +68,17 @@ export function Features() {
             <li key={feature.title}>
               <article>
                 {feature.image ? (
-                  <Image
-                    src={feature.image}
-                    alt={feature.alt}
-                    width={800}
-                    height={500}
-                    className="aspect-16/10 w-full rounded-xl border border-gold/40 object-cover"
-                  />
+                  <figure className="relative aspect-16/10 w-full stone-frame">
+                    <div className="absolute inset-0 overflow-hidden">
+                      <Image
+                        src={feature.image}
+                        alt={feature.alt}
+                        fill
+                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  </figure>
                 ) : (
                   <LeafMark />
                 )}

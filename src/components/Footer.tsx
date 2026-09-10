@@ -10,15 +10,15 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-iron/50 bg-norse-950 texture-noise">
+    <footer className="bg-norse-950 texture-noise">
+      <div className="gradient-band w-full" aria-hidden="true" />
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link href="/" className="inline-block rounded-sm">
-            <Logo />
+            <Logo className="h-28 w-auto" />
           </Link>
           <p className="mt-4 max-w-xs text-sm text-mist">
-            Viking-themed electric boat rentals. Quiet longships for harbor
-            cruises, sunsets, and small crews.
+            Quiet longships for harbor cruises, sunsets, and small crews.
           </p>
         </div>
         <div>
@@ -26,19 +26,16 @@ export function Footer() {
             Address
           </h2>
           <address className="mt-3 not-italic text-sm text-parchment">
-            Harbor Landing Dock
+            Lorem ipsum dolor sit amet
             <br />
-            Newport Beach, CA
+            Consectetur adipiscing elit
             <br />
-            <a className="mt-2 inline-block hover:text-gold" href="tel:+19495550142">
-              (949) 555-0142
+            <a className="mt-2 inline-block hover:text-gold" href="tel:+15555555555">
+              (555) 555-5555
             </a>
             <br />
-            <a
-              className="hover:text-gold"
-              href="mailto:hello@littlenorwayboats.com"
-            >
-              hello@littlenorwayboats.com
+            <a className="hover:text-gold" href="mailto:email@example.com">
+              email@example.com
             </a>
           </address>
         </div>
@@ -70,7 +67,7 @@ export function Footer() {
             <li>
               <a
                 className="inline-flex size-10 items-center justify-center rounded-full border border-parchment/70 text-parchment hover:border-gold hover:text-gold"
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/littlenorwayboats"
                 rel="noreferrer noopener"
               >
                 <span className="sr-only">Instagram</span>
@@ -93,21 +90,6 @@ export function Footer() {
                   <path
                     fill="currentColor"
                     d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-2c0-.6.4-1 1-1z"
-                  />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                className="inline-flex size-10 items-center justify-center rounded-full border border-parchment/70 text-parchment hover:border-gold hover:text-gold"
-                href="https://x.com"
-                rel="noreferrer noopener"
-              >
-                <span className="sr-only">X</span>
-                <svg viewBox="0 0 24 24" className="size-4" aria-hidden="true">
-                  <path
-                    fill="currentColor"
-                    d="m4 4 6.7 8.4L4.3 20H6l5.2-6.2L15.8 20H20l-7-8.8L19.4 4H17.7l-4.8 5.7L8.3 4z"
                   />
                 </svg>
               </a>

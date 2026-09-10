@@ -18,7 +18,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 7rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -33,6 +33,10 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  .hero-image-layer {
+    inset: 0;
+  }
 }
 
 body {
@@ -46,29 +50,115 @@ body {
   outline-offset: 3px;
 }
 
+:root {
+  --tex-walnut: image-set(
+    url("/images/textures/walnut-wood.webp") type("image/webp"),
+    url("/images/textures/walnut-wood.jpg") type("image/jpeg")
+  );
+}
+
 .texture-noise {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
 }
 
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 40rem;
+}
+
 .wood-panel {
-  background-color: #1a1410;
+  background-color: #2b1d15;
   background-image:
-    repeating-linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.22) 0px,
-      rgba(0, 0, 0, 0.22) 1px,
-      transparent 1px,
-      transparent 28px
-    ),
-    linear-gradient(180deg, #241c16 0%, #15110e 100%);
+    linear-gradient(180deg, rgba(12, 9, 7, 0.42), rgba(18, 12, 9, 0.28)),
+    var(--tex-walnut);
+  background-size: auto, 420px auto;
+  background-repeat: no-repeat, repeat;
 }
 
 .stone-frame {
-  border: 10px solid transparent;
-  border-image: linear-gradient(135deg, #6a635c, #2e2a26, #8a8378, #3a3530) 1;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-image-source: linear-gradient(
+    135deg,
+    var(--color-gold-bright) 0%,
+    var(--color-gold) 22%,
+    var(--color-iron) 48%,
+    var(--color-gold) 72%,
+    var(--color-gold-bright) 100%
+  );
+  border-image-slice: 1;
+  box-shadow: 0 14px 42px rgba(0, 0, 0, 0.55);
+}
+
+.nav-panel {
+  background-color: #2a2c2e;
   box-shadow:
-    inset 0 0 0 1px rgba(212, 180, 131, 0.25),
-    0 12px 40px rgba(0, 0, 0, 0.45);
+    0 10px 30px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.gradient-band {
+  height: 2px;
+  background-image: linear-gradient(
+    90deg,
+    var(--color-iron) 0%,
+    var(--color-gold) 22%,
+    var(--color-gold-bright) 50%,
+    var(--color-gold) 78%,
+    var(--color-iron) 100%
+  );
+}
+
+.hero-image-layer {
+  position: absolute;
+  inset: -18%;
+}
+
+.hero-veil {
+  background-image: linear-gradient(
+    to top,
+    rgba(8, 7, 6, 0.92) 0%,
+    rgba(8, 7, 6, 0.62) 45%,
+    rgba(8, 7, 6, 0.6) 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .hero-veil {
+    background-image:
+      linear-gradient(
+        100deg,
+        rgba(8, 7, 6, 0.94) 0%,
+        rgba(8, 7, 6, 0.86) 26%,
+        rgba(8, 7, 6, 0.48) 48%,
+        rgba(8, 7, 6, 0.08) 66%,
+        rgba(8, 7, 6, 0) 82%
+      ),
+      linear-gradient(to top, rgba(8, 7, 6, 0.7), rgba(8, 7, 6, 0) 40%);
+  }
+}
+
+.text-carved {
+  -webkit-text-stroke: 0.05em rgba(24, 14, 7, 0.8);
+  paint-order: stroke fill;
+  text-shadow:
+    0 2px 0 rgba(24, 14, 7, 0.5),
+    0 10px 26px rgba(0, 0, 0, 0.7);
+}
+
+.text-etched {
+  text-shadow:
+    0 1px 0 rgba(12, 8, 5, 0.9),
+    0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.wood-band {
+  background-color: #2b1d15;
+  background-image: var(--tex-walnut);
+  background-size: 420px auto;
+  background-repeat: repeat;
+  background-position: center;
 }
 
 .neon-btn {

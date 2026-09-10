@@ -4,12 +4,13 @@ import { Source_Sans_3 } from "next/font/google";
 import { SkipLink } from "@/components/SkipLink";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PreloadAssets } from "@/components/PreloadAssets";
 import "./globals.css";
 
 const display = localFont({
   src: [
     {
-      path: "../fonts/Norse.otf",
+      path: "../fonts/Norsebold.otf",
       weight: "400",
       style: "normal",
     },
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">
+        <PreloadAssets />
         <SkipLink />
         <Header />
         {children}

@@ -48,7 +48,7 @@ export function Gallery() {
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {photos.map((photo) => (
             <li key={photo.src}>
-              <figure className="overflow-hidden rounded-xl border border-gold/35">
+              <figure className="overflow-hidden stone-frame">
                 <Image
                   src={photo.src}
                   alt={photo.alt}

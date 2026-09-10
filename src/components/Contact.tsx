@@ -33,21 +33,18 @@ export function Contact() {
               Address
             </p>
             <p className="mt-2">
-              Harbor Landing Dock
+              Lorem ipsum dolor sit amet
               <br />
-              Newport Beach, CA
+              Consectetur adipiscing elit
             </p>
             <p className="mt-4">
-              <a className="hover:text-gold" href="tel:+19495550142">
-                (949) 555-0142
+              <a className="hover:text-gold" href="tel:+15555555555">
+                (555) 555-5555
               </a>
             </p>
             <p>
-              <a
-                className="hover:text-gold"
-                href="mailto:hello@littlenorwayboats.com"
-              >
-                hello@littlenorwayboats.com
+              <a className="hover:text-gold" href="mailto:email@example.com">
+                email@example.com
               </a>
             </p>
           </address>
