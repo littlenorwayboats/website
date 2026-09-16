@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import { Cinzel, Cormorant_Garamond } from "next/font/google";
@@ -9,7 +8,6 @@ import { JsonLd } from "@/components/JsonLd";
 import { PreloadAssets } from "@/components/PreloadAssets";
 import { PreviewFallback, PreviewGate } from "@/components/PreviewGate";
 import { PreviewProvider } from "@/components/PreviewProvider";
-import { cssImageSet } from "@/lib/images";
 import {
   OG_IMAGE,
   SITE_DESCRIPTION,
@@ -74,14 +72,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  const walnut = cssImageSet("/images/textures/walnut-wood.jpg");
-
   return (
-    <html
-      lang="en"
-      className={`${display.variable} ${body.variable} h-full`}
-      style={{ "--tex-walnut": walnut } as CSSProperties}
-    >
+    <html lang="en" className={`${display.variable} ${body.variable} h-full`}>
       <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-sans text-lg text-parchment antialiased">
         <JsonLd data={organizationJsonLd()} />
         <PreloadAssets />

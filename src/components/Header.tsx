@@ -92,7 +92,7 @@ export function Header() {
 
         <button
           type="button"
-          className="ml-auto inline-flex size-11 items-center justify-center rounded-sm border border-parchment/40 text-parchment lg:hidden"
+          className="ml-auto inline-flex size-11 shrink-0 items-center justify-center rounded-sm border border-parchment/40 text-parchment lg:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           onClick={() => setOpen((value) => !value)}

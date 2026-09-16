@@ -36,13 +36,6 @@ body {
   outline-offset: 3px;
 }
 
-:root {
-  --tex-walnut: image-set(
-    url("/images/textures/walnut-wood.webp") type("image/webp"),
-    url("/images/textures/walnut-wood.jpg") type("image/jpeg")
-  );
-}
-
 .texture-noise {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
 }
@@ -52,13 +45,10 @@ body {
   contain-intrinsic-size: auto 40rem;
 }
 
-.wood-panel {
-  background-color: var(--color-walnut);
-  background-image:
-    linear-gradient(180deg, rgba(14, 21, 28, 0.38), rgba(36, 54, 68, 0.22)),
-    var(--tex-walnut);
-  background-size: auto, 420px auto;
-  background-repeat: no-repeat, repeat;
+.surface-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 12px 32px rgba(28, 40, 50, 0.1);
 }
 
 .stone-frame {
@@ -136,14 +126,6 @@ body {
 
 .text-etched {
   text-shadow: var(--text-shadow-etched);
-}
-
-.wood-band {
-  background-color: var(--color-walnut);
-  background-image: var(--tex-walnut);
-  background-size: 420px auto;
-  background-repeat: repeat;
-  background-position: center;
 }
 
 .neon-btn {

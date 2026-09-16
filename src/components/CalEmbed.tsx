@@ -64,7 +64,11 @@ export function CalEmbed({ namespace, calLink }: CalEmbedProps) {
         calLink={calLink}
         className={isReady ? undefined : "invisible"}
         style={{ width: "100%", height: "100%", overflow: "scroll" }}
-        config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
+        config={{
+          layout: "month_view",
+          theme: "light",
+          useSlotsViewOnSmallScreen: "true",
+        }}
       />
     </div>
   );

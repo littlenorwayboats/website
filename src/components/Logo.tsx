@@ -8,14 +8,17 @@ export function Logo({
   priority?: boolean;
 }) {
   return (
-    <span className={`inline-block shrink-0 overflow-hidden ${className}`}>
+    <span
+      className={`block shrink-0 overflow-hidden ${className}`}
+      style={{ aspectRatio: "1 / 1" }}
+    >
       <OptimizedImage
         src="/images/logo.png"
         alt="Little Norway Boats"
         width={471}
         height={472}
         sizes="80px"
-        className="h-full w-full object-contain"
+        className="size-full object-contain"
         priority={priority}
       />
     </span>

@@ -24,7 +24,7 @@ export function Packages() {
         <ul className="mt-10 grid gap-6 md:grid-cols-3">
           {voyagePackages.map((item) => (
             <li key={item.slug}>
-              <article className="flex h-full flex-col rounded-2xl bg-white p-4 shadow-[0_12px_32px_rgba(28,40,50,0.1)]">
+              <article className="surface-card flex h-full flex-col p-4">
                 <div className="overflow-hidden rounded-xl">
                   <OptimizedImage
                     src={item.image}

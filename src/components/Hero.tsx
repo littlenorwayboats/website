@@ -25,10 +25,11 @@ export function Hero() {
       >
         <h1
           id="hero-heading"
-          className="max-w-full font-display text-[clamp(1.35rem,6.4vw,3.15rem)] leading-[1.12] font-bold tracking-[0.02em] break-words text-gold-bright uppercase sm:tracking-[0.04em]"
+          className="w-full max-w-full font-display text-[clamp(1.35rem,6vw,3.15rem)] leading-[1.12] font-bold tracking-[0.02em] text-gold-bright uppercase sm:tracking-[0.04em]"
         >
-          Experience the harbor aboard
-          our themed Duffy boats.
+          <span className="block sm:inline">Experience the harbor</span>{" "}
+          <span className="block sm:inline">aboard our themed</span>{" "}
+          <span className="block sm:inline">Duffy boats.</span>
         </h1>
         <p className="mx-auto mt-5 max-w-[24rem] text-lg leading-7 text-balance text-parchment">
           Explore the harbor with your clan in a unique Viking-themed
