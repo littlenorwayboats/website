@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { withBasePath } from "@/lib/paths";
+import { OptimizedImage } from "./OptimizedImage";
 
 const photos = [
   {
@@ -38,7 +37,7 @@ export function Gallery() {
       <div className="mx-auto max-w-6xl">
         <h1
           id="gallery-heading"
-          className="text-center font-display text-3xl text-gold uppercase md:text-4xl"
+          className="text-center font-display text-3xl font-semibold tracking-[0.08em] text-gold-bright uppercase md:text-4xl"
         >
           Gallery
         </h1>
@@ -50,11 +49,12 @@ export function Gallery() {
           {photos.map((photo) => (
             <li key={photo.src}>
               <figure className="overflow-hidden stone-frame">
-                <Image
-                  src={withBasePath(photo.src)}
+                <OptimizedImage
+                  src={photo.src}
                   alt={photo.alt}
                   width={1200}
                   height={900}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   className="aspect-4/3 w-full object-cover"
                 />
               </figure>

@@ -4,7 +4,10 @@ import { Gallery } from "@/components/Gallery";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Photos from Little Norway Boats: electric longships, harbor cruises, and Viking-themed Duffy rentals.",
+    "Photos from Little Norway Boats: electric longships, harbor cruises, and Viking-themed Duffy rentals on Liberty Bay.",
+  alternates: {
+    canonical: "/gallery/",
+  },
 };
 
 export default function GalleryPage() {

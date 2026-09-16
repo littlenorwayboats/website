@@ -1,53 +1,92 @@
-import Image from "next/image";
-import { withBasePath } from "@/lib/paths";
+import type { ReactNode } from "react";
 
-const features = [
+const features: { title: string; body: string; icon: ReactNode }[] = [
   {
-    title: "Easy to Pilot",
-    image: "/images/feature-pilot.jpg",
-    alt: "A small motorboat gliding across calm water",
-    body: "No boating license required. A short dockside briefing and you are underway at a gentle harbor speed.",
+    title: "100% Electric",
+    body: "Quiet, clean and boat friendly.",
+    icon: <BoltIcon />,
   },
   {
-    title: "Eco-Friendly",
-    image: null,
-    alt: "",
-    body: "Fully electric Duffy boats. Silent running, zero onboard fuel, and a lighter wake for the harbor we share.",
+    title: "Unique Viking Design",
+    body: "Wood panel wrap, shields and a dragon prow.",
+    icon: <WheelIcon />,
   },
   {
-    title: "Dog Friendly",
-    image: "/images/feature-dog.jpg",
-    alt: "A golden retriever looking toward the camera",
-    body: "Leashed pups are welcome aboard. Bring water, a towel, and a life vest sized for your shipmate.",
+    title: "Perfect for Groups",
+    body: "Up to 6 passengers.",
+    icon: <GroupIcon />,
   },
   {
-    title: "Full Cover",
-    image: "/images/feature-cover.jpg",
-    alt: "Open water under a wide sky, suggesting shade and shelter on deck",
-    body: "A canopy keeps the crew comfortable in sun or light weather so the voyage stays easy from dock to dock.",
+    title: "Explore the Sound",
+    body: "Your adventure starts on the water.",
+    icon: <WavesIcon />,
   },
 ];
 
-function LeafMark() {
+function BoltIcon() {
   return (
-    <div className="flex aspect-16/10 items-center justify-center stone-frame bg-norse-800">
-      <svg
-        viewBox="0 0 64 64"
-        className="h-20 w-20 text-emerald-400"
-        aria-hidden="true"
-      >
-        <path
-          fill="currentColor"
-          d="M32 6c14 8 22 22 22 36-12 2-22-4-28-14 8 2 14 0 18-4-10 0-18 4-22 12-2-10 0-22 10-30Z"
-        />
-        <path
-          fill="none"
-          stroke="#0c0b0a"
-          strokeWidth="2"
-          d="M30 16c-2 10-2 20 4 30"
-        />
-      </svg>
-    </div>
+    <svg
+      viewBox="0 0 48 48"
+      className="h-12 w-12"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M27.2 4.5 10.8 24.8c-.7.9 0 2.2 1.2 2.2h11.1L19.6 43.2c-.5 1.3 1.1 2.3 2.1 1.3l16.8-20.8c.7-.9 0-2.2-1.2-2.2H25.8l4.1-15.7c.4-1.3-1.2-2.3-2.2-1.3Z" />
+    </svg>
+  );
+}
+
+function WheelIcon() {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      className="h-12 w-12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <circle cx="24" cy="24" r="9" />
+      <circle cx="24" cy="24" r="3.4" />
+      <path d="M24 8v32M8 24h32M12.7 12.7l22.6 22.6M35.3 12.7 12.7 35.3" />
+    </svg>
+  );
+}
+
+function GroupIcon() {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      className="h-12 w-12"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <circle cx="13" cy="16.8" r="4.1" />
+      <path d="M5.8 32.6c0-4.8 3.2-8 7.2-8s7.2 3.2 7.2 8v.6H5.8z" />
+      <circle cx="35" cy="16.8" r="4.1" />
+      <path d="M27.8 32.6c0-4.8 3.2-8 7.2-8s7.2 3.2 7.2 8v.6H27.8z" />
+      <circle cx="24" cy="15.4" r="5" />
+      <path d="M14.8 35.2c0-6 4.1-10 9.2-10s9.2 4 9.2 10v1H14.8z" />
+    </svg>
+  );
+}
+
+function WavesIcon() {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      className="h-12 w-12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.85"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M6 18c3.2-3.6 6.4-3.6 9.6 0s6.4 3.6 9.6 0 6.4-3.6 9.6 0 6.4 3.6 9.6 0" />
+      <path d="M6 24c3.2-3.6 6.4-3.6 9.6 0s6.4 3.6 9.6 0 6.4-3.6 9.6 0 6.4 3.6 9.6 0" />
+      <path d="M6 30c3.2-3.6 6.4-3.6 9.6 0s6.4 3.6 9.6 0 6.4-3.6 9.6 0 6.4 3.6 9.6 0" />
+    </svg>
   );
 }
 
@@ -55,36 +94,28 @@ export function Features() {
   return (
     <section
       aria-labelledby="features-heading"
-      className="content-auto bg-norse-900 px-4 py-16 texture-noise"
+      className="content-auto bg-parchment px-4 py-14 texture-noise md:py-16"
     >
       <div className="mx-auto max-w-6xl">
-        <h2
-          id="features-heading"
-          className="text-center font-display text-3xl text-gold uppercase md:text-4xl"
-        >
-          Sail the Harbor in Style
+        <h2 id="features-heading" className="sr-only">
+          Why sail with Little Norway
         </h2>
-        <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => (
-            <li key={feature.title}>
-              <article>
-                {feature.image ? (
-                  <figure className="relative aspect-16/10 w-full stone-frame">
-                    <div className="absolute inset-0 overflow-hidden">
-                      <Image
-                        src={withBasePath(feature.image)}
-                        alt={feature.alt}
-                        fill
-                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                  </figure>
-                ) : (
-                  <LeafMark />
-                )}
-                <h3 className="mt-4 text-lg font-bold text-gold">{feature.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-mist">{feature.body}</p>
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature, index) => (
+            <li
+              key={feature.title}
+              className={`px-6 py-8 text-center sm:py-10 lg:px-8 ${
+                index !== 0 ? "lg:border-l lg:border-iron/30" : ""
+              }`}
+            >
+              <article className="flex flex-col items-center">
+                <div className="text-charcoal">{feature.icon}</div>
+                <h3 className="mt-5 font-display text-sm font-semibold tracking-label text-charcoal uppercase">
+                  {feature.title}
+                </h3>
+                <p className="mt-2 max-w-[16rem] text-base leading-6 text-iron">
+                  {feature.body}
+                </p>
               </article>
             </li>
           ))}

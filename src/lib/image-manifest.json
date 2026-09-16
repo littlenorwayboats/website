@@ -1,0 +1,139 @@
+{
+  "/images/feature-cover.jpg": {
+    "width": 800,
+    "height": 533,
+    "widths": [
+      640,
+      800
+    ]
+  },
+  "/images/feature-dog.jpg": {
+    "width": 800,
+    "height": 1283,
+    "widths": [
+      640,
+      800
+    ]
+  },
+  "/images/feature-pilot.jpg": {
+    "width": 800,
+    "height": 533,
+    "widths": [
+      640,
+      800
+    ]
+  },
+  "/images/gallery-1.jpg": {
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      640,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/gallery-2.jpg": {
+    "width": 1200,
+    "height": 1797,
+    "widths": [
+      640,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/gallery-3.jpg": {
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      640,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/gallery-4.jpg": {
+    "width": 1200,
+    "height": 798,
+    "widths": [
+      640,
+      828,
+      1080,
+      1200
+    ]
+  },
+  "/images/hero.jpg": {
+    "width": 1024,
+    "height": 434,
+    "widths": [
+      640,
+      828,
+      1024
+    ]
+  },
+  "/images/logo.png": {
+    "width": 471,
+    "height": 472,
+    "widths": [
+      471
+    ]
+  },
+  "/images/logo.webp": {
+    "width": 471,
+    "height": 472,
+    "widths": [
+      471
+    ]
+  },
+  "/images/package-sunset.jpg": {
+    "width": 800,
+    "height": 1200,
+    "widths": [
+      640,
+      800
+    ]
+  },
+  "/images/textures/chiseled-stone.jpg": {
+    "width": 256,
+    "height": 256,
+    "widths": [
+      256
+    ]
+  },
+  "/images/textures/chiseled-stone.webp": {
+    "width": 256,
+    "height": 256,
+    "widths": [
+      256
+    ]
+  },
+  "/images/textures/dark-leather.jpg": {
+    "width": 188,
+    "height": 110,
+    "widths": [
+      188
+    ]
+  },
+  "/images/textures/dark-leather.webp": {
+    "width": 188,
+    "height": 110,
+    "widths": [
+      188
+    ]
+  },
+  "/images/textures/walnut-wood.jpg": {
+    "width": 480,
+    "height": 263,
+    "widths": [
+      480
+    ]
+  },
+  "/images/textures/walnut-wood.webp": {
+    "width": 480,
+    "height": 263,
+    "widths": [
+      480
+    ]
+  }
+}

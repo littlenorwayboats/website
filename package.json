@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "predev": "npm run optimize:images",
+    "optimize:images": "tsx scripts/optimize-images.mts",
+    "build": "npm run optimize:images && next build",
     "preview": "npx --yes serve out",
     "lint": "eslint"
   },
@@ -21,7 +23,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4",
+    "tsx": "^4.23.13",
     "typescript": "^5"
   }
 }

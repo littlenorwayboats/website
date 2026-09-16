@@ -1,7 +1,8 @@
 "use client";
 
-import Cal, { getCalApi } from "@calcom/embed-react";
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
+import { BookingWidgetPlaceholder } from "./BookingWidgetPlaceholder";
 
 type BookingWidgetProps = {
   namespace: string;
@@ -9,75 +10,53 @@ type BookingWidgetProps = {
 };
 
 export const BOOKING_WIDGET_MIN_HEIGHT_CLASS = "min-h-[350px] md:min-h-[570px]";
+export { BookingWidgetPlaceholder } from "./BookingWidgetPlaceholder";
 
-export function BookingWidgetPlaceholder() {
-  return (
-    <div
-      className="absolute inset-0 z-10 animate-pulse rounded-lg bg-[#1a1a1a]"
-      aria-hidden="true"
-    />
-  );
-}
+const CalEmbed = dynamic(
+  () => import("./CalEmbed").then((module) => module.CalEmbed),
+  {
+    ssr: false,
+    loading: () => <BookingWidgetPlaceholder />,
+  },
+);
 
 export function BookingWidget({ namespace, calLink }: BookingWidgetProps) {
-  const [readyNamespace, setReadyNamespace] = useState<string | null>(null);
-  const isReady = readyNamespace === namespace;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
-    let cancelled = false;
-    let calApi: Awaited<ReturnType<typeof getCalApi>> | undefined;
+    const node = containerRef.current;
+    if (!node) return;
 
-    const onSettled = () => {
-      if (!cancelled) {
-        setReadyNamespace(namespace);
-      }
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "480px 0px" },
+    );
 
-    (async function () {
-      const cal = await getCalApi({ namespace });
-      if (cancelled) return;
-
-      calApi = cal;
-      cal("ui", {
-        cssVarsPerTheme: {
-          dark: { "cal-brand": "#00eaff" },
-          light: { "cal-brand": "#00eaff" },
-        },
-        hideEventTypeDetails: false,
-        layout: "month_view",
-      });
-      cal("on", { action: "linkReady", callback: onSettled });
-      cal("on", { action: "linkFailed", callback: onSettled });
-    })();
-
-    return () => {
-      cancelled = true;
-      calApi?.("off", { action: "linkReady", callback: onSettled });
-      calApi?.("off", { action: "linkFailed", callback: onSettled });
-    };
-  }, [namespace]);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
+      ref={containerRef}
       className={`relative ${BOOKING_WIDGET_MIN_HEIGHT_CLASS}`}
-      aria-busy={!isReady}
     >
-      {!isReady && (
+      {shouldLoad ? (
+        <CalEmbed key={namespace} namespace={namespace} calLink={calLink} />
+      ) : (
         <>
           <p className="sr-only" role="status">
-            Loading booking calendar
+            Booking calendar loads when you scroll to this section
           </p>
           <BookingWidgetPlaceholder />
         </>
       )}
-      <Cal
-        key={namespace}
-        namespace={namespace}
-        calLink={calLink}
-        className={isReady ? undefined : "invisible"}
-        style={{ width: "100%", height: "100%", overflow: "scroll" }}
-        config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
-      />
     </div>
   );
 }

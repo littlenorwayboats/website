@@ -37,39 +37,38 @@ export function Header() {
     setOpen(false);
   }
 
+  const currentPath = pathname.replace(/\/$/, "") || "/";
+  const isHome = currentPath === "/";
+
   function isCurrent(href: string) {
-    const current = pathname.replace(/\/$/, "") || "/";
     const target = href.replace(/\/$/, "") || "/";
-    return current === target;
+    return currentPath === target;
   }
 
   return (
     <header className="nav-panel sticky top-0 z-50">
-      <div className="relative mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 lg:h-14 lg:justify-end">
+      <div className="mx-auto flex h-20 max-w-6xl items-center gap-4 overflow-hidden px-4">
         <Link
           href="/"
-          className="shrink-0 rounded-sm lg:absolute lg:top-0 lg:left-6"
+          className="flex h-full shrink-0 items-center rounded-sm py-2"
           onClick={close}
         >
-          <Logo
-            priority
-            className="h-12 w-auto drop-shadow-[0_12px_22px_rgba(0,0,0,0.75)] sm:h-14 lg:h-[7rem]"
-          />
+          <Logo priority={!isHome} className="h-full w-auto" />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center lg:flex">
+        <nav aria-label="Primary" className="ml-auto hidden items-center lg:flex">
           <ul className="flex items-center">
             {navLinks.map((link, index) => (
               <li key={link.href} className="flex items-center">
                 {index > 0 ? (
-                  <span className="px-2.5 text-gold/45" aria-hidden="true">
+                  <span className="px-2.5 text-parchment/30" aria-hidden="true">
                     |
                   </span>
                 ) : null}
                 <Link
                   href={link.href}
                   aria-current={isCurrent(link.href) ? "page" : undefined}
-                  className="text-etched px-1 font-display text-lg tracking-[0.06em] text-parchment uppercase transition-colors hover:text-gold-bright aria-[current=page]:text-gold"
+                  className="px-1 font-display text-sm font-normal tracking-nav text-parchment uppercase transition-colors hover:text-gold-bright aria-[current=page]:text-gold-bright"
                 >
                   {link.label}
                 </Link>
@@ -80,14 +79,14 @@ export function Header() {
 
         <a
           href={withBasePath(bookingHref)}
-          className="neon-btn ml-3 hidden rounded-sm px-3.5 py-1.5 font-display text-lg tracking-[0.06em] uppercase lg:inline-flex"
+          className="neon-btn ml-3 hidden rounded-sm px-3.5 py-1.5 font-display text-sm font-semibold tracking-cta uppercase lg:inline-flex"
         >
           Book Now
         </a>
 
         <button
           type="button"
-          className="ml-auto inline-flex size-11 items-center justify-center rounded-sm border border-gold/40 text-gold lg:hidden"
+          className="ml-auto inline-flex size-11 items-center justify-center rounded-sm border border-parchment/40 text-parchment lg:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           onClick={() => setOpen((value) => !value)}
@@ -124,7 +123,7 @@ export function Header() {
                   href={link.href}
                   onClick={close}
                   aria-current={isCurrent(link.href) ? "page" : undefined}
-                  className="block rounded-sm px-2 py-3 font-display text-xl tracking-[0.06em] text-parchment uppercase aria-[current=page]:text-gold"
+                  className="block rounded-sm px-2 py-3 font-display text-base tracking-nav text-parchment uppercase aria-[current=page]:text-gold-bright"
                 >
                   {link.label}
                 </Link>
@@ -134,7 +133,7 @@ export function Header() {
               <a
                 href={withBasePath(bookingHref)}
                 onClick={close}
-                className="neon-btn mt-2 inline-flex w-full justify-center rounded-sm px-4 py-3 font-display text-xl tracking-[0.06em] uppercase"
+                className="neon-btn mt-2 inline-flex w-full justify-center rounded-sm px-4 py-3 font-display text-base font-semibold tracking-cta uppercase"
               >
                 Book Now
               </a>

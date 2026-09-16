@@ -43,6 +43,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
+      - name: Restore optimized images
+        uses: actions/cache@v4
+        with:
+          path: |
+            public/optimized
+            .image-cache.json
+          key: ${{ runner.os }}-images-${{ hashFiles('public/**/*.jpg', 'public/**/*.jpeg', 'public/**/*.png', 'public/**/*.webp', 'scripts/optimize-images.mts', 'src/lib/image-paths.ts') }}
+          restore-keys: |
+            ${{ runner.os }}-images-
+
       - name: Build with Next.js
         run: npm run build
         env:

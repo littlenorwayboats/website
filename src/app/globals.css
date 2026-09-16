@@ -1,24 +1,9 @@
 @import "tailwindcss";
-
-@theme inline {
-  --color-norse-950: #0c0b0a;
-  --color-norse-900: #141210;
-  --color-norse-800: #1c1814;
-  --color-norse-700: #2a241c;
-  --color-gold: #d4b483;
-  --color-gold-bright: #e8d4a8;
-  --color-parchment: #f4ead8;
-  --color-neon: #00eaff;
-  --color-neon-dim: #00c4d6;
-  --color-iron: #6b6560;
-  --color-mist: #c8c2b8;
-  --font-display: var(--font-norse);
-  --font-sans: var(--font-source-sans);
-}
+@config "../../tailwind.config.ts";
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 7rem;
+  scroll-padding-top: 6rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -39,14 +24,8 @@ html {
   }
 }
 
-body {
-  background-color: var(--color-norse-950);
-  color: var(--color-parchment);
-  font-family: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
-}
-
 :focus-visible {
-  outline: 2px solid var(--color-neon);
+  outline: 2px solid var(--color-rust);
   outline-offset: 3px;
 }
 
@@ -67,9 +46,9 @@ body {
 }
 
 .wood-panel {
-  background-color: #2b1d15;
+  background-color: var(--color-walnut);
   background-image:
-    linear-gradient(180deg, rgba(12, 9, 7, 0.42), rgba(18, 12, 9, 0.28)),
+    linear-gradient(180deg, rgba(14, 21, 28, 0.38), rgba(36, 54, 68, 0.22)),
     var(--tex-walnut);
   background-size: auto, 420px auto;
   background-repeat: no-repeat, repeat;
@@ -81,32 +60,28 @@ body {
   border: 2px solid transparent;
   border-image-source: linear-gradient(
     135deg,
-    var(--color-gold-bright) 0%,
-    var(--color-gold) 22%,
+    var(--color-gold) 0%,
+    var(--color-rust) 22%,
     var(--color-iron) 48%,
-    var(--color-gold) 72%,
-    var(--color-gold-bright) 100%
+    var(--color-rust) 72%,
+    var(--color-gold) 100%
   );
   border-image-slice: 1;
-  box-shadow: 0 14px 42px rgba(0, 0, 0, 0.55);
+  box-shadow: var(--shadow-stone);
 }
 
 .nav-panel {
-  background-color: #2a2c2e;
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background-color: var(--color-steel);
+  box-shadow: var(--shadow-nav);
 }
 
 .gradient-band {
-  height: 2px;
+  height: 1px;
   background-image: linear-gradient(
     90deg,
-    var(--color-iron) 0%,
-    var(--color-gold) 22%,
-    var(--color-gold-bright) 50%,
-    var(--color-gold) 78%,
-    var(--color-iron) 100%
+    color-mix(in srgb, var(--color-ink) 55%, transparent) 0%,
+    color-mix(in srgb, var(--color-rust) 35%, var(--color-norse-900)) 50%,
+    color-mix(in srgb, var(--color-ink) 55%, transparent) 100%
   );
 }
 
@@ -118,9 +93,9 @@ body {
 .hero-veil {
   background-image: linear-gradient(
     to top,
-    rgba(8, 7, 6, 0.92) 0%,
-    rgba(8, 7, 6, 0.62) 45%,
-    rgba(8, 7, 6, 0.6) 100%
+    color-mix(in srgb, var(--color-ink) 62%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 34%, transparent) 45%,
+    color-mix(in srgb, var(--color-ink) 28%, transparent) 100%
   );
 }
 
@@ -129,32 +104,32 @@ body {
     background-image:
       linear-gradient(
         100deg,
-        rgba(8, 7, 6, 0.94) 0%,
-        rgba(8, 7, 6, 0.86) 26%,
-        rgba(8, 7, 6, 0.48) 48%,
-        rgba(8, 7, 6, 0.08) 66%,
-        rgba(8, 7, 6, 0) 82%
+        color-mix(in srgb, var(--color-ink) 58%, transparent) 0%,
+        color-mix(in srgb, var(--color-ink) 42%, transparent) 26%,
+        color-mix(in srgb, var(--color-ink) 22%, transparent) 48%,
+        color-mix(in srgb, var(--color-ink) 6%, transparent) 66%,
+        transparent 82%
       ),
-      linear-gradient(to top, rgba(8, 7, 6, 0.7), rgba(8, 7, 6, 0) 40%);
+      linear-gradient(
+        to top,
+        color-mix(in srgb, var(--color-ink) 42%, transparent),
+        transparent 42%
+      );
   }
 }
 
 .text-carved {
-  -webkit-text-stroke: 0.05em rgba(24, 14, 7, 0.8);
+  -webkit-text-stroke: 0.04em rgba(14, 21, 28, 0.45);
   paint-order: stroke fill;
-  text-shadow:
-    0 2px 0 rgba(24, 14, 7, 0.5),
-    0 10px 26px rgba(0, 0, 0, 0.7);
+  text-shadow: var(--text-shadow-carved);
 }
 
 .text-etched {
-  text-shadow:
-    0 1px 0 rgba(12, 8, 5, 0.9),
-    0 2px 8px rgba(0, 0, 0, 0.6);
+  text-shadow: var(--text-shadow-etched);
 }
 
 .wood-band {
-  background-color: #2b1d15;
+  background-color: var(--color-walnut);
   background-image: var(--tex-walnut);
   background-size: 420px auto;
   background-repeat: repeat;
@@ -162,25 +137,20 @@ body {
 }
 
 .neon-btn {
-  border: 2px solid var(--color-neon);
-  color: #fff;
-  background: rgba(0, 234, 255, 0.06);
-  box-shadow:
-    0 0 10px rgba(0, 234, 255, 0.45),
-    inset 0 0 12px rgba(0, 234, 255, 0.12);
+  border: 0;
+  color: var(--color-gold-bright);
+  background: var(--color-rust);
+  box-shadow: var(--shadow-neon);
   transition:
     background-color 150ms ease,
-    box-shadow 150ms ease,
-    color 150ms ease;
+    box-shadow 150ms ease;
 }
 
 .neon-btn:hover {
-  background: rgba(0, 234, 255, 0.16);
-  box-shadow:
-    0 0 18px rgba(0, 234, 255, 0.7),
-    inset 0 0 16px rgba(0, 234, 255, 0.18);
+  background: var(--color-rust-dim);
+  box-shadow: var(--shadow-neon-hover);
 }
 
 .neon-btn:active {
-  background: rgba(0, 234, 255, 0.24);
+  background: color-mix(in srgb, var(--color-rust-dim) 88%, black);
 }

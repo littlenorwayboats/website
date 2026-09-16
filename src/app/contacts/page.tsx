@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { Contact } from "@/components/Contact";
 
 export const metadata: Metadata = {
-  title: "Contacts",
+  title: "Contact",
   description:
-    "Reach Little Norway Boats by phone, email, or message for reservations and harbor questions.",
+    "Reach Little Norway Boats for reservations, private charters, and harbor questions on Liberty Bay.",
+  alternates: {
+    canonical: "/contacts/",
+  },
 };
 
 export default function ContactsPage() {

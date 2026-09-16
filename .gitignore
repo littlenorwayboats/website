@@ -17,11 +17,16 @@
 /.next/
 /out/
 
+# generated image variants
+/public/optimized/
+.image-cache.json
+
 # production
 /build
 
 # misc
 .DS_Store
+Thumbs.db
 *.pem
 
 # debug
@@ -29,9 +34,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
 
-# env files (can opt-in for committing if needed)
+# Environment files. Next.js loads these automatically.
+# Never commit real .env files — public values live in src/lib/config.ts.
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +47,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# editors / OS
+.idea/
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

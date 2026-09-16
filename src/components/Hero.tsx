@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { bookingHref } from "@/lib/nav";
 import { withBasePath } from "@/lib/paths";
 import { HeroParallax } from "./HeroParallax";
+import { OptimizedImage } from "./OptimizedImage";
 
 export function Hero() {
   return (
@@ -13,8 +13,8 @@ export function Hero() {
       <HeroParallax
         className="w-full text-center will-change-transform md:w-[54%] md:pr-6 lg:w-[48%]"
         image={
-          <Image
-            src={withBasePath("/images/hero.jpg")}
+          <OptimizedImage
+            src="/images/hero.jpg"
             alt="A quiet harbor at sunset with boats at rest on still water"
             fill
             priority
@@ -25,22 +25,19 @@ export function Hero() {
       >
         <h1
           id="hero-heading"
-          className="text-carved font-display text-3xl leading-[1.06] text-parchment uppercase sm:text-4xl lg:text-[3.05rem]"
+          className="font-display text-3xl leading-[1.08] font-bold tracking-[0.04em] text-gold-bright uppercase sm:text-4xl lg:text-[3.15rem]"
         >
-          Embark on a Viking voyage!
-          <br />
           Experience the harbor aboard
-          <br />
           our themed Duffy boats.
         </h1>
-        <p className="text-etched mx-auto mt-5 max-w-[24rem] text-base leading-6 text-balance text-parchment">
+        <p className="mx-auto mt-5 max-w-[24rem] text-lg leading-7 text-balance text-parchment">
           Explore the harbor with your clan in a unique Viking-themed
           electric cruiser.
         </p>
         <div className="mt-7">
           <a
             href={withBasePath(bookingHref)}
-            className="neon-btn inline-flex rounded-sm px-7 py-2.5 font-display text-xl tracking-[0.06em] uppercase"
+            className="neon-btn inline-flex rounded-sm px-7 py-2.5 font-display text-sm font-semibold tracking-cta uppercase"
           >
             Book Your Odyssey
           </a>

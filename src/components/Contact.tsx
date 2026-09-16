@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { INSTAGRAM_URL, SITE_AREA } from "@/lib/site";
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -20,31 +21,30 @@ export function Contact() {
         <div>
           <h1
             id="contact-heading"
-            className="font-display text-3xl text-gold uppercase md:text-4xl"
+            className="font-display text-3xl font-semibold tracking-[0.08em] text-gold-bright uppercase md:text-4xl"
           >
-            Contacts
+            Contact
           </h1>
           <p className="mt-4 max-w-md text-mist">
             Questions about a voyage, a private event, or accessibility aboard?
-            Reach the crew directly.
+            Reach the crew on Instagram or book a slip online.
           </p>
           <address className="mt-8 not-italic text-parchment">
-            <p className="font-semibold tracking-widest text-gold uppercase">
+            <p className="font-display text-sm font-semibold tracking-section text-gold uppercase">
               Address
             </p>
             <p className="mt-2">
-              Lorem ipsum dolor sit amet
+              {SITE_AREA}
               <br />
-              Consectetur adipiscing elit
+              Exact dock directions arrive with your booking confirmation.
             </p>
             <p className="mt-4">
-              <a className="hover:text-gold" href="tel:+15555555555">
-                (555) 555-5555
-              </a>
-            </p>
-            <p>
-              <a className="hover:text-gold" href="mailto:email@example.com">
-                email@example.com
+              <a
+                className="hover:text-rust"
+                href={INSTAGRAM_URL}
+                rel="noreferrer noopener"
+              >
+                Instagram @littlenorwayboats
               </a>
             </p>
           </address>
@@ -52,7 +52,7 @@ export function Contact() {
 
         {submitted ? (
           <p
-            className="self-center rounded-sm border border-neon/40 bg-norse-950 p-6 text-parchment"
+            className="self-center rounded-sm border border-rust/40 bg-norse-950 p-6 text-parchment"
             role="status"
           >
             Thank you. The crew has your message and will reply by email.
@@ -60,7 +60,7 @@ export function Contact() {
         ) : (
           <form className="space-y-4" onSubmit={onSubmit}>
             <div>
-              <label htmlFor="name" className="block text-sm font-semibold text-gold">
+              <label htmlFor="name" className="block font-display text-sm font-semibold tracking-label text-gold uppercase">
                 Name
               </label>
               <input
@@ -73,7 +73,7 @@ export function Contact() {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-gold">
+              <label htmlFor="email" className="block font-display text-sm font-semibold tracking-label text-gold uppercase">
                 Email
               </label>
               <input
@@ -86,7 +86,7 @@ export function Contact() {
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-semibold text-gold">
+              <label htmlFor="message" className="block font-display text-sm font-semibold tracking-label text-gold uppercase">
                 Message
               </label>
               <textarea
@@ -99,7 +99,7 @@ export function Contact() {
             </div>
             <button
               type="submit"
-              className="neon-btn rounded-sm px-6 py-3 text-sm font-semibold tracking-[0.18em] uppercase"
+              className="neon-btn rounded-sm px-6 py-3 font-display text-sm font-semibold tracking-cta uppercase"
             >
               Send Message
             </button>
