@@ -4,6 +4,13 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+body {
+  max-width: 100%;
+  overscroll-behavior-x: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -87,7 +94,10 @@ html {
 
 .hero-image-layer {
   position: absolute;
-  inset: -18%;
+  top: -18%;
+  right: 0;
+  bottom: -18%;
+  left: 0;
 }
 
 .hero-veil {

@@ -1,11 +1,14 @@
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
+import { Suspense } from "react";
+import type { Metadata, Viewport } from "next";
 import { Cinzel, Cormorant_Garamond } from "next/font/google";
 import { SkipLink } from "@/components/SkipLink";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { PreloadAssets } from "@/components/PreloadAssets";
+import { PreviewFallback, PreviewGate } from "@/components/PreviewGate";
+import { PreviewProvider } from "@/components/PreviewProvider";
 import { cssImageSet } from "@/lib/images";
 import {
   OG_IMAGE,
@@ -31,6 +34,13 @@ const body = Cormorant_Garamond({
   display: "swap",
   variable: "--font-body",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#243644",
+};
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -72,12 +82,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${display.variable} ${body.variable} h-full`}
       style={{ "--tex-walnut": walnut } as CSSProperties}
     >
-      <body className="flex min-h-full flex-col bg-norse-950 font-sans text-lg text-parchment antialiased">
+      <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-sans text-lg text-parchment antialiased">
         <JsonLd data={organizationJsonLd()} />
         <PreloadAssets />
         <SkipLink />
-        <Header />
-        {children}
+        <Suspense fallback={<PreviewFallback />}>
+          <PreviewProvider>
+            <Header />
+            <div className="flex min-w-0 w-full flex-1 flex-col overflow-x-hidden">
+              <PreviewGate>{children}</PreviewGate>
+            </div>
+          </PreviewProvider>
+        </Suspense>
         <Footer />
       </body>
     </html>

@@ -4,13 +4,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { Logo } from "./Logo";
+import { useLivePreview } from "./PreviewProvider";
 import { bookingHref, navLinks } from "@/lib/nav";
 import { withBasePath } from "@/lib/paths";
+import { INSTAGRAM_URL } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const pathname = usePathname();
+  const isLive = useLivePreview();
+  const cta = isLive
+    ? { href: withBasePath(bookingHref), label: "Book Now", rel: undefined }
+    : { href: INSTAGRAM_URL, label: "Follow Along", rel: "noreferrer noopener" };
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -38,7 +44,6 @@ export function Header() {
   }
 
   const currentPath = pathname.replace(/\/$/, "") || "/";
-  const isHome = currentPath === "/";
 
   function isCurrent(href: string) {
     const target = href.replace(/\/$/, "") || "/";
@@ -46,14 +51,14 @@ export function Header() {
   }
 
   return (
-    <header className="nav-panel sticky top-0 z-50">
-      <div className="mx-auto flex h-20 max-w-6xl items-center gap-4 overflow-hidden px-4">
+    <header className="nav-panel sticky top-0 z-50 w-full min-w-0">
+      <div className="mx-auto flex h-20 w-full max-w-6xl items-center gap-4 px-4">
         <Link
           href="/"
-          className="flex h-full shrink-0 items-center rounded-sm py-2"
+          className="flex shrink-0 items-center rounded-sm"
           onClick={close}
         >
-          <Logo priority={!isHome} className="h-full w-auto" />
+          <Logo priority className="h-16 w-16" />
         </Link>
 
         <nav aria-label="Primary" className="ml-auto hidden items-center lg:flex">
@@ -78,10 +83,11 @@ export function Header() {
         </nav>
 
         <a
-          href={withBasePath(bookingHref)}
+          href={cta.href}
+          rel={cta.rel}
           className="neon-btn ml-3 hidden rounded-sm px-3.5 py-1.5 font-display text-sm font-semibold tracking-cta uppercase lg:inline-flex"
         >
-          Book Now
+          {cta.label}
         </a>
 
         <button
@@ -131,11 +137,12 @@ export function Header() {
             ))}
             <li>
               <a
-                href={withBasePath(bookingHref)}
+                href={cta.href}
+                rel={cta.rel}
                 onClick={close}
                 className="neon-btn mt-2 inline-flex w-full justify-center rounded-sm px-4 py-3 font-display text-base font-semibold tracking-cta uppercase"
               >
-                Book Now
+                {cta.label}
               </a>
             </li>
           </ul>

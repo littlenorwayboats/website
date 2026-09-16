@@ -39,6 +39,7 @@ export function OptimizedImage({
   const imgClassName = fill
     ? ["h-full w-full", className].filter(Boolean).join(" ")
     : className;
+  const useAvif = !src.toLowerCase().endsWith(".png");
 
   const img = (
     // Static export cannot use next/image optimization; srcset is built at compile time.
@@ -66,12 +67,18 @@ export function OptimizedImage({
   }
 
   return (
-    <picture className={fill ? "absolute inset-0 block h-full w-full" : undefined}>
-      <source
-        type="image/avif"
-        srcSet={srcSetFor(src, entry.widths, "avif")}
-        sizes={sizes}
-      />
+    <picture
+      className={
+        fill ? "absolute inset-0 block h-full w-full" : "block h-full w-full"
+      }
+    >
+      {useAvif ? (
+        <source
+          type="image/avif"
+          srcSet={srcSetFor(src, entry.widths, "avif")}
+          sizes={sizes}
+        />
+      ) : null}
       <source
         type="image/webp"
         srcSet={srcSetFor(src, entry.widths, "webp")}

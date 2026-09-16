@@ -51,12 +51,14 @@ export function HeroParallax({
 
   return (
     <>
-      <div ref={imageRef} className="hero-image-layer will-change-transform">
-        {image}
+      <div className="absolute inset-0 overflow-hidden [transform:translateZ(0)]">
+        <div ref={imageRef} className="hero-image-layer will-change-transform">
+          {image}
+        </div>
       </div>
       <div className="hero-veil absolute inset-0" aria-hidden="true" />
-      <div className="relative mx-auto flex min-h-[30rem] max-w-6xl items-center px-4 py-20 md:min-h-[36rem]">
-        <div ref={textRef} className={className}>
+      <div className="relative mx-auto flex min-h-[30rem] w-full max-w-6xl min-w-0 items-center overflow-hidden px-4 py-20 md:min-h-[36rem]">
+        <div ref={textRef} className={`min-w-0 ${className}`}>
           {children}
         </div>
       </div>

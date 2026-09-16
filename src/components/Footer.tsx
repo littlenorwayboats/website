@@ -12,12 +12,12 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-norse-950 texture-noise">
+    <footer className="w-full min-w-0 bg-norse-950 texture-noise">
       <div className="gradient-band w-full" aria-hidden="true" />
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link href="/" className="inline-block rounded-sm">
-            <Logo className="h-28 w-auto" />
+            <Logo className="h-28 w-28" />
           </Link>
           <p className="mt-4 max-w-xs text-sm text-mist">
             Quiet longships for harbor cruises, sunsets, and small crews.

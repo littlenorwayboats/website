@@ -11,7 +11,7 @@ export function Hero() {
       className="relative isolate min-h-[30rem] overflow-hidden md:min-h-[36rem]"
     >
       <HeroParallax
-        className="w-full text-center will-change-transform md:w-[54%] md:pr-6 lg:w-[48%]"
+        className="w-full min-w-0 max-w-full overflow-hidden text-center md:w-[54%] md:pr-6 lg:w-[48%]"
         image={
           <OptimizedImage
             src="/images/hero.jpg"
@@ -25,7 +25,7 @@ export function Hero() {
       >
         <h1
           id="hero-heading"
-          className="font-display text-3xl leading-[1.08] font-bold tracking-[0.04em] text-gold-bright uppercase sm:text-4xl lg:text-[3.15rem]"
+          className="max-w-full font-display text-[clamp(1.35rem,6.4vw,3.15rem)] leading-[1.12] font-bold tracking-[0.02em] break-words text-gold-bright uppercase sm:tracking-[0.04em]"
         >
           Experience the harbor aboard
           our themed Duffy boats.

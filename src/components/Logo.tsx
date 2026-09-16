@@ -1,20 +1,21 @@
 import { OptimizedImage } from "./OptimizedImage";
 
 export function Logo({
-  className = "h-[4.25rem] w-auto sm:h-20",
+  className = "h-16 w-16 sm:h-20 sm:w-20",
   priority = false,
 }: {
   className?: string;
   priority?: boolean;
 }) {
   return (
-    <span className={`inline-flex ${className}`}>
+    <span className={`inline-block shrink-0 overflow-hidden ${className}`}>
       <OptimizedImage
         src="/images/logo.png"
         alt="Little Norway Boats"
         width={471}
         height={472}
-        className="h-full w-auto max-w-none object-contain"
+        sizes="80px"
+        className="h-full w-full object-contain"
         priority={priority}
       />
     </span>
