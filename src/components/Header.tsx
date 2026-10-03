@@ -58,7 +58,7 @@ export function Header() {
           className="flex shrink-0 items-center rounded-sm"
           onClick={close}
         >
-          <Logo priority className="h-16 w-16" />
+          <Logo className="h-16 w-16" />
         </Link>
 
         <nav aria-label="Primary" className="ml-auto hidden items-center lg:flex">

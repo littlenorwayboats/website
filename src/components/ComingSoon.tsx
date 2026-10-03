@@ -21,7 +21,7 @@ export function ComingSoon() {
           Coming Soon
         </h1>
         <p className="mx-auto mt-6 max-w-md text-lg leading-7 text-mist">
-          Quiet longships for harbor cruises, sunsets, and small crews on
+          Quiet longship rentals for harbor cruises, sunsets, and small crews on
           Liberty Bay. We are preparing to launch.
         </p>
         <div className="mt-8 flex flex-col items-center gap-4">

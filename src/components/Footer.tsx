@@ -20,7 +20,7 @@ export function Footer() {
             <Logo className="h-28 w-28" />
           </Link>
           <p className="mt-4 max-w-xs text-sm text-mist">
-            Quiet longships for harbor cruises, sunsets, and small crews.
+            Quiet longship rentals for harbor cruises, sunsets, and small crews.
           </p>
         </div>
         <div>

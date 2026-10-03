@@ -5,7 +5,6 @@ import { SkipLink } from "@/components/SkipLink";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { PreloadAssets } from "@/components/PreloadAssets";
 import { PreviewFallback, PreviewGate } from "@/components/PreviewGate";
 import { PreviewProvider } from "@/components/PreviewProvider";
 import {
@@ -76,7 +75,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${display.variable} ${body.variable} h-full`}>
       <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-sans text-lg text-parchment antialiased">
         <JsonLd data={organizationJsonLd()} />
-        <PreloadAssets />
         <SkipLink />
         <Suspense fallback={<PreviewFallback />}>
           <PreviewProvider>
