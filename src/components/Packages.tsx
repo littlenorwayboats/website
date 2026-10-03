@@ -56,20 +56,6 @@ export function Packages() {
             </li>
           ))}
         </ul>
-        <div className="mt-12 flex justify-center text-norse-950" aria-hidden="true">
-          <svg
-            viewBox="0 0 48 48"
-            className="h-7 w-7"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          >
-            <circle cx="24" cy="24" r="9" />
-            <circle cx="24" cy="24" r="3.4" />
-            <path d="M24 8v32M8 24h32M12.7 12.7l22.6 22.6M35.3 12.7 12.7 35.3" />
-          </svg>
-        </div>
       </div>
     </section>
   );

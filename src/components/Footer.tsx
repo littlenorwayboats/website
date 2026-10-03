@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { Wordmark } from "./Wordmark";
 import { bookingHref, navLinks, packagesHref } from "@/lib/nav";
 import { INSTAGRAM_URL, SITE_AREA } from "@/lib/site";
 import { withBasePath } from "@/lib/paths";
@@ -16,8 +17,9 @@ export function Footer() {
       <div className="gradient-band w-full" aria-hidden="true" />
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Link href="/" className="inline-block rounded-sm">
+          <Link href="/" className="inline-flex flex-col items-start gap-2 rounded-sm">
             <Logo className="h-28 w-28" />
+            <Wordmark className="h-auto w-30 text-gold" labelled={false} />
           </Link>
           <p className="mt-4 max-w-xs text-sm text-mist">
             Quiet longship rentals for harbor cruises, sunsets, and small crews.

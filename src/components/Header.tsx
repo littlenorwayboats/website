@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { Logo } from "./Logo";
+import { Wordmark } from "./Wordmark";
 import { useLivePreview } from "./PreviewProvider";
 import { bookingHref, navLinks } from "@/lib/nav";
 import { withBasePath } from "@/lib/paths";
@@ -55,10 +56,11 @@ export function Header() {
       <div className="mx-auto flex h-20 w-full max-w-6xl items-center gap-4 px-4">
         <Link
           href="/"
-          className="flex shrink-0 items-center rounded-sm"
+          className="flex min-w-0 shrink items-center gap-2 rounded-sm"
           onClick={close}
         >
           <Logo className="h-16 w-16" />
+          {/* <Wordmark className="h-2.5 w-auto text-gold sm:h-3" labelled={false} /> */}
         </Link>
 
         <nav aria-label="Primary" className="ml-auto hidden items-center lg:flex">

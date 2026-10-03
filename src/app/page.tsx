@@ -24,6 +24,7 @@ export default function Home() {
       <Features />
       <Packages />
       <Booking />
+  
     </main>
   );
 }
