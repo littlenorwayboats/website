@@ -12,7 +12,7 @@ export function ComingSoon() {
         aria-labelledby="coming-soon-heading"
         className="mx-auto max-w-2xl text-center"
       >
-        <Wordmark className="mx-auto h-6 w-auto text-gold sm:h-9" />
+        
         <h1
           id="coming-soon-heading"
           className="mt-4 font-display text-3xl font-semibold tracking-[0.06em] text-gold-bright uppercase sm:text-4xl sm:tracking-[0.08em] md:text-5xl"
