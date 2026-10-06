@@ -97,11 +97,16 @@ export function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    const bar = barRef.current;
-    const logo = logoRef.current;
-    const nav = navRef.current;
-    const right = rightRef.current;
-    if (!bar || !logo || !nav || !right) return;
+    const barEl = barRef.current;
+    const logoEl = logoRef.current;
+    const navEl = navRef.current;
+    const rightEl = rightRef.current;
+    if (!barEl || !logoEl || !navEl || !rightEl) return;
+    // Closures lose the narrowing above, so bind the elements once.
+    const bar = barEl;
+    const logo = logoEl;
+    const nav = navEl;
+    const right = rightEl;
 
     let frame = 0;
     let features: HTMLElement | null = null;
