@@ -407,7 +407,7 @@ export function Header() {
 
           <button
             type="button"
-            className="inline-flex size-11 shrink-0 items-center justify-center rounded-sm border border-parchment/40 text-parchment lg:hidden"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-sm border-[1.5px] border-gold text-parchment lg:hidden"
             aria-expanded={open}
             aria-controls={menuId}
             onClick={() => setOpen((value) => !value)}
@@ -454,7 +454,6 @@ export function Header() {
           </ul>
         </nav>
       </div>
-      <div className="gradient-band w-full" aria-hidden="true" />
     </header>
   );
 }
