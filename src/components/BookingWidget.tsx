@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
+import { BOOKING_WIDGET_MIN_HEIGHT_CLASS } from "./bookingWidgetLayout";
 import { BookingWidgetPlaceholder } from "./BookingWidgetPlaceholder";
 
 type BookingWidgetProps = {
@@ -9,14 +10,18 @@ type BookingWidgetProps = {
   calLink: string;
 };
 
-export const BOOKING_WIDGET_MIN_HEIGHT_CLASS = "min-h-[350px] md:min-h-[570px]";
+export { BOOKING_WIDGET_MIN_HEIGHT_CLASS } from "./bookingWidgetLayout";
 export { BookingWidgetPlaceholder } from "./BookingWidgetPlaceholder";
 
 const CalEmbed = dynamic(
   () => import("./CalEmbed").then((module) => module.CalEmbed),
   {
     ssr: false,
-    loading: () => <BookingWidgetPlaceholder />,
+    loading: () => (
+      <div className={`relative ${BOOKING_WIDGET_MIN_HEIGHT_CLASS}`}>
+        <BookingWidgetPlaceholder />
+      </div>
+    ),
   },
 );
 
@@ -43,19 +48,16 @@ export function BookingWidget({ namespace, calLink }: BookingWidgetProps) {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className={`relative ${BOOKING_WIDGET_MIN_HEIGHT_CLASS}`}
-    >
+    <div ref={containerRef} className="relative w-full">
       {shouldLoad ? (
         <CalEmbed key={namespace} namespace={namespace} calLink={calLink} />
       ) : (
-        <>
+        <div className={`relative ${BOOKING_WIDGET_MIN_HEIGHT_CLASS}`}>
           <p className="sr-only" role="status">
             Booking calendar loads when you scroll to this section
           </p>
           <BookingWidgetPlaceholder />
-        </>
+        </div>
       )}
     </div>
   );

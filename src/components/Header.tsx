@@ -56,10 +56,10 @@ export function Header() {
       <div className="mx-auto flex h-20 w-full max-w-6xl items-center gap-4 px-4">
         <Link
           href="/"
-          className="flex min-w-0 shrink items-center gap-2 rounded-sm"
+          className="group/logo flex min-w-0 shrink items-center gap-2 rounded-sm"
           onClick={close}
         >
-          <Logo className="h-16 w-16" />
+          <Logo className="h-16 w-16" colorOnHover />
           {/* <Wordmark className="h-2.5 w-auto text-gold sm:h-3" labelled={false} /> */}
         </Link>
 

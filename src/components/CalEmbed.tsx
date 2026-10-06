@@ -3,6 +3,7 @@
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect, useState } from "react";
 import { colors } from "../../tailwind.config";
+import { BOOKING_WIDGET_MIN_HEIGHT_CLASS } from "./bookingWidgetLayout";
 import { BookingWidgetPlaceholder } from "./BookingWidgetPlaceholder";
 
 type CalEmbedProps = {
@@ -49,7 +50,10 @@ export function CalEmbed({ namespace, calLink }: CalEmbedProps) {
   }, [namespace]);
 
   return (
-    <div className="absolute inset-0" aria-busy={!isReady}>
+    <div
+      className={`relative w-full ${BOOKING_WIDGET_MIN_HEIGHT_CLASS}`}
+      aria-busy={!isReady}
+    >
       {!isReady && (
         <>
           <p className="sr-only" role="status">
@@ -63,7 +67,7 @@ export function CalEmbed({ namespace, calLink }: CalEmbedProps) {
         namespace={namespace}
         calLink={calLink}
         className={isReady ? undefined : "invisible"}
-        style={{ width: "100%", height: "100%", overflow: "scroll" }}
+        style={{ width: "100%", overflow: "visible" }}
         config={{
           layout: "month_view",
           theme: "light",
