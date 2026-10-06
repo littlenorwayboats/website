@@ -4,11 +4,27 @@ import { useEffect } from "react";
 
 const BOOKING_HASH = "booking";
 
-/** Scroll so #booking (Book Now title) sits under the sticky header — logo animation end. */
-export function scrollToBooking(behavior: ScrollBehavior = "smooth") {
+/** Same element the header uses as the end of the boat animation. */
+export function bookingAnimationTarget(): HTMLElement | null {
   const booking = document.getElementById(BOOKING_HASH);
-  if (!booking) return false;
-  booking.scrollIntoView({ behavior, block: "start" });
+  const card = booking?.closest(".surface-card");
+  if (card instanceof HTMLElement) return card;
+  return booking;
+}
+
+/**
+ * Scroll so the booking card top sits under the sticky header.
+ * Matches the header boat animation end (card top === header bottom),
+ * not the document scroll-padding.
+ */
+export function scrollToBooking(behavior: ScrollBehavior = "smooth") {
+  const target = bookingAnimationTarget();
+  if (!target) return false;
+
+  const header = document.querySelector("header");
+  const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
+  const top = window.scrollY + target.getBoundingClientRect().top - headerHeight;
+  window.scrollTo({ top, behavior });
   return true;
 }
 

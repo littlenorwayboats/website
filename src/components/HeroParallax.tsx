@@ -57,7 +57,7 @@ export function HeroParallax({
         </div>
       </div>
       <div className="hero-veil absolute inset-0" aria-hidden="true" />
-      <div className="relative mx-auto flex min-h-[30rem] w-full max-w-6xl min-w-0 items-center overflow-hidden px-4 py-20 md:min-h-[36rem]">
+      <div className="relative mx-auto flex min-h-[calc(100svh-5rem-1px)] w-full max-w-6xl min-w-0 items-center overflow-hidden px-4 py-20">
         <div ref={textRef} className={`min-w-0 ${className}`}>
           {children}
         </div>

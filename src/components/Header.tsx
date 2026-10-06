@@ -16,10 +16,8 @@ function clamp(value: number, min: number, max: number) {
 
 const BAR_PADDING = 16;
 const NAV_GAP = 24;
-/** Ship travel progress before the nav marquee begins. */
-const MARQUEE_START = 0.75;
-/** Hand off pointer events / a11y from the right set to the left set (within marquee 0–1). */
-const NAV_HANDOFF = 0.5;
+/** Ship travel progress before the nav and Book Now shift aside. */
+const SHIFT_START = 0.75;
 
 function NavList({
   currentPath,
@@ -59,8 +57,8 @@ function NavList({
 export function Header() {
   const [open, setOpen] = useState(false);
   const [colored, setColored] = useState(false);
-  /** Which desktop nav set receives clicks / keyboard focus. */
-  const [activeNav, setActiveNav] = useState<"right" | "left">("right");
+  /** Desktop CTA has slid out of the bar; drop it from tab order. */
+  const [ctaShiftedOut, setCtaShiftedOut] = useState(false);
   const menuId = useId();
   const pathname = usePathname();
   const isLive = useLivePreview();
@@ -70,11 +68,10 @@ export function Header() {
 
   const barRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
-  const navRightRef = useRef<HTMLElement>(null);
-  const navLeftRef = useRef<HTMLElement>(null);
+  const navRef = useRef<HTMLElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const coloredRef = useRef(false);
-  const activeNavRef = useRef<"right" | "left">("right");
+  const ctaShiftedRef = useRef(false);
 
   const isHome = (pathname.replace(/\/$/, "") || "/") === "/";
   const currentPath = pathname.replace(/\/$/, "") || "/";
@@ -102,10 +99,9 @@ export function Header() {
   useEffect(() => {
     const bar = barRef.current;
     const logo = logoRef.current;
-    const navRight = navRightRef.current;
-    const navLeft = navLeftRef.current;
+    const nav = navRef.current;
     const right = rightRef.current;
-    if (!bar || !logo || !navRight || !navLeft || !right) return;
+    if (!bar || !logo || !nav || !right) return;
 
     let frame = 0;
     let features: HTMLElement | null = null;
@@ -118,73 +114,54 @@ export function Header() {
 
     function cacheSections() {
       features = document.getElementById("features");
-      bookingAnchor = document.getElementById("booking");
+      const booking = document.getElementById("booking");
+      bookingAnchor =
+        booking?.closest(".surface-card") ?? booking;
     }
 
     function cacheSizes() {
       logoWidth = logo.offsetWidth;
-      // Both sets share the same link list; measure the visible-sized one.
-      navWidth = Math.max(navRight.offsetWidth, navLeft.offsetWidth);
+      navWidth = nav.offsetWidth;
       rightWidth = right.offsetWidth;
     }
 
-    function setActiveNavSide(side: "right" | "left") {
-      if (activeNavRef.current === side) return;
-      activeNavRef.current = side;
-      setActiveNav(side);
+    function setCtaShifted(next: boolean) {
+      if (ctaShiftedRef.current === next) return;
+      ctaShiftedRef.current = next;
+      setCtaShiftedOut(next);
     }
 
     function applyProgress(progress: number) {
       logo.style.left = `calc(${BAR_PADDING * (1 - progress)}px + ${50 * progress}%)`;
       logo.style.transform = `translateX(${-50 * progress}%)`;
 
-      // Nav waits until the ship is most of the way to center, then finishes
-      // its marquee in the remaining stretch.
-      const marquee = clamp(
-        (progress - MARQUEE_START) / (1 - MARQUEE_START),
-        0,
-        1,
-      );
+      // Hold the links until the ship is close to center, then slide them
+      // right as Book Now leaves the bar.
+      const shift = clamp((progress - SHIFT_START) / (1 - SHIFT_START), 0, 1);
 
       if (!desktopQuery.matches) {
-        navRight.style.left = "";
-        navRight.style.right = "";
-        navRight.style.transform = "";
-        navRight.style.opacity = "";
-        navLeft.style.left = "";
-        navLeft.style.right = "";
-        navLeft.style.transform = "";
-        navLeft.style.opacity = "";
-        setActiveNavSide("right");
+        nav.style.left = "";
+        nav.style.right = "";
+        nav.style.transform = "";
+        right.style.transform = "";
+        setCtaShifted(false);
         return;
       }
 
       const barWidth = bar.clientWidth;
-      // Resting spot for the right-hand set (left of the CTA).
-      const rightRestLeft =
+      const navStartLeft =
         barWidth - BAR_PADDING - rightWidth - NAV_GAP - navWidth;
-      // Final spot for the left-hand set (left of the centered logo).
-      const leftRestLeft = Math.max(
-        BAR_PADDING,
-        barWidth / 2 - logoWidth / 2 - NAV_GAP - navWidth,
-      );
+      // Slide into the space the CTA vacates, ending flush with the right padding.
+      const navTravel = rightWidth + NAV_GAP;
+      // CTA's right edge sits BAR_PADDING inside the clip edge.
+      const ctaExit = rightWidth + BAR_PADDING;
 
-      // Right set exits off the right edge of the bar.
-      const rightExitTravel = barWidth - rightRestLeft + 8;
-      // Left set enters from off the left edge.
-      const leftEnterTravel = leftRestLeft + navWidth + 8;
+      nav.style.left = `${navStartLeft}px`;
+      nav.style.right = "auto";
+      nav.style.transform = `translateX(${navTravel * shift}px)`;
+      right.style.transform = `translateX(${ctaExit * shift}px)`;
 
-      navRight.style.left = `${rightRestLeft}px`;
-      navRight.style.right = "auto";
-      navRight.style.transform = `translateX(${rightExitTravel * marquee}px)`;
-      navRight.style.opacity = String(clamp(1 - marquee / 0.85, 0, 1));
-
-      navLeft.style.left = `${leftRestLeft}px`;
-      navLeft.style.right = "auto";
-      navLeft.style.transform = `translateX(${-leftEnterTravel * (1 - marquee)}px)`;
-      navLeft.style.opacity = String(clamp(marquee / 0.35, 0, 1));
-
-      setActiveNavSide(marquee >= NAV_HANDOFF ? "left" : "right");
+      setCtaShifted(shift >= 1);
     }
 
     function setColoredState(next: boolean) {
@@ -225,7 +202,7 @@ export function Header() {
       }
 
       applyProgress(progress);
-      // Light up once the Book Now title reaches the sticky nav (animation end).
+      // Light up once the booking card top reaches the sticky nav (animation end).
       setColoredState(
         progress >= 1 || bookingAnchor.getBoundingClientRect().top <= headerHeight + 2,
       );
@@ -290,36 +267,24 @@ export function Header() {
           />
         </Link>
 
-        {/* Marquee set A: starts right of logo, exits off the right. */}
         <nav
-          ref={navRightRef}
-          aria-label={activeNav === "right" ? "Primary" : undefined}
-          aria-hidden={activeNav !== "right"}
-          inert={activeNav !== "right" || undefined}
+          ref={navRef}
+          aria-label="Primary"
           className="absolute inset-y-0 right-[calc(1rem+8.5rem)] z-10 my-auto hidden h-fit will-change-transform lg:block"
-        >
-          <NavList currentPath={currentPath} />
-        </nav>
-
-        {/* Marquee set B: enters from the left, settles left of the centered logo. */}
-        <nav
-          ref={navLeftRef}
-          aria-label={activeNav === "left" ? "Primary" : undefined}
-          aria-hidden={activeNav !== "left"}
-          inert={activeNav !== "left" || undefined}
-          className="absolute inset-y-0 left-4 z-10 my-auto hidden h-fit opacity-0 will-change-transform lg:block"
         >
           <NavList currentPath={currentPath} />
         </nav>
 
         <div
           ref={rightRef}
-          className="absolute inset-y-0 right-4 z-20 my-auto flex h-fit items-center gap-3"
+          className="absolute inset-y-0 right-4 z-20 my-auto flex h-fit items-center gap-3 will-change-transform"
         >
           <a
             href={cta.href}
             rel={cta.rel}
             onClick={isLive ? onBookingClick : undefined}
+            aria-hidden={ctaShiftedOut || undefined}
+            inert={ctaShiftedOut || undefined}
             className="neon-btn hidden rounded-sm px-3.5 py-1.5 font-display text-sm font-semibold tracking-cta uppercase lg:inline-flex"
           >
             {cta.label}

@@ -86,9 +86,6 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <p className="border-t border-black bg-black py-3 text-center text-xs text-mist">
-        © {new Date().getFullYear()} Little Norway Boats. All rights reserved.
-      </p>
     </footer>
   );
 }

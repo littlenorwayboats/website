@@ -8,7 +8,7 @@ export function Hero() {
     <section
       id="home"
       aria-labelledby="hero-heading"
-      className="relative isolate min-h-[30rem] overflow-hidden md:min-h-[36rem]"
+      className="relative isolate min-h-[calc(100svh-5rem-1px)] overflow-hidden"
     >
       <HeroParallax
         className="w-full min-w-0 max-w-full overflow-hidden text-center md:w-[54%] md:pr-6 lg:w-[48%]"
