@@ -93,6 +93,7 @@ function WavesIcon() {
 export function Features() {
   return (
     <section
+      id="features"
       aria-labelledby="features-heading"
       className="content-auto bg-parchment px-4 py-14 texture-noise md:py-16"
     >

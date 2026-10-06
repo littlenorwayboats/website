@@ -78,14 +78,13 @@ function BookingFallback() {
 export function Booking() {
   return (
     <section
-      id="booking"
-      aria-labelledby="booking-heading"
-      className="scroll-mt-24 bg-parchment px-4 py-16 texture-noise"
+      aria-labelledby="booking"
+      className="bg-parchment px-4 py-16 texture-noise"
     >
       <div className="surface-card mx-auto max-w-4xl px-6 py-14 md:px-10">
         <h2
-          id="booking-heading"
-          className="text-center font-sans text-4xl font-bold tracking-tight text-norse-950 md:text-5xl"
+          id="booking"
+          className="scroll-mt-20 text-center font-sans text-4xl font-bold tracking-tight text-norse-950 md:text-5xl"
         >
           Book Now
         </h2>

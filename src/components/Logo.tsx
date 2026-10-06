@@ -29,11 +29,17 @@ const markPaths = [
 export function Logo({
   className = "h-12 w-12 sm:h-20 sm:w-20",
   colorOnHover = false,
+  colored = false,
 }: {
   className?: string;
   /** Reveal the full-colour artwork while the mark is hovered or focused. */
   colorOnHover?: boolean;
+  /** Always show the full-colour artwork (e.g. after scroll landmark). */
+  colored?: boolean;
 }) {
+  const showColorLayer = colored || colorOnHover;
+  const colorVisible = colored;
+
   return (
     <span
       className={`group/logo block shrink-0 overflow-hidden ${className}`}
@@ -45,8 +51,14 @@ export function Logo({
         role="img"
         aria-label="Little Norway Boats"
       >
-        {colorOnHover ? (
-          <g className="opacity-0 transition-opacity duration-200 ease-out group-hover/logo:opacity-100 group-focus-visible/logo:opacity-100">
+        {showColorLayer ? (
+          <g
+            className={
+              colorVisible
+                ? "opacity-100 transition-opacity duration-300 ease-out"
+                : "opacity-0 transition-opacity duration-200 ease-out group-hover/logo:opacity-100 group-focus-visible/logo:opacity-100"
+            }
+          >
             {logoFillPaths.map((path, index) => (
               <path key={index} d={path.d} fill={path.fill} />
             ))}
@@ -54,12 +66,14 @@ export function Logo({
         ) : null}
         <g
           className={
-            colorOnHover
-              ? "transition-opacity duration-200 ease-out group-hover/logo:opacity-0 group-focus-visible/logo:opacity-0"
+            showColorLayer
+              ? colorVisible
+                ? "opacity-0 transition-opacity duration-300 ease-out"
+                : "transition-opacity duration-200 ease-out group-hover/logo:opacity-0 group-focus-visible/logo:opacity-0"
               : undefined
           }
         >
-          {(colorOnHover ? logoLinePaths : markPaths).map((d, index) => (
+          {(showColorLayer ? logoLinePaths : markPaths).map((d, index) => (
             <path key={index} d={d} fill="#e6d5bc" />
           ))}
         </g>
