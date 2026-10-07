@@ -303,6 +303,43 @@ function MenuIcon({ open }: { open: boolean }) {
   );
 }
 
+/** True while the open mobile menu still sits on the hero photo. */
+function useMenuOverHero(isHome: boolean, open: boolean, menuId: string) {
+  const [overHero, setOverHero] = useState(isHome);
+
+  useEffect(() => {
+    if (!isHome) {
+      setOverHero(false);
+      return;
+    }
+
+    function update() {
+      const hero = document.getElementById("home");
+      const menu = document.getElementById(menuId);
+      if (!hero) {
+        setOverHero(false);
+        return;
+      }
+      const limit = menu ? menu.getBoundingClientRect().bottom : 0;
+      setOverHero(hero.getBoundingClientRect().bottom >= limit - 1);
+    }
+
+    update();
+    const menu = document.getElementById(menuId);
+    const observer = new ResizeObserver(update);
+    if (menu) observer.observe(menu);
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [isHome, open, menuId]);
+
+  return overHero;
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const [colored, setColored] = useLatchedBoolean(false);
@@ -322,6 +359,7 @@ export function Header() {
 
   const currentPath = normalizePath(pathname);
   const isHome = currentPath === "/";
+  const overHero = useMenuOverHero(isHome, open, menuId);
 
   useMobileMenu(open, setOpen, pathname);
   useHomeBarAnimation({
@@ -354,11 +392,11 @@ export function Header() {
       aria-hidden="true"
       className="header-scrim pointer-events-none fixed inset-x-0 top-0 z-10"
     >
-      {/* Color lives on this child so iOS Safari can draw the hero behind the notch. */}
-      <div className="absolute inset-0 bg-steel shadow-[0_8px_24px_rgba(14,21,28,0.32)]" />
+      {/* Color starts below the notch so the hero photo can fill that strip. */}
+      <div className="absolute inset-x-0 bottom-0 top-(--safe-top) bg-steel shadow-[0_8px_24px_rgba(14,21,28,0.32)]" />
     </div>
     <header
-      className={`header-safe fixed inset-x-0 top-0 z-30 w-full min-w-0 ${open ? "bg-steel" : ""}`}
+      className={`header-safe fixed inset-x-0 top-0 z-30 w-full min-w-0 ${open && !overHero ? "bg-steel" : ""}`}
     >
         <div
           ref={barRef}
@@ -424,7 +462,13 @@ export function Header() {
         }`}
       >
         <div className="min-h-0 overflow-hidden">
-          <div className="mobile-menu-panel overflow-y-auto border-t border-black/40 bg-steel px-4 py-4 shadow-nav">
+          <div
+            className={`mobile-menu-panel overflow-y-auto px-4 py-4 ${
+              overHero
+                ? "bg-transparent"
+                : "border-t border-black/40 bg-steel shadow-nav"
+            }`}
+          >
             <nav aria-label="Mobile">
               <ul className="flex flex-col gap-2">
                 {navLinks.map((link) => (

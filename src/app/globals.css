@@ -3,6 +3,8 @@
 
 html {
   --safe-top: env(safe-area-inset-top, 0px);
+  /* iPhone sets this so the hero can sit under the status bar. Desktop stays 0. */
+  --notch-bleed: 0px;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
   scroll-padding-top: calc(6rem + var(--safe-top));
@@ -99,11 +101,17 @@ body {
   height: calc(5rem + var(--safe-top));
 }
 
+.notch-runway {
+  height: var(--notch-bleed);
+  flex: none;
+}
+
 .hero-screen {
   margin-top: -5rem;
-  margin-top: calc(-5rem - var(--safe-top));
+  margin-top: calc(-5rem - var(--safe-top) - var(--notch-bleed));
+  padding-top: var(--notch-bleed);
   min-height: calc(100svh - 1px);
-  min-height: calc(100svh - 1px + var(--safe-top));
+  min-height: calc(100svh - 1px + var(--safe-top) + var(--notch-bleed));
 }
 
 .mobile-menu-panel {
@@ -114,6 +122,7 @@ body {
 .hero-image-layer {
   position: absolute;
   top: -18%;
+  top: calc(-18% - var(--notch-bleed));
   right: 0;
   bottom: -18%;
   left: 0;

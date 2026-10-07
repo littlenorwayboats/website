@@ -5,6 +5,7 @@ import { SkipLink } from "@/components/SkipLink";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { NotchBleed } from "@/components/NotchBleed";
 import { PreviewFallback, PreviewGate } from "@/components/PreviewGate";
 import { PreviewProvider } from "@/components/PreviewProvider";
 import {
@@ -77,17 +78,29 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${display.variable} ${body.variable} h-full bg-norse-950`}
     >
       <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-sans text-lg text-parchment antialiased">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){if(!/iPhone/.test(navigator.userAgent))return;var root=document.documentElement;root.style.setProperty("--notch-bleed","72px");root.style.overscrollBehaviorY="none";})();`,
+          }}
+        />
         <JsonLd data={organizationJsonLd()} />
         <SkipLink />
+        <div className="notch-runway" aria-hidden="true" />
+        <NotchBleed />
         <Suspense fallback={<PreviewFallback />}>
           <PreviewProvider>
             <Header />
-            <div className="header-offset flex min-w-0 w-full flex-1 flex-col overflow-x-hidden">
+            <div className="header-offset flex min-w-0 w-full flex-1 flex-col overflow-x-clip">
               <PreviewGate>{children}</PreviewGate>
             </div>
           </PreviewProvider>
         </Suspense>
         <Footer />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var root=document.documentElement;var bleed=parseFloat(getComputedStyle(root).getPropertyValue("--notch-bleed"))||0;if(!bleed||location.hash||window.scrollY>=bleed)return;root.style.scrollBehavior="auto";window.scrollTo(0,bleed);})();`,
+          }}
+        />
       </body>
     </html>
   );

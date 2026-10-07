@@ -30,7 +30,10 @@ export function HeroParallax({
       const textNode = textRef.current;
       if (!imageNode || !textNode) return;
 
-      const scrolled = window.scrollY;
+      const bleed = Number.parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--notch-bleed"),
+      );
+      const scrolled = Math.max(0, window.scrollY - (Number.isFinite(bleed) ? bleed : 0));
       imageNode.style.transform = `translate3d(0, ${scrolled * IMAGE_SHIFT}px, 0)`;
       textNode.style.transform = `translate3d(0, ${scrolled * TEXT_SHIFT}px, 0)`;
       textNode.style.opacity = String(Math.max(0, 1 - scrolled / FADE_DISTANCE));
