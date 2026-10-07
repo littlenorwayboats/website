@@ -27,13 +27,12 @@ export function Hero() {
           id="hero-heading"
           className="w-full max-w-full font-display text-[clamp(1.35rem,6vw,3.15rem)] leading-[1.12] font-bold tracking-[0.02em] text-gold-bright uppercase sm:tracking-[0.04em]"
         >
-          <span className="block sm:inline">Experience the harbor</span>{" "}
-          <span className="block sm:inline">aboard our themed</span>{" "}
-          <span className="block sm:inline">Duffy boats.</span>
+          <span className="block sm:inline">Explore liberty bay</span>{" "}
+          <span className="block sm:inline">with our Viking-themed</span>{" "}
+          <span className="block sm:inline">electric cruiser.</span>
         </h1>
         <p className="mx-auto mt-5 max-w-[24rem] text-lg leading-7 text-balance text-parchment">
-          Explore the harbor with your clan in a unique Viking-themed
-          electric cruiser.
+          Hourly self-captained rentals at Poulsbo Marina.
         </p>
         <div className="mt-7">
           <a
