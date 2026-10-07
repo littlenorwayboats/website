@@ -364,11 +364,18 @@ export function Header() {
   }
 
   return (
-    <header className="nav-panel sticky top-0 z-50 w-full min-w-0">
-      <div
-        ref={barRef}
-        className="relative mx-auto h-20 w-full max-w-6xl overflow-x-clip px-4"
-      >
+    <>
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-x-0 top-0 z-10 h-20 bg-steel shadow-[0_8px_24px_rgba(14,21,28,0.32)]"
+    />
+    <header
+      className={`fixed inset-x-0 top-0 z-30 w-full min-w-0 ${open ? "bg-steel" : ""}`}
+    >
+        <div
+          ref={barRef}
+          className="relative mx-auto h-20 w-full max-w-6xl overflow-x-clip px-4"
+        >
         <Link
           ref={logoRef}
           href="/"
@@ -455,5 +462,6 @@ export function Header() {
         </nav>
       </div>
     </header>
+    </>
   );
 }

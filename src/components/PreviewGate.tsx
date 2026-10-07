@@ -26,11 +26,13 @@ export function PreviewFallback() {
     <>
       <Header />
       {isUngatedPath(pathname) ? (
-        <main id="main-content" className="flex min-w-0 flex-1 flex-col">
+        <main id="main-content" className="flex min-w-0 flex-1 flex-col pt-20">
           <Contact />
         </main>
       ) : (
-        <ComingSoon />
+        <div className="pt-20">
+          <ComingSoon />
+        </div>
       )}
     </>
   );

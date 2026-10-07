@@ -79,7 +79,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Suspense fallback={<PreviewFallback />}>
           <PreviewProvider>
             <Header />
-            <div className="flex min-w-0 w-full flex-1 flex-col overflow-x-hidden">
+            <div className="flex min-w-0 w-full flex-1 flex-col overflow-x-hidden pt-20">
               <PreviewGate>{children}</PreviewGate>
             </div>
           </PreviewProvider>
