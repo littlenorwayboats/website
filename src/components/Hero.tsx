@@ -8,7 +8,7 @@ export function Hero() {
     <section
       id="home"
       aria-labelledby="hero-heading"
-      className="relative isolate z-20 -mt-20 min-h-[calc(100svh-1px)] overflow-hidden"
+      className="hero-screen relative isolate z-20 overflow-hidden"
     >
       <HeroParallax
         className="w-full min-w-0 max-w-full overflow-hidden text-center md:w-[54%] md:pr-6 lg:w-[48%]"
@@ -32,7 +32,7 @@ export function Hero() {
           <span className="block sm:inline">electric cruiser.</span>
         </h1>
         <p className="mx-auto mt-5 max-w-[24rem] text-lg leading-7 text-balance text-parchment">
-          Hourly self-captained rentals at Poulsbo Marina.
+          Hourly self-captained rentals at Poulsbo Marina for up to 10 guests.
         </p>
         <div className="mt-7">
           <a

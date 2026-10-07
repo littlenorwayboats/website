@@ -56,6 +56,10 @@ const letterSpacing = {
   section: "0.22em",
 } as const;
 
+const transitionTimingFunction = {
+  menu: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+} as const;
+
 const cssVariables = {
   "--color-norse-700": colors.norse[700],
   "--color-norse-800": colors.norse[800],
@@ -84,6 +88,7 @@ const cssVariables = {
   "--text-shadow-carved": textShadow.carved,
   "--text-shadow-etched": textShadow.etched,
   "--text-shadow-heading": textShadow.heading,
+  "--ease-menu": transitionTimingFunction.menu,
 } as const;
 
 const config = {
@@ -98,6 +103,7 @@ const config = {
       dropShadow,
       textShadow,
       letterSpacing,
+      transitionTimingFunction,
     },
   },
   plugins: [

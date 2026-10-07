@@ -2,8 +2,10 @@
 @config "../../tailwind.config.ts";
 
 html {
+  --safe-top: env(safe-area-inset-top, 0px);
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+  scroll-padding-top: calc(6rem + var(--safe-top));
   overflow-x: hidden;
   overscroll-behavior-x: none;
 }
@@ -80,6 +82,33 @@ body {
     color-mix(in srgb, var(--color-rust) 35%, var(--color-norse-900)) 50%,
     color-mix(in srgb, var(--color-ink) 55%, transparent) 100%
   );
+}
+
+/* --safe-top is 0 on desktop, so these match the 5rem header. */
+.header-offset {
+  padding-top: 5rem;
+  padding-top: calc(5rem + var(--safe-top));
+}
+
+.header-safe {
+  padding-top: var(--safe-top);
+}
+
+.header-scrim {
+  height: 5rem;
+  height: calc(5rem + var(--safe-top));
+}
+
+.hero-screen {
+  margin-top: -5rem;
+  margin-top: calc(-5rem - var(--safe-top));
+  min-height: calc(100svh - 1px);
+  min-height: calc(100svh - 1px + var(--safe-top));
+}
+
+.mobile-menu-panel {
+  max-height: calc(100dvh - 5rem);
+  max-height: calc(100dvh - 5rem - var(--safe-top));
 }
 
 .hero-image-layer {

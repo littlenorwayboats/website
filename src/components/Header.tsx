@@ -352,10 +352,13 @@ export function Header() {
     <>
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-x-0 top-0 z-10 h-20 bg-steel shadow-[0_8px_24px_rgba(14,21,28,0.32)]"
-    />
+      className="header-scrim pointer-events-none fixed inset-x-0 top-0 z-10"
+    >
+      {/* Color lives on this child so iOS Safari can draw the hero behind the notch. */}
+      <div className="absolute inset-0 bg-steel shadow-[0_8px_24px_rgba(14,21,28,0.32)]" />
+    </div>
     <header
-      className={`fixed inset-x-0 top-0 z-30 w-full min-w-0 ${open ? "bg-steel" : ""}`}
+      className={`header-safe fixed inset-x-0 top-0 z-30 w-full min-w-0 ${open ? "bg-steel" : ""}`}
     >
         <div
           ref={barRef}
@@ -412,39 +415,48 @@ export function Header() {
 
       <div
         id={menuId}
-        hidden={!open}
-        className="absolute inset-x-0 top-full z-30 max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-black/40 bg-steel px-4 py-4 shadow-nav lg:hidden"
+        inert={!open || undefined}
+        aria-hidden={!open}
+        className={`absolute inset-x-0 top-full z-30 grid overflow-hidden transition-[grid-template-rows] ease-menu lg:hidden ${
+          open
+            ? "grid-rows-[1fr] duration-[225ms]"
+            : "pointer-events-none grid-rows-[0fr] duration-[195ms]"
+        }`}
       >
-        <nav aria-label="Mobile">
-          <ul className="flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={close}
-                  aria-current={
-                    normalizePath(link.href) === currentPath
-                      ? "page"
-                      : undefined
-                  }
-                  className="block rounded-sm px-2 py-3 font-display text-base tracking-nav text-parchment uppercase aria-[current=page]:text-gold-bright"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <a
-                href={cta.href}
-                rel={cta.rel}
-                onClick={isLive ? onBookingClick : close}
-                className="neon-btn mt-2 inline-flex w-full justify-center rounded-sm px-4 py-3 font-display text-base font-semibold tracking-cta uppercase"
-              >
-                {cta.label}
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <div className="min-h-0 overflow-hidden">
+          <div className="mobile-menu-panel overflow-y-auto border-t border-black/40 bg-steel px-4 py-4 shadow-nav">
+            <nav aria-label="Mobile">
+              <ul className="flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={close}
+                      aria-current={
+                        normalizePath(link.href) === currentPath
+                          ? "page"
+                          : undefined
+                      }
+                      className="block rounded-sm px-2 py-3 font-display text-base tracking-nav text-parchment uppercase aria-[current=page]:text-gold-bright"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <a
+                    href={cta.href}
+                    rel={cta.rel}
+                    onClick={isLive ? onBookingClick : close}
+                    className="neon-btn mt-2 inline-flex w-full justify-center rounded-sm px-4 py-3 font-display text-base font-semibold tracking-cta uppercase"
+                  >
+                    {cta.label}
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
     </header>
     </>

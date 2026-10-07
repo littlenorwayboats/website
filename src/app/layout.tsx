@@ -72,14 +72,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${display.variable} ${body.variable} h-full bg-norse-950`}
+    >
       <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-sans text-lg text-parchment antialiased">
         <JsonLd data={organizationJsonLd()} />
         <SkipLink />
         <Suspense fallback={<PreviewFallback />}>
           <PreviewProvider>
             <Header />
-            <div className="flex min-w-0 w-full flex-1 flex-col overflow-x-hidden pt-20">
+            <div className="header-offset flex min-w-0 w-full flex-1 flex-col overflow-x-hidden">
               <PreviewGate>{children}</PreviewGate>
             </div>
           </PreviewProvider>
