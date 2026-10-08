@@ -27,26 +27,20 @@ export function Hero() {
   const underlayRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative">
-      {/* Sits under the navy bar, so scallop holes stay filled with the photo until they cross it. */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-        aria-hidden="true"
-      >
-        <div className="absolute inset-0 overflow-hidden [transform:translateZ(0)]">
-          <div
-            ref={underlayRef}
-            className="hero-image-layer will-change-transform"
-          >
+    <>
+      <div className="header-photo" aria-hidden="true">
+        <div className="header-photo-frame">
+          <div ref={underlayRef} className="hero-image-layer will-change-transform">
             <HeroPhoto decorative />
           </div>
+          <div className="hero-veil absolute inset-0" />
+          <div className="hero-veil header-photo-veil-extend" />
         </div>
-        <div className="hero-veil absolute inset-0" />
       </div>
       <section
         id="home"
         aria-labelledby="hero-heading"
-        className="hero-scallop hero-screen relative z-20 overflow-hidden"
+        className="hero-screen relative z-20 overflow-hidden"
       >
         <HeroParallax
           underlayRef={underlayRef}
@@ -74,6 +68,6 @@ export function Hero() {
           </div>
         </HeroParallax>
       </section>
-    </div>
+    </>
   );
 }

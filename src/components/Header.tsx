@@ -390,9 +390,9 @@ export function Header() {
     <>
     <div
       aria-hidden="true"
-      className="header-scrim pointer-events-none fixed inset-x-0 top-0 z-10"
+      className="header-scrim pointer-events-none fixed inset-x-0 top-0 z-10 overflow-hidden shadow-[0_8px_24px_rgba(14,21,28,0.32)]"
     >
-      <div className="absolute inset-0 bg-steel shadow-[0_8px_24px_rgba(14,21,28,0.32)]" />
+      <div className="header-scallop bg-steel" />
     </div>
     <header
       className={`header-safe fixed inset-x-0 top-0 z-30 w-full min-w-0 ${open && !overHero ? "bg-steel" : ""}`}

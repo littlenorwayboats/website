@@ -15,7 +15,7 @@ export function HeroParallax({
   image: ReactNode;
   children: ReactNode;
   className?: string;
-  /** Same photo behind the scallop mask, so the edge only shows over the navy bar. */
+  /** Photo behind the navy dips, kept in step with the hero image. */
   underlayRef?: RefObject<HTMLDivElement | null>;
 }) {
   const imageRef = useRef<HTMLDivElement>(null);
