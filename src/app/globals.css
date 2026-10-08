@@ -3,12 +3,13 @@
 
 html {
   --safe-top: env(safe-area-inset-top, 0px);
-  /* iPhone sets this so the hero can sit under the status bar. Desktop stays 0. */
-  --notch-bleed: 0px;
+  --scallop-rise: 28px;
+  --scallop-span: 56px;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
   scroll-padding-top: calc(6rem + var(--safe-top));
-  overflow-x: hidden;
+  /* clip avoids the iOS bug where overflow-x: hidden paints the page color over the notch */
+  overflow-x: clip;
   overscroll-behavior-x: none;
 }
 
@@ -38,10 +39,6 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-rust);
   outline-offset: 3px;
-}
-
-.texture-noise {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
 }
 
 .content-auto {
@@ -101,17 +98,32 @@ body {
   height: calc(5rem + var(--safe-top));
 }
 
-.notch-runway {
-  height: var(--notch-bleed);
-  flex: none;
-}
-
 .hero-screen {
   margin-top: -5rem;
-  margin-top: calc(-5rem - var(--safe-top) - var(--notch-bleed));
-  padding-top: var(--notch-bleed);
+  margin-top: calc(-5rem - var(--safe-top));
   min-height: calc(100svh - 1px);
-  min-height: calc(100svh - 1px + var(--safe-top) + var(--notch-bleed));
+  min-height: calc(100svh - 1px + var(--safe-top));
+}
+
+/* Semicircles sit on the navy bar. Holes reveal whatever is behind this layer. */
+.hero-scallop {
+  mask:
+    linear-gradient(#fff 0 0) center top / 100% calc(100% - var(--scallop-rise)) no-repeat,
+    radial-gradient(circle at 50% 0%, #fff var(--scallop-rise), transparent var(--scallop-rise)) left bottom / var(--scallop-span) var(--scallop-rise) repeat-x;
+  mask-composite: add;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) center top / 100% calc(100% - var(--scallop-rise)) no-repeat,
+    radial-gradient(circle at 50% 0%, #fff var(--scallop-rise), transparent var(--scallop-rise)) left bottom / var(--scallop-span) var(--scallop-rise) repeat-x;
+  -webkit-mask-composite: source-over;
+}
+
+/* Phones: cover the large viewport so the feature icons and footer stay
+   below the fold while the hero photo loads, including under a hidden browser bar. */
+@media (max-width: 767px) {
+  .hero-screen {
+    min-height: 100lvh;
+    min-height: calc(100lvh + var(--safe-top));
+  }
 }
 
 .mobile-menu-panel {
@@ -121,8 +133,7 @@ body {
 
 .hero-image-layer {
   position: absolute;
-  top: -18%;
-  top: calc(-18% - var(--notch-bleed));
+  top: calc(-18% - var(--safe-top));
   right: 0;
   bottom: -18%;
   left: 0;

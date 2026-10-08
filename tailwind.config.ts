@@ -57,7 +57,7 @@ const letterSpacing = {
 } as const;
 
 const transitionTimingFunction = {
-  menu: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+  menu: "cubic-bezier(0.42, 0, 0.58, 1)",
 } as const;
 
 const cssVariables = {

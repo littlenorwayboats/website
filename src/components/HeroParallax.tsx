@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 
 const IMAGE_SHIFT = 0.14;
 const TEXT_SHIFT = 0.42;
@@ -10,10 +10,13 @@ export function HeroParallax({
   image,
   children,
   className,
+  underlayRef,
 }: {
   image: ReactNode;
   children: ReactNode;
   className?: string;
+  /** Same photo behind the scallop mask, so the edge only shows over the navy bar. */
+  underlayRef?: RefObject<HTMLDivElement | null>;
 }) {
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -30,11 +33,10 @@ export function HeroParallax({
       const textNode = textRef.current;
       if (!imageNode || !textNode) return;
 
-      const bleed = Number.parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue("--notch-bleed"),
-      );
-      const scrolled = Math.max(0, window.scrollY - (Number.isFinite(bleed) ? bleed : 0));
-      imageNode.style.transform = `translate3d(0, ${scrolled * IMAGE_SHIFT}px, 0)`;
+      const scrolled = window.scrollY;
+      const shift = `translate3d(0, ${scrolled * IMAGE_SHIFT}px, 0)`;
+      imageNode.style.transform = shift;
+      if (underlayRef?.current) underlayRef.current.style.transform = shift;
       textNode.style.transform = `translate3d(0, ${scrolled * TEXT_SHIFT}px, 0)`;
       textNode.style.opacity = String(Math.max(0, 1 - scrolled / FADE_DISTANCE));
     }
@@ -50,7 +52,7 @@ export function HeroParallax({
       window.removeEventListener("scroll", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [underlayRef]);
 
   return (
     <>
