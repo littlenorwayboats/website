@@ -23,7 +23,8 @@ export function HeroParallax({
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (motion.matches) return;
+    const mobile = window.matchMedia("(max-width: 767px)");
+    if (motion.matches || mobile.matches) return;
 
     let frame = 0;
 

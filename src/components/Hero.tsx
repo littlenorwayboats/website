@@ -27,20 +27,19 @@ export function Hero() {
   const underlayRef = useRef<HTMLDivElement>(null);
 
   return (
-    <>
-      <div className="header-photo" aria-hidden="true">
-        <div className="header-photo-frame">
+    <div className="hero-screen relative">
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+        <div className="absolute inset-0 overflow-hidden [transform:translateZ(0)]">
           <div ref={underlayRef} className="hero-image-layer will-change-transform">
             <HeroPhoto decorative />
           </div>
-          <div className="hero-veil absolute inset-0" />
-          <div className="hero-veil header-photo-veil-extend" />
         </div>
+        <div className="hero-veil absolute inset-0" />
       </div>
       <section
         id="home"
         aria-labelledby="hero-heading"
-        className="hero-screen relative z-20 overflow-hidden"
+        className="hero-wave relative z-20 min-h-[inherit] overflow-hidden"
       >
         <HeroParallax
           underlayRef={underlayRef}
@@ -68,6 +67,6 @@ export function Hero() {
           </div>
         </HeroParallax>
       </section>
-    </>
+    </div>
   );
 }
