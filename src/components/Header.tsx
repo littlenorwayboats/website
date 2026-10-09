@@ -461,13 +461,7 @@ export function Header() {
         }`}
       >
         <div className="min-h-0 overflow-hidden">
-          <div
-            className={`mobile-menu-panel overflow-y-auto px-4 py-4 ${
-              overHero
-                ? "bg-transparent"
-                : "border-t border-black/40 bg-steel shadow-nav"
-            }`}
-          >
+          <div className="mobile-menu-panel overflow-y-auto border-t border-black/40 bg-steel px-4 py-4 shadow-nav">
             <nav aria-label="Mobile">
               <ul className="flex flex-col gap-2">
                 {navLinks.map((link) => (

@@ -47,7 +47,7 @@ export function Hero() {
             <span className="block sm:inline">electric cruiser.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-[24rem] text-lg leading-7 text-balance text-parchment">
-            Hourly self-captained rentals at Poulsbo Marina for up to 10 guests.
+            Hourly self-captained rentals at the Port of Poulsbo for up to 10 guests.
           </p>
           <div className="mt-7">
             <a
