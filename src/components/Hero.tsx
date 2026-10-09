@@ -28,18 +28,10 @@ export function Hero() {
 
   return (
     <div className="hero-screen relative">
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-        <div className="absolute inset-0 overflow-hidden [transform:translateZ(0)]">
-          <div ref={underlayRef} className="hero-image-layer will-change-transform">
-            <HeroPhoto decorative />
-          </div>
-        </div>
-        <div className="hero-veil absolute inset-0" />
-      </div>
       <section
         id="home"
         aria-labelledby="hero-heading"
-        className="hero-wave relative z-20 min-h-[inherit] overflow-hidden"
+        className="relative z-20 min-h-[inherit] overflow-hidden"
       >
         <HeroParallax
           underlayRef={underlayRef}
@@ -67,6 +59,16 @@ export function Hero() {
           </div>
         </HeroParallax>
       </section>
+      <div className="hero-dip-window" aria-hidden="true">
+        <div className="hero-dips">
+          <div className="hero-dips-frame">
+            <div ref={underlayRef} className="hero-image-layer will-change-transform">
+              <HeroPhoto decorative />
+            </div>
+            <div className="hero-dips-veil" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

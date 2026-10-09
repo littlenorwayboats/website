@@ -5,6 +5,7 @@ html {
   --safe-top: env(safe-area-inset-top, 0px);
   --scallop-rise: 16px;
   --scallop-span: 32px;
+  --hero-span: calc(100svh - 1px + var(--safe-top));
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
   scroll-padding-top: calc(6rem + var(--safe-top));
@@ -33,6 +34,15 @@ body {
 
   .hero-image-layer {
     inset: 0;
+  }
+
+  .hero-dips .hero-image-layer {
+    bottom: calc(var(--scallop-rise) * -1);
+  }
+
+  .hero-dips {
+    animation: none !important;
+    visibility: hidden;
   }
 }
 
@@ -100,29 +110,74 @@ body {
 
 .hero-screen {
   margin-top: calc(-5rem - var(--safe-top));
-  min-height: calc(100svh - 1px + var(--safe-top));
+  min-height: var(--hero-span);
 }
 
-.hero-wave {
+/* A header-sized window. The strip inside is only a transform, so the
+   scallops stay on the hero's bottom edge without repainting a clip path. */
+.hero-dip-window {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 15;
+  height: calc(5rem + var(--safe-top));
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-dips {
   --wave-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='16' viewBox='0 0 32 16'%3E%3Cpath fill='white' d='M0 0C5.824 0 10.176 16 16 16C21.824 16 26.176 0 32 0Z'/%3E%3C/svg%3E");
-  mask-image: linear-gradient(#fff 0 0), var(--wave-mask);
-  mask-size: 100% calc(100% - var(--scallop-rise)), var(--scallop-span) var(--scallop-rise);
-  mask-position: center top, left bottom;
-  mask-repeat: no-repeat, repeat-x;
-  mask-composite: add;
-  -webkit-mask-image: linear-gradient(#fff 0 0), var(--wave-mask);
-  -webkit-mask-size: 100% calc(100% - var(--scallop-rise)), var(--scallop-span) var(--scallop-rise);
-  -webkit-mask-position: center top, left bottom;
-  -webkit-mask-repeat: no-repeat, repeat-x;
-  -webkit-mask-composite: source-over;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--scallop-rise);
+  overflow: hidden;
+  mask-image: var(--wave-mask);
+  mask-size: var(--scallop-span) 100%;
+  mask-repeat: repeat-x;
+  -webkit-mask-image: var(--wave-mask);
+  -webkit-mask-size: var(--scallop-span) 100%;
+  -webkit-mask-repeat: repeat-x;
+  animation: hero-dip-rise linear both;
+  animation-timeline: scroll(root block);
+  animation-range: 0 calc(var(--hero-span) + var(--scallop-rise));
+  will-change: transform;
+}
+
+@keyframes hero-dip-rise {
+  from {
+    transform: translate3d(0, var(--hero-span), 0);
+  }
+  to {
+    transform: translate3d(0, calc(var(--scallop-rise) * -1), 0);
+  }
+}
+
+.hero-dips-frame {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: var(--hero-span);
+}
+
+.hero-dips-veil {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  height: var(--scallop-rise);
+  background: color-mix(in srgb, var(--color-ink) 62%, transparent);
 }
 
 /* Phones: cover the large viewport so the feature icons and footer stay
    below the fold while the hero photo loads, including under a hidden browser bar. */
 @media (max-width: 767px) {
-  .hero-screen {
-    min-height: 100lvh;
-    min-height: calc(100lvh + var(--safe-top));
+  html {
+    --hero-span: calc(100lvh + var(--safe-top));
   }
 }
 
@@ -177,6 +232,19 @@ body {
         color-mix(in srgb, var(--color-ink) 42%, transparent),
         transparent 42%
       );
+  }
+
+  .hero-dips-veil {
+    background:
+      linear-gradient(
+        100deg,
+        color-mix(in srgb, var(--color-ink) 58%, transparent) 0%,
+        color-mix(in srgb, var(--color-ink) 42%, transparent) 26%,
+        color-mix(in srgb, var(--color-ink) 22%, transparent) 48%,
+        color-mix(in srgb, var(--color-ink) 6%, transparent) 66%,
+        transparent 82%
+      ),
+      color-mix(in srgb, var(--color-ink) 42%, transparent);
   }
 }
 
