@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { bookingHref } from "@/lib/nav";
 import { withBasePath } from "@/lib/paths";
 import { HeroParallax } from "./HeroParallax";
@@ -25,62 +25,21 @@ function HeroPhoto({ decorative = false }: { decorative?: boolean }) {
 
 export function Hero() {
   const underlayRef = useRef<HTMLDivElement>(null);
-  const dipsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const dips = dipsRef.current;
-    const hero = document.getElementById("home");
-    if (!dips || !hero) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let frame = 0;
-    let clip = "";
-
-    function update() {
-      frame = 0;
-      const header = document.querySelector(".header-scrim");
-      if (!header) return;
-
-      const headerBottom = header.getBoundingClientRect().bottom;
-      const top = hero.getBoundingClientRect().bottom;
-      const rise = dips.offsetHeight;
-      const bottom = top + rise;
-      let insetTop = 0;
-      let insetBottom = rise;
-
-      if (bottom > 0 && top < headerBottom) {
-        insetTop = Math.max(0, -top);
-        insetBottom = Math.max(0, bottom - headerBottom);
-      }
-
-      const next = `inset(${insetTop}px 0px ${insetBottom}px 0px)`;
-      if (next !== clip) {
-        clip = next;
-        dips.style.clipPath = next;
-      }
-    }
-
-    function onScroll() {
-      if (frame) return;
-      frame = window.requestAnimationFrame(update);
-    }
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, []);
 
   return (
     <div className="hero-screen relative">
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+        <div className="absolute inset-0 overflow-hidden [transform:translateZ(0)]">
+          <div ref={underlayRef} className="hero-image-layer will-change-transform">
+            <HeroPhoto decorative />
+          </div>
+        </div>
+        <div className="hero-veil absolute inset-0" />
+      </div>
       <section
         id="home"
         aria-labelledby="hero-heading"
-        className="relative z-20 min-h-[inherit] overflow-hidden"
+        className="hero-wave relative z-20 min-h-[inherit] overflow-hidden"
       >
         <HeroParallax
           underlayRef={underlayRef}
@@ -108,14 +67,6 @@ export function Hero() {
           </div>
         </HeroParallax>
       </section>
-      <div ref={dipsRef} className="hero-dips" aria-hidden="true">
-        <div className="hero-dips-frame">
-          <div ref={underlayRef} className="hero-image-layer will-change-transform">
-            <HeroPhoto decorative />
-          </div>
-          <div className="hero-dips-veil" />
-        </div>
-      </div>
     </div>
   );
 }

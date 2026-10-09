@@ -15,7 +15,7 @@ export function HeroParallax({
   image: ReactNode;
   children: ReactNode;
   className?: string;
-  /** Photo in the dips below the hero, kept in step with the hero image. */
+  /** Photo behind the wave cutouts, kept in step with the hero image. */
   underlayRef?: RefObject<HTMLDivElement | null>;
 }) {
   const imageRef = useRef<HTMLDivElement>(null);

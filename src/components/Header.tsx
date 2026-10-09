@@ -303,59 +303,6 @@ function MenuIcon({ open }: { open: boolean }) {
   );
 }
 
-/**
- * True once the white section under the hero reaches the bottom of the nav.
- * Until then the hero photo covers the bar.
- */
-function useNavSolid(isHome: boolean) {
-  const [solid, setSolid] = useLatchedBoolean(!isHome);
-
-  useEffect(() => {
-    if (!isHome) {
-      setSolid(true);
-      return;
-    }
-
-    let frame = 0;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    function update() {
-      frame = 0;
-      if (reduceMotion.matches) {
-        setSolid(true);
-        return;
-      }
-
-      const hero = document.getElementById("home");
-      const header = document.querySelector(".header-scrim");
-      if (!hero || !header) {
-        setSolid(true);
-        return;
-      }
-
-      setSolid(hero.getBoundingClientRect().bottom <= header.getBoundingClientRect().bottom + 0.5);
-    }
-
-    function onScroll() {
-      if (frame) return;
-      frame = window.requestAnimationFrame(update);
-    }
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    reduceMotion.addEventListener("change", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      reduceMotion.removeEventListener("change", onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, [isHome, setSolid]);
-
-  return solid;
-}
-
 export function Header() {
   const [open, setOpen] = useState(false);
   const [colored, setColored] = useLatchedBoolean(false);
@@ -375,7 +322,6 @@ export function Header() {
 
   const currentPath = normalizePath(pathname);
   const isHome = currentPath === "/";
-  const navSolid = useNavSolid(isHome);
 
   useMobileMenu(open, setOpen, pathname);
   useHomeBarAnimation({
@@ -406,7 +352,7 @@ export function Header() {
     <>
     <div
       aria-hidden="true"
-      className={`header-scrim pointer-events-none fixed inset-x-0 top-0 z-10 ${navSolid ? "" : "opacity-0"}`}
+      className="header-scrim pointer-events-none fixed inset-x-0 top-0 z-10"
     >
       <div className="absolute inset-0 bg-steel shadow-[0_8px_24px_rgba(14,21,28,0.32)]" />
     </div>
