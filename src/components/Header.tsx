@@ -303,41 +303,57 @@ function MenuIcon({ open }: { open: boolean }) {
   );
 }
 
-/** True while the open mobile menu still sits on the hero photo. */
-function useMenuOverHero(isHome: boolean, open: boolean, menuId: string) {
-  const [overHero, setOverHero] = useState(isHome);
+/**
+ * True once the white section under the hero reaches the bottom of the nav.
+ * Until then the hero photo covers the bar.
+ */
+function useNavSolid(isHome: boolean) {
+  const [solid, setSolid] = useLatchedBoolean(!isHome);
 
   useEffect(() => {
     if (!isHome) {
-      setOverHero(false);
+      setSolid(true);
       return;
     }
 
+    let frame = 0;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
     function update() {
-      const hero = document.getElementById("home");
-      const menu = document.getElementById(menuId);
-      if (!hero) {
-        setOverHero(false);
+      frame = 0;
+      if (reduceMotion.matches) {
+        setSolid(true);
         return;
       }
-      const limit = menu ? menu.getBoundingClientRect().bottom : 0;
-      setOverHero(hero.getBoundingClientRect().bottom >= limit - 1);
+
+      const hero = document.getElementById("home");
+      const header = document.querySelector(".header-scrim");
+      if (!hero || !header) {
+        setSolid(true);
+        return;
+      }
+
+      setSolid(hero.getBoundingClientRect().bottom <= header.getBoundingClientRect().bottom + 0.5);
+    }
+
+    function onScroll() {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
     }
 
     update();
-    const menu = document.getElementById(menuId);
-    const observer = new ResizeObserver(update);
-    if (menu) observer.observe(menu);
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    reduceMotion.addEventListener("change", onScroll);
     return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      reduceMotion.removeEventListener("change", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [isHome, open, menuId]);
+  }, [isHome, setSolid]);
 
-  return overHero;
+  return solid;
 }
 
 export function Header() {
@@ -359,7 +375,7 @@ export function Header() {
 
   const currentPath = normalizePath(pathname);
   const isHome = currentPath === "/";
-  const overHero = useMenuOverHero(isHome, open, menuId);
+  const navSolid = useNavSolid(isHome);
 
   useMobileMenu(open, setOpen, pathname);
   useHomeBarAnimation({
@@ -390,12 +406,12 @@ export function Header() {
     <>
     <div
       aria-hidden="true"
-      className="header-scrim pointer-events-none fixed inset-x-0 top-0 z-10"
+      className={`header-scrim pointer-events-none fixed inset-x-0 top-0 z-10 ${navSolid ? "" : "opacity-0"}`}
     >
       <div className="absolute inset-0 bg-steel shadow-[0_8px_24px_rgba(14,21,28,0.32)]" />
     </div>
     <header
-      className={`header-safe fixed inset-x-0 top-0 z-30 w-full min-w-0 ${open && !overHero ? "bg-steel" : ""}`}
+      className="header-safe fixed inset-x-0 top-0 z-30 w-full min-w-0"
     >
         <div
           ref={barRef}

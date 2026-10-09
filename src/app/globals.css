@@ -41,7 +41,6 @@ body {
   }
 
   .hero-dips {
-    animation: none !important;
     visibility: hidden;
   }
 }
@@ -113,46 +112,25 @@ body {
   min-height: var(--hero-span);
 }
 
-/* A header-sized window. The strip inside is only a transform, so the
-   scallops stay on the hero's bottom edge without repainting a clip path. */
-.hero-dip-window {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 15;
-  height: calc(5rem + var(--safe-top));
-  overflow: hidden;
-  pointer-events: none;
-}
-
+/* Hangs below the hero and scrolls with the page. The pointed crests sit on
+   the white section's top edge. clip-path hides whatever falls outside the nav. */
 .hero-dips {
   --wave-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='16' viewBox='0 0 32 16'%3E%3Cpath fill='white' d='M0 0C3.2 10 10 16 16 16C22 16 28.8 10 32 0Z'/%3E%3C/svg%3E");
   position: absolute;
-  top: 0;
+  top: 100%;
   left: 0;
+  z-index: 15;
   width: 100%;
   height: var(--scallop-rise);
   overflow: hidden;
+  pointer-events: none;
+  clip-path: inset(0 0 100% 0);
   mask-image: var(--wave-mask);
   mask-size: var(--scallop-span) 100%;
   mask-repeat: repeat-x;
   -webkit-mask-image: var(--wave-mask);
   -webkit-mask-size: var(--scallop-span) 100%;
   -webkit-mask-repeat: repeat-x;
-  animation: hero-dip-rise linear both;
-  animation-timeline: scroll(root block);
-  animation-range: 0 calc(var(--hero-span) + var(--scallop-rise));
-  will-change: transform;
-}
-
-@keyframes hero-dip-rise {
-  from {
-    transform: translate3d(0, var(--hero-span), 0);
-  }
-  to {
-    transform: translate3d(0, calc(var(--scallop-rise) * -1), 0);
-  }
 }
 
 .hero-dips-frame {
