@@ -48,9 +48,10 @@ export function Hero() {
         >
           <h1
             id="hero-heading"
-            className="w-full max-w-full font-display text-[clamp(1.35rem,6vw,3.15rem)] leading-[1.12] font-bold tracking-[0.02em] text-gold-bright uppercase sm:tracking-[0.04em]"
+            className="w-full max-w-full font-hero text-[clamp(1.85rem,5.6vw,3.65rem)] leading-[1.18] font-semibold tracking-tight text-balance text-gold-bright"
+            style={{ fontVariationSettings: '"SOFT" 40, "opsz" 144' }}
           >
-            <span className="block sm:inline">Explore liberty bay</span>{" "}
+            <span className="block sm:inline">Explore Liberty Bay</span>{" "}
             <span className="block sm:inline">with our Viking-themed</span>{" "}
             <span className="block sm:inline">electric cruiser.</span>
           </h1>

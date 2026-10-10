@@ -97,6 +97,7 @@ const config = {
       colors,
       fontFamily: {
         display: ["var(--font-display)", "ui-serif", "Georgia", "serif"],
+        hero: ["var(--font-hero)", "ui-serif", "Georgia", "serif"],
         sans: ["var(--font-body)", "ui-serif", "Georgia", "serif"],
       },
       boxShadow,

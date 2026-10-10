@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
-import { Cinzel, Cormorant_Garamond } from "next/font/google";
+import { Cinzel, Cormorant_Garamond, Fraunces } from "next/font/google";
 import { SkipLink } from "@/components/SkipLink";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -30,6 +30,13 @@ const body = Cormorant_Garamond({
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-body",
+});
+
+const hero = Fraunces({
+  subsets: ["latin"],
+  axes: ["SOFT", "opsz"],
+  display: "swap",
+  variable: "--font-hero",
 });
 
 export const viewport: Viewport = {
@@ -73,7 +80,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} h-full bg-norse-950`}
+      className={`${display.variable} ${body.variable} ${hero.variable} h-full bg-norse-950`}
     >
       <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-sans text-lg text-parchment antialiased">
         <JsonLd data={organizationJsonLd()} />
