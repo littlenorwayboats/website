@@ -64,6 +64,26 @@
     ]
   },
   "/images/hero.jpg": {
+    "width": 1586,
+    "height": 672,
+    "widths": [
+      640,
+      828,
+      1080,
+      1586
+    ]
+  },
+  "/images/hero1.jpg": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      640,
+      828,
+      1080,
+      1672
+    ]
+  },
+  "/images/hero2.jpg": {
     "width": 1024,
     "height": 434,
     "widths": [
@@ -94,6 +114,16 @@
       800
     ]
   },
+  "/images/poulsbo.jpg": {
+    "width": 3235,
+    "height": 2403,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
+    ]
+  },
   "/images/textures/chiseled-stone.jpg": {
     "width": 256,
     "height": 256,
@@ -120,6 +150,16 @@
     "height": 110,
     "widths": [
       188
+    ]
+  },
+  "/images/textures/hero.jpg": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      640,
+      828,
+      1080,
+      1672
     ]
   },
   "/images/textures/walnut-wood.jpg": {
