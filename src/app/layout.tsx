@@ -14,6 +14,7 @@ import {
   SITE_TITLE,
   siteUrl,
 } from "@/lib/site";
+import { SITE_LAUNCHED } from "@/lib/preview";
 import { organizationJsonLd } from "@/lib/structured-data";
 import "./globals.css";
 
@@ -78,14 +79,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-sans text-lg text-parchment antialiased">
         <JsonLd data={organizationJsonLd()} />
         <SkipLink />
-        <Suspense fallback={<PreviewFallback />}>
-          <PreviewProvider>
+        {SITE_LAUNCHED ? (
+          <>
             <Header />
             <div className="header-offset flex min-w-0 w-full flex-1 flex-col overflow-x-clip">
-              <PreviewGate>{children}</PreviewGate>
+              {children}
             </div>
-          </PreviewProvider>
-        </Suspense>
+          </>
+        ) : (
+          <Suspense fallback={<PreviewFallback />}>
+            <PreviewProvider>
+              <Header />
+              <div className="header-offset flex min-w-0 w-full flex-1 flex-col overflow-x-clip">
+                <PreviewGate>{children}</PreviewGate>
+              </div>
+            </PreviewProvider>
+          </Suspense>
+        )}
         <Footer />
       </body>
     </html>

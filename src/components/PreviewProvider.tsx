@@ -12,10 +12,11 @@ import {
   PREVIEW_PARAM,
   PREVIEW_STORAGE_KEY,
   PREVIEW_VALUE,
+  SITE_LAUNCHED,
   isLivePreviewParam,
 } from "@/lib/preview";
 
-const PreviewContext = createContext(false);
+const PreviewContext = createContext(SITE_LAUNCHED);
 
 export function useLivePreview() {
   return useContext(PreviewContext);

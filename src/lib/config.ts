@@ -5,4 +5,6 @@
  */
 export const publicConfig = {
   siteUrl: "https://littlenorwayboats.com",
+  /** Flip to true to remove Coming Soon gating and index every page. */
+  launched: false,
 } as const;

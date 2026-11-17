@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Gallery } from "@/components/Gallery";
+import { robotsFor } from "@/lib/preview";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/gallery/",
   },
+  robots: robotsFor("/gallery"),
 };
 
 export default function GalleryPage() {

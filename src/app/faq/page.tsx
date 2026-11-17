@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FAQ } from "@/components/FAQ";
 import { JsonLd } from "@/components/JsonLd";
+import { robotsFor } from "@/lib/preview";
 import { faqJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/faq/",
   },
+  robots: robotsFor("/faq"),
 };
 
 export default function FAQPage() {
