@@ -29,32 +29,31 @@ const photos = [
 
 export function Gallery() {
   return (
-    <section
-      id="gallery"
-      aria-labelledby="gallery-heading"
-      className="bg-norse-950 px-4 py-16 texture-noise"
-    >
+    <section aria-labelledby="gallery-heading" className="px-4">
       <div className="mx-auto max-w-6xl">
-        <h1
+        <h2
           id="gallery-heading"
-          className="text-center font-display text-3xl font-semibold tracking-[0.08em] text-gold-bright uppercase md:text-4xl"
+          className="font-display text-xl font-semibold tracking-section text-gold uppercase"
         >
           Gallery
-        </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-mist">
-          Electric longships on the water: dragon prow, round shields, and a
-          quiet glide through the harbor.
-        </p>
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        </h2>
+        <ul
+          tabIndex={0}
+          aria-label="Photo gallery, scroll horizontally"
+          className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4"
+        >
           {photos.map((photo) => (
-            <li key={photo.src}>
+            <li
+              key={photo.src}
+              className="w-[80%] shrink-0 snap-start sm:w-[45%] lg:w-[32%]"
+            >
               <figure className="overflow-hidden stone-frame">
                 <OptimizedImage
                   src={photo.src}
                   alt={photo.alt}
                   width={1200}
                   height={900}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 45vw, 80vw"
                   className="aspect-4/3 w-full object-cover"
                 />
               </figure>

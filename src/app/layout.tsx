@@ -1,11 +1,10 @@
-import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import { Cinzel, Cormorant_Garamond } from "next/font/google";
 import { SkipLink } from "@/components/SkipLink";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { PreviewFallback, PreviewGate } from "@/components/PreviewGate";
+import { PreviewGate } from "@/components/PreviewGate";
 import { PreviewProvider } from "@/components/PreviewProvider";
 import {
   OG_IMAGE,
@@ -18,17 +17,15 @@ import { SITE_LAUNCHED } from "@/lib/preview";
 import { organizationJsonLd } from "@/lib/structured-data";
 import "./globals.css";
 
+// Variable fonts: one file per style covers every weight.
 const display = Cinzel({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
   display: "swap",
   variable: "--font-display",
 });
 
 const body = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
   display: "swap",
   variable: "--font-body",
 });
@@ -85,18 +82,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <div className="header-offset flex min-w-0 w-full flex-1 flex-col overflow-x-clip">
               {children}
             </div>
+            <Footer />
           </>
         ) : (
-          <Suspense fallback={<PreviewFallback />}>
-            <PreviewProvider>
-              <Header />
-              <div className="header-offset flex min-w-0 w-full flex-1 flex-col overflow-x-clip">
-                <PreviewGate>{children}</PreviewGate>
-              </div>
-            </PreviewProvider>
-          </Suspense>
+          <PreviewProvider>
+            <Header />
+            <div className="header-offset flex min-w-0 w-full flex-1 flex-col overflow-x-clip">
+              <PreviewGate>{children}</PreviewGate>
+            </div>
+            <Footer />
+          </PreviewProvider>
         )}
-        <Footer />
       </body>
     </html>
   );

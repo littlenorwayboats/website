@@ -3,20 +3,20 @@ import { publicConfig } from "./config";
 export const SITE_NAME = "Little Norway Boats";
 
 export const SITE_TITLE =
-  "Little Norway Boats | Viking Electric Duffy Rentals";
+  "Electric Boat Rentals in Poulsbo, WA | Little Norway Boats";
 
 export const SITE_DESCRIPTION =
-  "Rent a Viking-themed electric Duffy boat on Liberty Bay. Quiet harbor cruises, sunset sails, and dog-friendly voyages with Little Norway Boats.";
+  "Rent a Viking-themed electric Duffy boat in Poulsbo, WA. Quiet Liberty Bay harbor cruises, sunset sails, and dog-friendly voyages with Little Norway Boats.";
 
 export const SITE_AREA = "Liberty Bay, Washington";
 
 export const INSTAGRAM_URL = "https://www.instagram.com/littlenorwayboats";
 
 export const OG_IMAGE = {
-  url: "/images/hero.jpg",
-  width: 1024,
-  height: 434,
-  alt: "A quiet harbor at sunset with boats at rest on still water",
+  url: "/images/og-image.jpg",
+  width: 1200,
+  height: 630,
+  alt: "Poulsbo's waterfront on Liberty Bay reflected in calm water",
 } as const;
 
 function originFromEnv(): string {

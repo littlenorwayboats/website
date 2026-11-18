@@ -21,7 +21,7 @@ import {
 } from "./bookingProgress";
 import { scrollToBooking } from "./HashScroll";
 import { useLivePreview } from "./PreviewProvider";
-import { bookingHref, navLinks } from "@/lib/nav";
+import { bookingHref, visibleNavLinks, type NavLink } from "@/lib/nav";
 import { withBasePath } from "@/lib/paths";
 import { INSTAGRAM_URL } from "@/lib/site";
 
@@ -250,15 +250,17 @@ function useMobileMenu(
 }
 
 function NavList({
+  links,
   currentPath,
   onNavigate,
 }: {
+  links: readonly NavLink[];
   currentPath: string;
   onNavigate?: () => void;
 }) {
   return (
     <ul className="flex items-center">
-      {navLinks.map((link, index) => (
+      {links.map((link, index) => (
         <li key={link.href} className="flex items-center">
           {index > 0 ? (
             <span className="px-2.5 text-parchment/30" aria-hidden="true">
@@ -320,6 +322,7 @@ export function Header() {
   const navRef = useRef<HTMLElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
 
+  const links = visibleNavLinks(isLive);
   const currentPath = normalizePath(pathname);
   const isHome = currentPath === "/";
 
@@ -373,6 +376,7 @@ export function Header() {
             className="h-16 w-16"
             colorOnHover={!colored}
             colored={colored}
+            priority
           />
         </Link>
 
@@ -381,7 +385,7 @@ export function Header() {
           aria-label="Primary"
           className="absolute inset-y-0 right-[calc(1rem+8.5rem)] z-10 my-auto hidden h-fit will-change-transform lg:block"
         >
-          <NavList currentPath={currentPath} />
+          <NavList links={links} currentPath={currentPath} />
         </nav>
 
         <div
@@ -426,7 +430,7 @@ export function Header() {
           <div className="mobile-menu-panel overflow-y-auto border-t border-black/40 bg-steel px-4 py-4 shadow-nav">
             <nav aria-label="Mobile">
               <ul className="flex flex-col gap-2">
-                {navLinks.map((link) => (
+                {links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}

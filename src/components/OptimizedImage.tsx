@@ -1,3 +1,4 @@
+import { preload } from "react-dom";
 import { getImageEntry, optimizedVariantPath } from "@/lib/images";
 import { withBasePath } from "@/lib/paths";
 
@@ -40,6 +41,17 @@ export function OptimizedImage({
     ? ["h-full w-full", className].filter(Boolean).join(" ")
     : className;
   const useAvif = !src.toLowerCase().endsWith(".png");
+
+  if (priority && entry?.widths.length) {
+    const format = useAvif ? "avif" : "webp";
+    preload(withBasePath(optimizedVariantPath(src, entry.widths[0], format)), {
+      as: "image",
+      type: `image/${format}`,
+      imageSrcSet: srcSetFor(src, entry.widths, format),
+      imageSizes: sizes,
+      fetchPriority: "high",
+    });
+  }
 
   const img = (
     // Static export cannot use next/image optimization; srcset is built at compile time.

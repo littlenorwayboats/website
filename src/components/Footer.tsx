@@ -1,15 +1,8 @@
 import Link from "next/link";
+import { FooterLinks } from "./FooterLinks";
 import { Logo } from "./Logo";
 import { Wordmark } from "./Wordmark";
-import { bookingHref, navLinks, packagesHref } from "@/lib/nav";
 import { INSTAGRAM_URL, SITE_AREA } from "@/lib/site";
-import { withBasePath } from "@/lib/paths";
-
-const footerLinks = [
-  ...navLinks,
-  { href: bookingHref, label: "Book Now" },
-  { href: packagesHref, label: "Packages" },
-];
 
 export function Footer() {
   return (
@@ -47,21 +40,7 @@ export function Footer() {
           <h2 className="font-display text-sm font-semibold tracking-section text-gold uppercase">
             Links
           </h2>
-          <ul className="mt-3 columns-2 gap-6 text-sm">
-            {footerLinks.map((link) => (
-              <li key={link.href} className="mb-2">
-                {link.href.startsWith("/#") ? (
-                  <a className="text-parchment hover:text-rust" href={withBasePath(link.href)}>
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link className="text-parchment hover:text-rust" href={link.href}>
-                    {link.label}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
+          <FooterLinks />
         </nav>
         <div>
           <h2 className="font-display text-sm font-semibold tracking-section text-gold uppercase">

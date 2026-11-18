@@ -6,8 +6,8 @@ export const dynamic = "force-static";
 
 const pages = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
-  { path: "/gallery", changeFrequency: "monthly", priority: 0.8 },
   { path: "/faq", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/logbook", changeFrequency: "weekly", priority: 0.8 },
   { path: "/contacts", changeFrequency: "monthly", priority: 0.6 },
 ] as const;
 

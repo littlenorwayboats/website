@@ -43,6 +43,11 @@ body {
   outline-offset: 3px;
 }
 
+/* Weight stays at 600 so browsers pick Jenson's Bold face while Cinzel renders as before. */
+.font-hero {
+  font-family: "Adobe Jenson Pro", "adobe-jenson-pro", var(--font-display);
+}
+
 .content-auto {
   content-visibility: auto;
   contain-intrinsic-size: auto 40rem;
@@ -211,4 +216,66 @@ body {
 
 .neon-btn:active {
   background: color-mix(in srgb, var(--color-rust-dim) 88%, black);
+}
+
+.logbook-prose {
+  color: var(--color-parchment);
+  line-height: 1.7;
+}
+
+.logbook-prose > * + * {
+  margin-top: 1em;
+}
+
+.logbook-prose :is(h2, h3, h4) {
+  margin-top: 1.6em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.logbook-prose h2 {
+  font-size: 1.4em;
+}
+
+.logbook-prose :is(h3, h4) {
+  font-size: 1.15em;
+}
+
+.logbook-prose a {
+  color: var(--color-gold-bright);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.logbook-prose a:hover {
+  color: var(--color-rust);
+}
+
+.logbook-prose :is(ul, ol) {
+  padding-left: 1.5em;
+}
+
+.logbook-prose ul {
+  list-style: disc;
+}
+
+.logbook-prose ol {
+  list-style: decimal;
+}
+
+.logbook-prose blockquote {
+  border-left: 3px solid var(--color-rust);
+  padding-left: 1em;
+  color: var(--color-mist);
+  font-style: italic;
+}
+
+.logbook-prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+.logbook-prose hr {
+  border-color: color-mix(in srgb, var(--color-iron) 40%, transparent);
 }

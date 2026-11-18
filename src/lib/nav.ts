@@ -1,9 +1,20 @@
-export const navLinks = [
+export type NavLink = {
+  href: string;
+  label: string;
+  /** Only shown once the site is launched or in live preview. */
+  previewOnly?: boolean;
+};
+
+export const navLinks: readonly NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
-  { href: "/contacts", label: "Contacts" },
-] as const;
+  { href: "/logbook", label: "Logbook", previewOnly: true },
+  { href: "/contacts", label: "Contact" },
+];
+
+export function visibleNavLinks(isLive: boolean): NavLink[] {
+  return navLinks.filter((link) => isLive || !link.previewOnly);
+}
 
 export const bookingHref = "/#booking";
 export const packagesHref = "/#packages";

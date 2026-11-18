@@ -48,7 +48,7 @@ export function Hero({ action }: { action?: ReactNode }) {
         >
           <h1
             id="hero-heading"
-            className="w-full max-w-full font-display text-[clamp(1.85rem,5.6vw,3.65rem)] leading-[1.18] font-semibold tracking-[0.06em] text-balance text-gold-bright sm:tracking-[0.08em]"
+            className="w-full max-w-full font-hero text-[clamp(1.85rem,5.6vw,3.65rem)] leading-[1.18] font-semibold tracking-[0.06em] text-balance text-gold-bright sm:tracking-[0.08em]"
           >
             <span className="block sm:inline">Electric Boat Rentals</span>{" "}
             <span className="block sm:inline">in Poulsbo, WA</span>

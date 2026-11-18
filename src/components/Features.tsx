@@ -13,7 +13,7 @@ const features: { title: string; body: string; icon: ReactNode }[] = [
   },
   {
     title: "Perfect for Groups",
-    body: "Up to 6 passengers.",
+    body: "Up to 10 passengers.",
     icon: <GroupIcon />,
   },
   {

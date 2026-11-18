@@ -4,10 +4,10 @@ import {
   createContext,
   useContext,
   useEffect,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   PREVIEW_PARAM,
   PREVIEW_STORAGE_KEY,
@@ -22,31 +22,45 @@ export function useLivePreview() {
   return useContext(PreviewContext);
 }
 
+function hasPreviewParam() {
+  const params = new URLSearchParams(window.location.search);
+  return isLivePreviewParam(params.get(PREVIEW_PARAM));
+}
+
+function readIsLive() {
+  return (
+    hasPreviewParam() ||
+    sessionStorage.getItem(PREVIEW_STORAGE_KEY) === PREVIEW_VALUE
+  );
+}
+
+function subscribe(onChange: () => void) {
+  window.addEventListener("popstate", onChange);
+  return () => window.removeEventListener("popstate", onChange);
+}
+
+/**
+ * Reads the preview flag from `window.location` rather than `useSearchParams`,
+ * which would force every prerendered page to bail out to client rendering.
+ */
 export function PreviewProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const fromQuery = isLivePreviewParam(searchParams.get(PREVIEW_PARAM));
-  const [isLive, setIsLive] = useState(fromQuery);
+  const isLive = useSyncExternalStore(subscribe, readIsLive, () => false);
 
   useEffect(() => {
-    if (fromQuery) {
+    if (hasPreviewParam()) {
       sessionStorage.setItem(PREVIEW_STORAGE_KEY, PREVIEW_VALUE);
-      setIsLive(true);
       return;
     }
+    if (!isLive) return;
 
-    const stored = sessionStorage.getItem(PREVIEW_STORAGE_KEY) === PREVIEW_VALUE;
-    setIsLive(stored);
-
-    if (!stored) return;
-
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
     params.set(PREVIEW_PARAM, PREVIEW_VALUE);
     router.replace(`${pathname}?${params.toString()}${window.location.hash}`, {
       scroll: false,
     });
-  }, [fromQuery, pathname, router, searchParams]);
+  }, [isLive, pathname, router]);
 
   return (
     <PreviewContext.Provider value={isLive}>{children}</PreviewContext.Provider>
