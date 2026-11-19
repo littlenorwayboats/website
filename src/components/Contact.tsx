@@ -26,7 +26,7 @@ export function Contact() {
         <div>
           <h1
             id="contact-heading"
-            className="font-display text-3xl font-semibold tracking-[0.08em] text-gold-bright uppercase md:text-4xl"
+            className="text-3xl font-bold tracking-[0.08em] text-gold-bright uppercase md:text-4xl"
           >
             Contact
           </h1>
@@ -35,7 +35,7 @@ export function Contact() {
             Email the crew or reach us on Instagram.
           </p>
           <address className="mt-8 not-italic text-parchment">
-            <p className="font-display text-sm font-semibold tracking-section text-gold uppercase">
+            <p className="text-sm font-bold tracking-section text-gold uppercase">
               Address
             </p>
             <p className="mt-2">
@@ -44,7 +44,7 @@ export function Contact() {
               Exact dock directions arrive with your booking confirmation.
             </p>
             <p className="mt-4">
-              <span className="block font-display text-sm font-semibold tracking-section text-gold uppercase">
+              <span className="block text-sm font-bold tracking-section text-gold uppercase">
                 Email
               </span>
               <ContactEmailLink className="mt-2 inline-block hover:text-rust" />
@@ -65,7 +65,7 @@ export function Contact() {
           <div>
             <label
               htmlFor="name"
-              className="block font-display text-sm font-semibold tracking-label text-gold uppercase"
+              className="block text-sm font-bold tracking-label text-gold uppercase"
             >
               Name
             </label>
@@ -81,7 +81,7 @@ export function Contact() {
           <div>
             <label
               htmlFor="email"
-              className="block font-display text-sm font-semibold tracking-label text-gold uppercase"
+              className="block text-sm font-bold tracking-label text-gold uppercase"
             >
               Email
             </label>
@@ -97,7 +97,7 @@ export function Contact() {
           <div>
             <label
               htmlFor="message"
-              className="block font-display text-sm font-semibold tracking-label text-gold uppercase"
+              className="block text-sm font-bold tracking-label text-gold uppercase"
             >
               Message
             </label>
@@ -111,7 +111,7 @@ export function Contact() {
           </div>
           <button
             type="submit"
-            className="neon-btn rounded-sm px-6 py-3 font-display text-sm font-semibold tracking-cta uppercase"
+            className="neon-btn rounded-sm px-6 py-3 text-sm"
           >
             Send Message
           </button>

@@ -12,12 +12,12 @@ export function Packages() {
       className="content-auto bg-parchment px-4 py-16 texture-noise"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="text-center font-display text-xs font-semibold tracking-section text-iron uppercase">
+        <p className="text-center text-xs font-bold tracking-section text-iron uppercase">
           Featured Journeys
         </p>
         <h2
           id="packages-heading"
-          className="mt-3 text-center font-sans text-4xl font-bold tracking-tight text-norse-950 md:text-5xl"
+          className="mt-3 text-center font-hero text-[clamp(2rem,5vw,3.25rem)] leading-[1.18] font-semibold tracking-[0.06em] text-norse-950 sm:tracking-[0.08em]"
         >
           Popular Voyages &amp; Packages
         </h2>
@@ -36,10 +36,10 @@ export function Packages() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col items-center px-3 pt-5 pb-3 text-center">
-                  <h3 className="font-sans text-2xl font-bold text-norse-950">
+                  <h3 className="text-2xl font-bold text-norse-950">
                     {item.name}
                   </h3>
-                  <p className="mt-1 text-base font-semibold text-rust">
+                  <p className="mt-1 text-base font-bold text-rust">
                     {item.length}
                   </p>
                   <p className="mt-3 mb-6 max-w-[16rem] flex-1 text-base leading-6 text-iron">
@@ -47,7 +47,7 @@ export function Packages() {
                   </p>
                   <a
                     href={bookingHrefForPackage(item.slug)}
-                    className="neon-btn inline-flex rounded-md px-5 py-2.5 font-sans text-sm font-semibold"
+                    className="neon-btn inline-flex rounded-md px-5 py-2.5 text-sm"
                   >
                     Reserve {item.name}
                   </a>

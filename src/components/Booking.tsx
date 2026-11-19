@@ -39,7 +39,7 @@ function BookingContent() {
       <div className="mx-auto mt-8 max-w-md">
         <label
           htmlFor={selectId}
-          className="block text-center font-display text-xs font-semibold tracking-section text-iron uppercase"
+          className="block text-center text-xs font-bold tracking-section text-iron uppercase"
         >
           Voyage package
         </label>
@@ -47,7 +47,7 @@ function BookingContent() {
           id={selectId}
           value={selected.slug}
           onChange={(event) => onPackageChange(event.target.value)}
-          className="mt-3 w-full appearance-none rounded-lg border border-iron/25 bg-parchment px-4 py-3 text-center font-sans text-norse-950 outline-none [background-image:linear-gradient(45deg,transparent_50%,var(--color-rust)_50%),linear-gradient(135deg,var(--color-rust)_50%,transparent_50%)] [background-position:calc(100%-1.4rem)_calc(1.1rem+2px),calc(100%-1rem)_calc(1.1rem+2px)] [background-repeat:no-repeat] [background-size:6px_6px,6px_6px] focus-visible:border-rust"
+          className="mt-3 w-full appearance-none rounded-lg border border-iron/25 bg-parchment px-4 py-3 text-center text-norse-950 outline-none [background-image:linear-gradient(45deg,transparent_50%,var(--color-rust)_50%),linear-gradient(135deg,var(--color-rust)_50%,transparent_50%)] [background-position:calc(100%-1.4rem)_calc(1.1rem+2px),calc(100%-1rem)_calc(1.1rem+2px)] [background-repeat:no-repeat] [background-size:6px_6px,6px_6px] focus-visible:border-rust"
         >
           {voyagePackages.map((item) => (
             <option key={item.slug} value={item.slug}>
@@ -141,7 +141,7 @@ export function Booking() {
       <div className="surface-card mx-auto max-w-4xl px-6 py-14 md:px-10">
         <h2
           id="booking"
-          className="scroll-mt-20 text-center font-sans text-4xl font-bold tracking-tight text-norse-950 md:text-5xl"
+          className="scroll-mt-20 text-center font-hero text-[clamp(2rem,5vw,3.25rem)] leading-[1.18] font-semibold tracking-[0.06em] text-norse-950 sm:tracking-[0.08em]"
         >
           Book Now
         </h2>

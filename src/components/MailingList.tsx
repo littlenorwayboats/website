@@ -37,7 +37,11 @@ export default function MailingList() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="mx-auto w-full max-w-md text-center">
+    <form
+      id="signup"
+      onSubmit={onSubmit}
+      className="mx-auto w-full max-w-md scroll-mt-24 text-center"
+    >
       <p
         id="mailing-list-heading"
         className="text-lg leading-7 text-mist"
@@ -61,7 +65,7 @@ export default function MailingList() {
         <button
           type="submit"
           disabled={pending}
-          className="neon-btn shrink-0 rounded-sm px-6 py-2.5 font-display text-sm font-semibold tracking-cta uppercase disabled:cursor-not-allowed disabled:opacity-60"
+          className="neon-btn shrink-0 rounded-sm px-6 py-2.5 text-sm disabled:cursor-not-allowed disabled:opacity-60"
         >
           {pending ? "Sending" : "Sign Up"}
         </button>

@@ -12,10 +12,10 @@ export default function NotFound() {
       id="main-content"
       className="flex min-w-0 flex-1 flex-col items-center justify-center px-6 py-24 text-center"
     >
-      <p className="font-display text-sm font-semibold tracking-section text-iron uppercase">
+      <p className="text-sm font-bold tracking-section text-iron uppercase">
         404
       </p>
-      <h1 className="mt-4 font-display text-3xl font-semibold tracking-[0.06em] text-gold-bright sm:text-4xl">
+      <h1 className="mt-4 text-3xl font-bold tracking-[0.06em] text-gold-bright uppercase sm:text-4xl">
         Page not found
       </h1>
       <p className="mt-4 max-w-md text-lg text-mist">
@@ -24,7 +24,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="neon-btn mt-10 inline-flex rounded-sm px-7 py-2.5 font-display text-sm font-semibold tracking-cta uppercase"
+        className="neon-btn mt-10 inline-flex rounded-sm px-7 py-2.5 text-sm"
       >
         Back to home
       </Link>

@@ -3,6 +3,7 @@
 import { useRef, type ReactNode } from "react";
 import { bookingHref } from "@/lib/nav";
 import { withBasePath } from "@/lib/paths";
+import { LaunchBanner } from "./LaunchBanner";
 import { HeroParallax } from "./HeroParallax";
 import { OptimizedImage } from "./OptimizedImage";
 
@@ -28,6 +29,7 @@ export function Hero({ action }: { action?: ReactNode }) {
 
   return (
     <div className="hero-screen relative">
+      <LaunchBanner />
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
         <div className="absolute inset-0 overflow-hidden [transform:translateZ(0)]">
           <div ref={underlayRef} className="hero-image-layer will-change-transform">
@@ -39,11 +41,11 @@ export function Hero({ action }: { action?: ReactNode }) {
       <section
         id="home"
         aria-labelledby="hero-heading"
-        className="hero-wave relative z-20 min-h-[inherit] overflow-hidden"
+        className="hero-wave relative z-10 min-h-[inherit] overflow-hidden"
       >
         <HeroParallax
           underlayRef={underlayRef}
-          className="w-full min-w-0 max-w-full overflow-hidden text-center md:w-[54%] md:pr-6 lg:w-[48%]"
+          className="hero-legible w-full min-w-0 max-w-full overflow-hidden text-center md:w-[54%] md:pr-6 lg:w-[48%]"
           image={<HeroPhoto />}
         >
           <h1
@@ -54,13 +56,19 @@ export function Hero({ action }: { action?: ReactNode }) {
             <span className="block sm:inline">in Poulsbo, WA</span>
           </h1>
           <p className="mx-auto mt-5 max-w-[24rem] text-lg leading-7 text-balance text-parchment">
-          Captain your own Viking-themed electric cruiser from the Port of Poulsbo. Hourly self-captained rentals for up to 10 guests. <a href="/faq" className="text-gold-bright">No experience required.</a>
+          Rent your own Viking-themed electric Duffy boat from the Port of Poulsbo. Hourly self-captained rentals for up to 10 guests.{" "}
+            <a
+              href={withBasePath("/faq#no-experience")}
+              className="text-gold-bright"
+            >
+              No experience required.
+            </a>
           </p>
           <div className="mt-7">
             {action ?? (
               <a
                 href={withBasePath(bookingHref)}
-                className="neon-btn inline-flex rounded-sm px-7 py-2.5 font-display text-sm font-semibold tracking-cta uppercase"
+                className="neon-btn inline-flex rounded-sm px-7 py-2.5 text-sm"
               >
                 Book Your Odyssey
               </a>

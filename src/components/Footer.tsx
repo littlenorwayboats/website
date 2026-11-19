@@ -19,7 +19,7 @@ export function Footer() {
           </p>
         </div>
         <div>
-          <h2 className="font-display text-sm font-semibold tracking-section text-gold uppercase">
+          <h2 className="text-sm font-bold tracking-section text-gold uppercase">
             Address
           </h2>
           <address className="mt-3 not-italic text-sm text-parchment">
@@ -37,13 +37,13 @@ export function Footer() {
           </address>
         </div>
         <nav aria-label="Footer">
-          <h2 className="font-display text-sm font-semibold tracking-section text-gold uppercase">
+          <h2 className="text-sm font-bold tracking-section text-gold uppercase">
             Links
           </h2>
           <FooterLinks />
         </nav>
         <div>
-          <h2 className="font-display text-sm font-semibold tracking-section text-gold uppercase">
+          <h2 className="text-sm font-bold tracking-section text-gold uppercase">
             Social
           </h2>
           <ul className="mt-3 flex gap-3">

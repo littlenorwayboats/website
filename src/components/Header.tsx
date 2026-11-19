@@ -273,7 +273,7 @@ function NavList({
             aria-current={
               normalizePath(link.href) === currentPath ? "page" : undefined
             }
-            className="px-1 font-display text-sm font-normal tracking-nav text-parchment uppercase transition-colors hover:text-gold-bright aria-[current=page]:text-gold-bright"
+            className="px-1 text-sm font-bold tracking-nav text-parchment uppercase transition-colors hover:text-gold-bright aria-[current=page]:text-gold-bright"
           >
             {link.label}
           </Link>
@@ -398,7 +398,7 @@ export function Header() {
             onClick={isLive ? onBookingClick : undefined}
             aria-hidden={ctaShiftedOut || undefined}
             inert={ctaShiftedOut || undefined}
-            className="neon-btn hidden rounded-sm px-3.5 py-1.5 font-display text-sm font-semibold tracking-cta uppercase lg:inline-flex"
+            className="neon-btn hidden rounded-sm px-3.5 py-1.5 text-sm lg:inline-flex"
           >
             {cta.label}
           </a>
@@ -440,7 +440,7 @@ export function Header() {
                           ? "page"
                           : undefined
                       }
-                      className="block rounded-sm px-2 py-3 font-display text-base tracking-nav text-parchment uppercase aria-[current=page]:text-gold-bright"
+                      className="block rounded-sm px-2 py-3 text-base font-bold tracking-nav text-parchment uppercase aria-[current=page]:text-gold-bright"
                     >
                       {link.label}
                     </Link>
@@ -451,7 +451,7 @@ export function Header() {
                     href={cta.href}
                     rel={cta.rel}
                     onClick={isLive ? onBookingClick : close}
-                    className="neon-btn mt-2 inline-flex w-full justify-center rounded-sm px-4 py-3 font-display text-base font-semibold tracking-cta uppercase"
+                    className="neon-btn mt-2 inline-flex w-full justify-center rounded-sm px-4 py-3 text-base"
                   >
                     {cta.label}
                   </a>

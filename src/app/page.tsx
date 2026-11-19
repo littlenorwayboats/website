@@ -4,6 +4,8 @@ import { Packages } from "@/components/Packages";
 import { Features } from "@/components/Features";
 import { Booking } from "@/components/Booking";
 import { HashScroll } from "@/components/HashScroll";
+import MailingList from "@/components/MailingList";
+import { SITE_LAUNCHED } from "@/lib/preview";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -23,8 +25,15 @@ export default function Home() {
       <Hero />
       <Features />
       <Packages />
+      {SITE_LAUNCHED ? null : (
+        <section
+          aria-labelledby="mailing-list-heading"
+          className="bg-norse-900 px-4 py-16 texture-noise"
+        >
+          <MailingList />
+        </section>
+      )}
       <Booking />
-  
     </main>
   );
 }

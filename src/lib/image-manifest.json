@@ -1,4 +1,14 @@
 {
+  "/images/blog/port-of-poulsbo.png": {
+    "width": 1382,
+    "height": 840,
+    "widths": [
+      640,
+      828,
+      1080,
+      1382
+    ]
+  },
   "/images/feature-cover.jpg": {
     "width": 800,
     "height": 533,
@@ -61,6 +71,36 @@
       828,
       1080,
       1200
+    ]
+  },
+  "/images/gallery/group-cruise-with-toddlers.jpg": {
+    "width": 1920,
+    "height": 1440,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
+    ]
+  },
+  "/images/gallery/mount-rainier-from-liberty-bay.jpg": {
+    "width": 1920,
+    "height": 1440,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
+    ]
+  },
+  "/images/gallery/seal-in-liberty-bay.jpg": {
+    "width": 1920,
+    "height": 1440,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
     ]
   },
   "/images/hero.jpg": {

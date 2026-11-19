@@ -1,7 +1,9 @@
 import "server-only";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
-import { marked } from "marked";
+import { Marked, type RendererThis, type Tokens } from "marked";
+import { getImageEntry, optimizedVariantPath } from "@/lib/images";
+import { withBasePath } from "@/lib/paths";
 
 /** Articles are `content/logbook/YYYY-MM-DD-slug.md`; the first `# Heading` is the title. */
 const LOGBOOK_DIR = path.join(process.cwd(), "content", "logbook");
@@ -13,6 +15,72 @@ export type LogbookEntry = {
   title: string;
   html: string;
 };
+
+const LOGBOOK_IMAGE_SIZES = "(min-width: 48rem) 48rem, 100vw";
+
+const logbookMarked = new Marked();
+logbookMarked.use({
+  renderer: {
+    image({ href, title, text }) {
+      return renderLogbookImage(href, text, title);
+    },
+    link(this: RendererThis, { href, title, tokens }: Tokens.Link) {
+      const label = this.parser.parseInline(tokens);
+      const url =
+        href.startsWith("/") && !href.startsWith("//") ? withBasePath(href) : href;
+      const titleAttr = title ? ` title="${escapeHtml(title)}"` : "";
+      return `<a href="${escapeHtml(url)}"${titleAttr}>${label}</a>`;
+    },
+  },
+});
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function srcSetFor(src: string, widths: number[], format: "avif" | "webp") {
+  return widths
+    .map(
+      (width) =>
+        `${withBasePath(optimizedVariantPath(src, width, format))} ${width}w`,
+    )
+    .join(", ");
+}
+
+/** Same picture/srcset markup as OptimizedImage, emitted from markdown. */
+function renderLogbookImage(href: string, alt: string, title: string | null) {
+  const safeAlt = escapeHtml(alt);
+  const titleAttr = title ? ` title="${escapeHtml(title)}"` : "";
+
+  if (!href.startsWith("/") || href.startsWith("//")) {
+    return `<img src="${escapeHtml(href)}" alt="${safeAlt}"${titleAttr} decoding="async" loading="lazy" />`;
+  }
+
+  const entry = getImageEntry(href);
+  const src = escapeHtml(withBasePath(href));
+  const dimensions =
+    entry && entry.width > 0 && entry.height > 0
+      ? ` width="${entry.width}" height="${entry.height}"`
+      : "";
+  const img = `<img src="${src}" alt="${safeAlt}"${titleAttr}${dimensions} sizes="${LOGBOOK_IMAGE_SIZES}" decoding="async" loading="lazy" />`;
+
+  if (!entry?.widths.length) return img;
+
+  // PNG sources skip AVIF, matching OptimizedImage.
+  const useAvif = !href.toLowerCase().endsWith(".png");
+  const sources = [
+    useAvif
+      ? `<source type="image/avif" srcset="${escapeHtml(srcSetFor(href, entry.widths, "avif"))}" sizes="${LOGBOOK_IMAGE_SIZES}" />`
+      : "",
+    `<source type="image/webp" srcset="${escapeHtml(srcSetFor(href, entry.widths, "webp"))}" sizes="${LOGBOOK_IMAGE_SIZES}" />`,
+  ].join("");
+
+  return `<picture>${sources}${img}</picture>`;
+}
 
 function splitTitle(markdown: string, fallback: string) {
   const match = markdown.match(/^#[ \t]+(.+?)[ \t]*$/m);
@@ -36,7 +104,7 @@ export async function getLogbookEntries(): Promise<LogbookEntry[]> {
       return (async () => {
         const markdown = await readFile(path.join(LOGBOOK_DIR, file), "utf8");
         const { title, body } = splitTitle(markdown, slug);
-        const html = await marked.parse(body.trim());
+        const html = await logbookMarked.parse(body.trim());
         return { slug, date, title, html };
       })();
     }),

@@ -98,6 +98,13 @@ const config = {
       fontFamily: {
         display: ["var(--font-display)", "ui-serif", "Georgia", "serif"],
         sans: ["var(--font-body)", "ui-serif", "Georgia", "serif"],
+        alegreya: ["var(--font-alegreya)", "Palatino", "Georgia", "serif"],
+        "alegreya-sans": [
+          "var(--font-alegreya-sans)",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       boxShadow,
       dropShadow,

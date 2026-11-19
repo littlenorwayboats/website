@@ -3,24 +3,24 @@ import type { ReactNode } from "react";
 const features: { title: string; body: string; icon: ReactNode }[] = [
   {
     title: "100% Electric",
-    body: "Quiet, clean and boat friendly.",
+    body: "Quiet, clean and eco-friendly.",
     icon: <BoltIcon />,
   },
   {
-    title: "Unique Viking Design",
-    body: "Wood panel wrap, shields and a dragon prow.",
-    icon: <WheelIcon />,
-  },
-  {
     title: "Perfect for Groups",
-    body: "Up to 10 passengers.",
+    body: "Up to 10 passengers. All ages welcome.",
     icon: <GroupIcon />,
   },
   {
     title: "Explore the Sound",
-    body: "Your adventure starts on the water.",
+    body: "Experience Poulsbo's stunning Liberty Bay from the water.",
     icon: <WavesIcon />,
   },
+  {
+    title: "Unique Viking Design",
+    body: "Cruise Washington's Little Norway in style!",
+    icon: <WheelIcon />,
+  }
 ];
 
 function BoltIcon() {
@@ -111,7 +111,7 @@ export function Features() {
             >
               <article className="flex flex-col items-center">
                 <div className="text-charcoal">{feature.icon}</div>
-                <h3 className="mt-5 font-display text-sm font-semibold tracking-label text-charcoal uppercase">
+                <h3 className="mt-5 text-sm font-bold tracking-label text-charcoal uppercase">
                   {feature.title}
                 </h3>
                 <p className="mt-2 max-w-[16rem] text-base leading-6 text-iron">

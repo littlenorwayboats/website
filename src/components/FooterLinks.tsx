@@ -18,11 +18,17 @@ export function FooterLinks() {
       {links.map((link) => (
         <li key={link.href} className="mb-2">
           {link.href.startsWith("/#") ? (
-            <a className="text-parchment hover:text-rust" href={withBasePath(link.href)}>
+            <a
+              className="font-bold tracking-nav text-parchment uppercase transition-colors hover:text-gold-bright"
+              href={withBasePath(link.href)}
+            >
               {link.label}
             </a>
           ) : (
-            <Link className="text-parchment hover:text-rust" href={link.href}>
+            <Link
+              className="font-bold tracking-nav text-parchment uppercase transition-colors hover:text-gold-bright"
+              href={link.href}
+            >
               {link.label}
             </Link>
           )}

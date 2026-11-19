@@ -8,7 +8,7 @@ export type NavLink = {
 export const navLinks: readonly NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/faq", label: "FAQ" },
-  { href: "/logbook", label: "Logbook", previewOnly: true },
+  { href: "/logbook", label: "Logbook" },
   { href: "/contacts", label: "Contact" },
 ];
 

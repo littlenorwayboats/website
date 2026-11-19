@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cinzel, Cormorant_Garamond } from "next/font/google";
+import { Alegreya, Alegreya_Sans, Amatic_SC, Cinzel, Cormorant_Garamond } from "next/font/google";
 import { SkipLink } from "@/components/SkipLink";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -28,6 +28,27 @@ const body = Cormorant_Garamond({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-body",
+});
+
+const hero = Amatic_SC({
+  subsets: ["latin"],
+  weight: "700",
+  display: "swap",
+  variable: "--font-hero",
+});
+
+const alegreya = Alegreya({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-alegreya",
+});
+
+const alegreyaSans = Alegreya_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-alegreya-sans",
 });
 
 export const viewport: Viewport = {
@@ -71,9 +92,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} h-full bg-norse-950`}
+      className={`${display.variable} ${body.variable} ${hero.variable} ${alegreya.variable} ${alegreyaSans.variable} h-full bg-norse-950`}
     >
-      <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-sans text-lg text-parchment antialiased">
+      <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-alegreya text-lg font-normal text-parchment antialiased">
         <JsonLd data={organizationJsonLd()} />
         <SkipLink />
         {SITE_LAUNCHED ? (

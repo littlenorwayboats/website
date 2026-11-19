@@ -7,7 +7,7 @@ import { faqJsonLd } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "Answers about boating licenses, capacity, pets, weather, and what to expect on a Little Norway Boats rental on Liberty Bay.",
+    "Basics, voyage day details, safety rules, and booking policies for Little Norway Boats rentals on Liberty Bay in Poulsbo.",
   alternates: {
     canonical: "/faq/",
   },
