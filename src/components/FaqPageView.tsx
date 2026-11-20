@@ -21,6 +21,14 @@ function FaqComingSoon() {
           Frequently Asked Questions
         </h1>
         <p className="mt-6 text-xl text-mist">Coming Soon...</p>
+        <p className="mt-4 text-mist">
+          We&apos;re gearing up for a January 2027 soft launch and will add
+          answers here as they&apos;re ready.{" "}
+          <a className="underline" href="/#signup">
+            Sign up on the homepage
+          </a>{" "}
+          if you&apos;d like a heads-up when we go live.
+        </p>
       </div>
     </section>
   );
