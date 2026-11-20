@@ -214,9 +214,9 @@ body {
 }
 
 .launch-banner {
-  background: var(--color-rust);
-  box-shadow: var(--shadow-neon);
-  color: var(--color-gold-bright);
+  background: var(--color-thunderbolt-yellow);
+  box-shadow: var(--shadow-wood);
+  color: var(--color-ink);
   text-shadow: none;
 }
 

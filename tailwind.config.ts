@@ -28,6 +28,9 @@ export const colors = {
   steel: "#243644",
   ink: "#0e151c",
   leaf: "#1f2324",
+  thunderbolt: {
+    yellow: "#d4c477",
+  },
 } as const;
 
 const boxShadow = {
@@ -79,6 +82,7 @@ const cssVariables = {
   "--color-steel": colors.steel,
   "--color-ink": colors.ink,
   "--color-leaf": colors.leaf,
+  "--color-thunderbolt-yellow": colors.thunderbolt.yellow,
   "--shadow-stone": boxShadow.stone,
   "--shadow-card": boxShadow.card,
   "--shadow-wood": boxShadow.wood,

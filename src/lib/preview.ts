@@ -9,6 +9,8 @@ export const PREVIEW_VALUE = "live";
 export const PREVIEW_STORAGE_KEY = "little-norway:preview";
 
 const UNGATED_PATHS = ["/contacts", "/logbook"];
+/** Pre-launch routes that bypass the home Coming Soon gate (not all are indexed). */
+const PRELAUNCH_PUBLIC_PATHS = [...UNGATED_PATHS, "/faq"];
 const PRELAUNCH_INDEXABLE_PATHS = ["/", ...UNGATED_PATHS];
 
 export function isLivePreviewParam(value: string | null): boolean {
@@ -20,7 +22,7 @@ export function normalizePath(pathname: string): string {
 }
 
 export function isUngatedPath(pathname: string): boolean {
-  return UNGATED_PATHS.includes(normalizePath(pathname));
+  return PRELAUNCH_PUBLIC_PATHS.includes(normalizePath(pathname));
 }
 
 /** Pages hidden behind Coming Soon must not be indexed. */

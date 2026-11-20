@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { FAQ } from "@/components/FAQ";
-import { JsonLd } from "@/components/JsonLd";
+import { FaqPageView } from "@/components/FaqPageView";
 import { robotsFor } from "@/lib/preview";
-import { faqJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -17,8 +15,7 @@ export const metadata: Metadata = {
 export default function FAQPage() {
   return (
     <main id="main-content" className="min-w-0 flex-1">
-      <JsonLd data={faqJsonLd()} />
-      <FAQ />
+      <FaqPageView />
     </main>
   );
 }
