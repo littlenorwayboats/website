@@ -80,8 +80,8 @@ export function LogbookTabs({
               onKeyDown={(event) => onTabKeyDown(event, index)}
               className={`relative -mb-px px-4 py-3 text-sm font-bold tracking-label uppercase transition-colors sm:px-5 ${
                 selected
-                  ? "border-b-2 border-rust text-gold-bright"
-                  : "border-b-2 border-transparent text-mist hover:text-gold"
+                  ? "border-b-2 border-rust text-rust"
+                  : "border-b-2 border-transparent text-norse-800 hover:text-norse-950"
               }`}
             >
               {tab.label}

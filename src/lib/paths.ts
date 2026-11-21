@@ -5,3 +5,7 @@ export function withBasePath(path: string): string {
   }
   return `${base}${path}`;
 }
+
+export function logbookArticlePath(slug: string): string {
+  return `/logbook/${slug}/`;
+}

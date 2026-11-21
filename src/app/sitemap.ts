@@ -1,4 +1,6 @@
 import type { MetadataRoute } from "next";
+import { getLogbookArticles } from "@/lib/logbook";
+import { logbookArticlePath } from "@/lib/paths";
 import { isIndexablePath } from "@/lib/preview";
 import { absoluteUrl } from "@/lib/site";
 
@@ -11,8 +13,15 @@ const pages = [
   { path: "/contacts", changeFrequency: "monthly", priority: 0.6 },
 ] as const;
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return pages
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const articles = (await getLogbookArticles()).map((article) => ({
+    path: logbookArticlePath(article.slug),
+    lastModified: article.updated ?? article.date,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...pages, ...articles]
     .filter((page) => isIndexablePath(page.path))
     .map(({ path, ...rest }) => ({ url: absoluteUrl(path), ...rest }));
 }

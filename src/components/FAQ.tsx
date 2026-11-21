@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { faqSections } from "@/lib/faqs";
+import { SITE_LAUNCHED } from "@/lib/preview";
 
 export function FAQ() {
   const detailsRefs = useRef(new Map<string, HTMLDetailsElement>());
@@ -30,6 +31,17 @@ export function FAQ() {
         >
           Frequently Asked Questions
         </h1>
+
+        {SITE_LAUNCHED ? null : (
+          <p className="mx-auto mt-6 max-w-2xl text-center text-mist">
+            We&apos;re gearing up for a January 2027 soft launch and will add
+            answers here as they&apos;re ready.{" "}
+            <a className="underline" href="/#signup">
+              Sign up on the homepage
+            </a>{" "}
+            if you&apos;d like a heads-up when we go live.
+          </p>
+        )}
 
         <div className="mt-12 space-y-12">
           {faqSections.map((section) => (
@@ -65,9 +77,10 @@ export function FAQ() {
                           </span>
                         </span>
                       </summary>
-                      <p className="border-t border-iron/40 pt-3 pb-3 text-mist">
-                        {item.answer}
-                      </p>
+                      <p
+                        className="border-t border-iron/40 pt-3 pb-3 text-mist [&_a]:underline"
+                        dangerouslySetInnerHTML={{ __html: item.answer }}
+                      />
                     </details>
                   );
                 })}

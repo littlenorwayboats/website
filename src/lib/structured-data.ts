@@ -1,5 +1,7 @@
 import { voyagePackages } from "./packages";
 import { faqs } from "./faqs";
+import type { LogbookArticle } from "./logbook";
+import { logbookArticlePath } from "./paths";
 import {
   INSTAGRAM_URL,
   OG_IMAGE,
@@ -52,6 +54,45 @@ export function organizationJsonLd() {
   };
 }
 
+export function articleJsonLd(article: LogbookArticle) {
+  const siteUrl = getSiteUrl();
+  const url = absoluteUrl(logbookArticlePath(article.slug));
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#article`,
+        url,
+        mainEntityOfPage: url,
+        headline: article.title,
+        description: article.description,
+        image: absoluteUrl(article.image ?? OG_IMAGE.url),
+        datePublished: article.date,
+        dateModified: article.updated ?? article.date,
+        inLanguage: "en-US",
+        author: { "@id": `${siteUrl}/#business` },
+        publisher: { "@id": `${siteUrl}/#business` },
+        isPartOf: { "@id": `${siteUrl}/#website` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { name: "Home", path: "/" },
+          { name: "Logbook", path: "/logbook" },
+          { name: article.title, path: logbookArticlePath(article.slug) },
+        ].map((crumb, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: crumb.name,
+          item: absoluteUrl(crumb.path),
+        })),
+      },
+    ],
+  };
+}
+
 export function faqJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -61,7 +102,7 @@ export function faqJsonLd() {
       name: item.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.answer,
+        text: item.answer.replace(/<[^>]*>/g, ""),
       },
     })),
   };

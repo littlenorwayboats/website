@@ -3,6 +3,7 @@ import { Alegreya, Alegreya_Sans, Amatic_SC, Cinzel, Cormorant_Garamond } from "
 import { SkipLink } from "@/components/SkipLink";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Gtm } from "@/components/Gtm";
 import { JsonLd } from "@/components/JsonLd";
 import { PreviewGate } from "@/components/PreviewGate";
 import { PreviewProvider } from "@/components/PreviewProvider";
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${display.variable} ${body.variable} ${hero.variable} ${alegreya.variable} ${alegreyaSans.variable} h-full bg-norse-950`}
     >
       <body className="flex min-h-full min-w-0 flex-col bg-norse-950 font-alegreya text-lg font-normal text-parchment antialiased">
+        <Gtm />
         <JsonLd data={organizationJsonLd()} />
         <SkipLink />
         {SITE_LAUNCHED ? (

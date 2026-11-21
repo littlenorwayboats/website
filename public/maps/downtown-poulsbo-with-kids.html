@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Norway with Kids — Poulsbo Map</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <style>
+    html, body, #map {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .popup-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .popup-meta {
+      font-size: 12px;
+      color: #4b5563;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>
+    // Coordinates from Google Maps list: Little Norway with Kids
+    const places = [
+      { name: "Little Norway Boats", category: "Boat rental service", lat: 47.7335759, lng: -122.6470111 },
+      { name: "SEA Discovery Center", category: "Aquarium", lat: 47.7327132, lng: -122.6455506 },
+      { name: "Valholl Brewing", category: "Brewery", lat: 47.7351943, lng: -122.6453254 },
+      { name: "Lions Park", category: "Park", lat: 47.728045, lng: -122.641712 },
+      { name: "The Loft at Latitude Forty Seven Seven", category: "American restaurant", lat: 47.7334, lng: -122.6462324 },
+      { name: "Island Cool Ice Cream", category: "Ice cream shop", lat: 47.7334535, lng: -122.6457014 },
+      { name: "Green Light Diner", category: "Diner", lat: 47.7336851, lng: -122.6452677 },
+      { name: "Poulsbo Norway Flag Steps", category: "Tourist attraction", lat: 47.7344878, lng: -122.6455213 },
+      { name: "Sluys Poulsbo Bakery", category: "Bakery", lat: 47.7345981, lng: -122.6460617 },
+      { name: "Tizley's EuroPub", category: "European restaurant", lat: 47.7346786, lng: -122.6460108 },
+      { name: "Poulsbo Maritime Museum and Store", category: "Museum", lat: 47.7353655, lng: -122.6474713 },
+      { name: "Poulsbo Candy Shoppe", category: "Candy store", lat: 47.7350646, lng: -122.6471048 },
+      { name: "Red Telephone Booth", category: "Tourist attraction", lat: 47.7352074, lng: -122.6469047 },
+      { name: "Public Restroom", category: "Public bathroom", lat: 47.7341863, lng: -122.6473258 },
+      { name: "Liberty Bay Waterfront Park", category: "Park", lat: 47.7342833, lng: -122.6475726 },
+      { name: "Ma Facon TR", category: "Pastry shop", lat: 47.7353386, lng: -122.6470967 },
+      { name: "American Legion Park", category: "Park", lat: 47.7383843, lng: -122.6494834 },
+    ];
+
+    const map = L.map("map", { scrollWheelZoom: false }).setView([47.7352, -122.6475], 15);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors",
+    }).addTo(map);
+
+    const bounds = [];
+
+    places.forEach((place) => {
+      const marker = L.marker([place.lat, place.lng]).addTo(map);
+      marker.bindPopup(
+        `<div class="popup-title">${place.name}</div><div class="popup-meta">${place.category}</div>`,
+      );
+      bounds.push([place.lat, place.lng]);
+    });
+
+    if (bounds.length > 0) {
+      map.fitBounds(bounds, { padding: [30, 30] });
+    }
+  </script>
+</body>
+</html>

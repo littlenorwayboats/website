@@ -1,7 +1,7 @@
 export function About() {
   return (
     <section aria-label="About" className="px-4">
-      <div className="mx-auto max-w-3xl space-y-5 font-alegreya-sans text-lg leading-8 text-parchment">
+      <div className="mx-auto max-w-3xl space-y-5 font-alegreya-sans text-lg leading-8 text-norse-950">
         <p>
           We’re a local Poulsbo family—mom, dad, and toddler—who spend 
           as much time as we can out on Liberty Bay in canoes, kayaks and 

@@ -5,16 +5,32 @@ import { Marked, type RendererThis, type Tokens } from "marked";
 import { getImageEntry, optimizedVariantPath } from "@/lib/images";
 import { withBasePath } from "@/lib/paths";
 
-/** Articles are `content/logbook/YYYY-MM-DD-slug.md`; the first `# Heading` is the title. */
+/**
+ * Entries are `content/logbook/YYYY-MM-DD-slug.md`; the first `# Heading` is the title.
+ * Optional frontmatter (flat `key: value` lines between `---` fences):
+ *   type: article | note   (default note; articles get their own page at /logbook/<slug>/)
+ *   description, image, imageAlt, updated (YYYY-MM-DD), draft (true hides it from builds)
+ */
 const LOGBOOK_DIR = path.join(process.cwd(), "content", "logbook");
 const FILENAME_PATTERN = /^(\d{4}-\d{2}-\d{2})-(.+)\.md$/;
+const FRONTMATTER_PATTERN = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
+const DESCRIPTION_MAX_LENGTH = 160;
+
+export type LogbookEntryType = "article" | "note";
 
 export type LogbookEntry = {
   slug: string;
+  type: LogbookEntryType;
   date: string;
+  updated?: string;
   title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
   html: string;
 };
+
+export type LogbookArticle = LogbookEntry & { type: "article" };
 
 const LOGBOOK_IMAGE_SIZES = "(min-width: 48rem) 48rem, 100vw";
 
@@ -92,25 +108,95 @@ function splitTitle(markdown: string, fallback: string) {
   return { title: match[1], body };
 }
 
+function splitFrontmatter(markdown: string) {
+  const match = markdown.match(FRONTMATTER_PATTERN);
+  if (!match) return { data: {} as Record<string, string>, content: markdown };
+
+  const data: Record<string, string> = {};
+  for (const line of match[1].split(/\r?\n/)) {
+    const separator = line.indexOf(":");
+    if (separator === -1 || line.trimStart().startsWith("#")) continue;
+    const key = line.slice(0, separator).trim();
+    const value = line
+      .slice(separator + 1)
+      .trim()
+      .replace(/^(["'])(.*)\1$/, "$2");
+    if (key) data[key] = value;
+  }
+  return { data, content: markdown.slice(match[0].length) };
+}
+
+function decodeEntities(text: string) {
+  return text
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#39;", "'")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;", "&");
+}
+
+/** First paragraph with real text, trimmed to a meta-description length. */
+function excerptFrom(html: string) {
+  for (const [, inner] of html.matchAll(/<p>([\s\S]*?)<\/p>/g)) {
+    const text = decodeEntities(inner.replace(/<[^>]+>/g, ""))
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!text) continue;
+    if (text.length <= DESCRIPTION_MAX_LENGTH) return text;
+    const cut = text.slice(0, DESCRIPTION_MAX_LENGTH - 1);
+    return `${cut.slice(0, cut.lastIndexOf(" "))}…`;
+  }
+  return "";
+}
+
+async function readEntry(file: string): Promise<LogbookEntry | null> {
+  const match = file.match(FILENAME_PATTERN);
+  if (!match) return null;
+  const [, date, slug] = match;
+
+  const raw = await readFile(path.join(LOGBOOK_DIR, file), "utf8");
+  const { data, content } = splitFrontmatter(raw);
+  if (data.draft === "true" && process.env.NODE_ENV === "production") {
+    return null;
+  }
+
+  const { title, body } = splitTitle(content, slug);
+  const html = await logbookMarked.parse(body.trim());
+
+  return {
+    slug,
+    type: data.type === "article" ? "article" : "note",
+    date,
+    updated: data.updated || undefined,
+    title,
+    description: data.description || excerptFrom(html),
+    image: data.image || undefined,
+    imageAlt: data.imageAlt || undefined,
+    html,
+  };
+}
+
 export async function getLogbookEntries(): Promise<LogbookEntry[]> {
   const files = await readdir(LOGBOOK_DIR);
+  const entries = await Promise.all(files.map(readEntry));
 
-  const entries = await Promise.all(
-    files.flatMap((file) => {
-      const match = file.match(FILENAME_PATTERN);
-      if (!match) return [];
-      const [, date, slug] = match;
+  return entries
+    .filter((entry): entry is LogbookEntry => entry !== null)
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
 
-      return (async () => {
-        const markdown = await readFile(path.join(LOGBOOK_DIR, file), "utf8");
-        const { title, body } = splitTitle(markdown, slug);
-        const html = await logbookMarked.parse(body.trim());
-        return { slug, date, title, html };
-      })();
-    }),
-  );
+export function isLogbookArticle(entry: LogbookEntry): entry is LogbookArticle {
+  return entry.type === "article";
+}
 
-  return entries.sort((a, b) => b.date.localeCompare(a.date));
+export async function getLogbookArticles(): Promise<LogbookArticle[]> {
+  return (await getLogbookEntries()).filter(isLogbookArticle);
+}
+
+export async function getLogbookArticle(
+  slug: string,
+): Promise<LogbookArticle | undefined> {
+  return (await getLogbookArticles()).find((article) => article.slug === slug);
 }
 
 export function formatLogbookDate(date: string): string {

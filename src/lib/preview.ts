@@ -21,16 +21,19 @@ export function normalizePath(pathname: string): string {
   return pathname.replace(/\/$/, "") || "/";
 }
 
+/** Logbook articles live under `/logbook/<slug>` and share the logbook's access. */
+function matchesPath(paths: readonly string[], pathname: string): boolean {
+  const path = normalizePath(pathname);
+  return paths.includes(path) || path.startsWith("/logbook/");
+}
+
 export function isUngatedPath(pathname: string): boolean {
-  return PRELAUNCH_PUBLIC_PATHS.includes(normalizePath(pathname));
+  return matchesPath(PRELAUNCH_PUBLIC_PATHS, pathname);
 }
 
 /** Pages hidden behind Coming Soon must not be indexed. */
 export function isIndexablePath(pathname: string): boolean {
-  return (
-    SITE_LAUNCHED ||
-    PRELAUNCH_INDEXABLE_PATHS.includes(normalizePath(pathname))
-  );
+  return SITE_LAUNCHED || matchesPath(PRELAUNCH_INDEXABLE_PATHS, pathname);
 }
 
 export function robotsFor(pathname: string): Metadata["robots"] | undefined {

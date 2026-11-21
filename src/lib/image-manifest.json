@@ -1,4 +1,44 @@
 {
+  "/images/blog/downtown-phone-booth.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
+    ]
+  },
+  "/images/blog/eagle-at-waterfront-park.png": {
+    "width": 1934,
+    "height": 1430,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
+    ]
+  },
+  "/images/blog/little-norway-boats.png": {
+    "width": 1940,
+    "height": 1438,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
+    ]
+  },
+  "/images/blog/maritime-museum.JPG": {
+    "width": 4032,
+    "height": 3024,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
+    ]
+  },
   "/images/blog/port-of-poulsbo.png": {
     "width": 1382,
     "height": 840,
@@ -7,6 +47,36 @@
       828,
       1080,
       1382
+    ]
+  },
+  "/images/blog/sunset-with-mountains.JPG": {
+    "width": 4032,
+    "height": 3024,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
+    ]
+  },
+  "/images/blog/velkommen-til-poulsbo.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
+    ]
+  },
+  "/images/blog/waterfront-park-with-boardwalk-in-background.jpg": {
+    "width": 5712,
+    "height": 4284,
+    "widths": [
+      640,
+      828,
+      1080,
+      1920
     ]
   },
   "/images/feature-cover.jpg": {
