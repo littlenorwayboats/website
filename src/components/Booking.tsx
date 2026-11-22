@@ -82,7 +82,7 @@ function BookingFallback() {
 }
 
 /** Filled once the booking card meets the sticky nav, including via the Book Now jump. */
-function useBookingBoltFilled() {
+export function useBookingBoltFilled() {
   const [filled, setFilled] = useState(false);
 
   useEffect(() => {

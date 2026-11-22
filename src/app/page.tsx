@@ -4,6 +4,7 @@ import { Packages } from "@/components/Packages";
 import { Features } from "@/components/Features";
 import { Booking } from "@/components/Booking";
 import { HashScroll } from "@/components/HashScroll";
+import { SimpleBooking } from "@/components/SimpleBooking";
 import MailingList from "@/components/MailingList";
 import { SITE_LAUNCHED } from "@/lib/preview";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/lib/site";
@@ -24,7 +25,15 @@ export default function Home() {
       <HashScroll />
       <Hero />
       <Features />
-      <Packages />
+      <SimpleBooking />
+      {SITE_LAUNCHED ? (
+        <SimpleBooking />
+      ) : (
+        <>
+          <Packages />
+          <Booking />
+        </>
+      )}
       {SITE_LAUNCHED ? null : (
         <section
           aria-labelledby="mailing-list-heading"
@@ -33,7 +42,6 @@ export default function Home() {
           <MailingList />
         </section>
       )}
-      <Booking />
     </main>
   );
 }
