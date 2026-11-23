@@ -308,6 +308,63 @@ body {
   border-radius: 0.75rem;
 }
 
+.logbook-prose video.logbook-video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+.logbook-prose .logbook-table-scroll {
+  margin-top: 0.25rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.75rem;
+}
+
+.logbook-prose table {
+  width: 100%;
+  min-width: 36rem;
+  margin-top: 0;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  border: 1px solid color-mix(in srgb, var(--color-iron) 40%, transparent);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(28, 40, 50, 0.06);
+}
+
+.logbook-prose thead th {
+  text-align: left;
+  font-family: var(--font-alegreya), Palatino, Georgia, serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-norse-950);
+  background: color-mix(in srgb, var(--color-norse-950) 7%, white);
+  border-bottom: 2px solid color-mix(in srgb, var(--color-rust) 55%, transparent);
+  padding: 0.7rem 0.9rem;
+  white-space: nowrap;
+}
+
+.logbook-prose tbody td {
+  padding: 0.65rem 0.9rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-iron) 28%, transparent);
+  vertical-align: top;
+}
+
+.logbook-prose tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--color-norse-950) 3.5%, white);
+}
+
+.logbook-prose tbody td:first-child {
+  font-weight: 600;
+  color: var(--color-norse-950);
+}
+
 .logbook-prose hr {
   border-color: color-mix(in srgb, var(--color-iron) 40%, transparent);
 }

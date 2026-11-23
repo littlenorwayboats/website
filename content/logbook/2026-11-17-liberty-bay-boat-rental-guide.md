@@ -1,5 +1,6 @@
 ---
 type: article
+tags: Boating, Trip Planning
 description: Everything first-timers need to know about renting an electric Viking longship on Liberty Bay in Poulsbo, WA: who can drive, what to bring, and how the day works.
 image: /images/blog/little-norway-boats.png
 imageAlt: A Viking-themed electric cruiser passing the harbor with guests aboard

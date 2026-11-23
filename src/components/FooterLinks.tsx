@@ -2,16 +2,14 @@
 
 import Link from "next/link";
 import { useLivePreview } from "./PreviewProvider";
-import { bookingHref, packagesHref, visibleNavLinks } from "@/lib/nav";
+import { bookingHref, visibleNavLinks } from "@/lib/nav";
 import { withBasePath } from "@/lib/paths";
-import { SITE_LAUNCHED } from "@/lib/preview";
 
 export function FooterLinks() {
   const isLive = useLivePreview();
   const links = [
     ...visibleNavLinks(isLive),
     { href: bookingHref, label: "Book Now" },
-    ...(SITE_LAUNCHED ? [] : [{ href: packagesHref, label: "Packages" }]),
   ];
 
   return (

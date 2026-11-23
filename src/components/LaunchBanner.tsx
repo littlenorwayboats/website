@@ -5,7 +5,7 @@ export function LaunchBanner() {
 
   return (
     <div
-      className="pointer-events-none absolute top-[calc(5rem+var(--safe-top))] left-1/2 z-40 w-[115vw] -translate-x-1/2 -rotate-1"
+      className="pointer-events-none absolute top-[calc(5rem+var(--safe-top))] left-1/2 z-20 w-[115vw] -translate-x-1/2 -rotate-1"
       role="status"
       aria-live="polite"
     >

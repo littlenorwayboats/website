@@ -47,16 +47,6 @@
             "No. All ages are welcome on the raid. Infants and kids count toward the passenger limit, so pack the crew list accordingly.",
         },
         {
-          question: "What can I bring with me?",
-          answer:
-            "Picnics, snacks, and drinks are welcome. Skip glass cups and breakable drinkware — wine bottles are fine if you handle them with care (a cleaning fee applies if glass breaks). Pack out what you pack in.",
-        },
-        {
-          question: "Where can we take the boat?",
-          answer:
-            "Stay within Liberty Bay and the harbor limits we outline at check-in. No shoreline docking, no shallow areas and no open-sound expeditions — this is a scenic coastal cruise, not a North Sea crossing.",
-        },
-        {
           question: "Can I bring my dog?",
           answer:
             "We love dogs — truly — but only service dogs are allowed aboard the longship. Please let us know when you book so we can ready the deck for your companion.",
@@ -86,6 +76,26 @@
           question: "What is the orientation process?",
           answer:
             "On arrival we wrap up any remaining paperwork, then walk your designated skipper through a safety checkout and boat tutorial. We escort you to the longship, answer last questions, and help you clear the dock so the odyssey can begin.",
+        },
+        {
+          question: "Can I bring alcohol on the boat?",
+          answer:
+            "Yes — passengers of legal drinking age may bring alcohol aboard. Avoid glass bottles when you can; wine and champagne bottles are fine if you handle them with care (a cleaning fee applies if glass breaks). The person driving the boat cannot drink alcohol while operating — that is illegal in Washington state, and we enforce it for everyone's safety.",
+        },
+        {
+          question: "Can I smoke on the boat?",
+          answer:
+            "No. Smoking and vaping are not allowed aboard, out of respect for non-smoking passengers and to protect the canvas, upholstery, and gear.",
+        },
+        {
+          question: "What can I bring with me?",
+          answer:
+            "Picnics, snacks, and drinks are welcome. Skip glass cups and breakable drinkware — wine bottles are fine if you handle them with care (a cleaning fee applies if glass breaks). Please no smoking or vaping on the boat. Pack out what you pack in.",
+        },
+        {
+          question: "Where can we take the boat?",
+          answer:
+            "Stay within Liberty Bay and the harbor limits we outline at check-in. No shoreline docking, no shallow areas and no open-sound expeditions — this is a scenic coastal cruise, not a North Sea crossing.",
         },
       ],
     },

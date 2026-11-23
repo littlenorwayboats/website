@@ -1,5 +1,6 @@
 ---
 type: article
+tags: Family, Downtown Poulsbo
 description: Stroller-friendly walks, playgrounds, sweet treats, and parent-tested tips for a family day in downtown Poulsbo with toddlers, babies, and kids.
 image: /images/blog/velkommen-til-poulsbo.jpg
 imageAlt: Velkommen til Poulsbo welcome sign on historic Front Street in downtown Little Norway

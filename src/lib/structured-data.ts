@@ -72,6 +72,7 @@ export function articleJsonLd(article: LogbookArticle) {
         datePublished: article.date,
         dateModified: article.updated ?? article.date,
         inLanguage: "en-US",
+        ...(article.tags.length > 0 ? { keywords: article.tags } : {}),
         author: { "@id": `${siteUrl}/#business` },
         publisher: { "@id": `${siteUrl}/#business` },
         isPartOf: { "@id": `${siteUrl}/#website` },

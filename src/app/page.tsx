@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
-import { Packages } from "@/components/Packages";
 import { Features } from "@/components/Features";
-import { Booking } from "@/components/Booking";
 import { HashScroll } from "@/components/HashScroll";
 import { SimpleBooking } from "@/components/SimpleBooking";
 import MailingList from "@/components/MailingList";
@@ -26,14 +24,6 @@ export default function Home() {
       <Hero />
       <Features />
       <SimpleBooking />
-      {SITE_LAUNCHED ? (
-        <SimpleBooking />
-      ) : (
-        <>
-          <Packages />
-          <Booking />
-        </>
-      )}
       {SITE_LAUNCHED ? null : (
         <section
           aria-labelledby="mailing-list-heading"

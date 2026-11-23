@@ -8,7 +8,7 @@ export const SITE_TITLE =
 export const SITE_DESCRIPTION =
   "Rent a Viking-themed electric Duffy boat in Poulsbo, WA. Quiet Liberty Bay harbor cruises, sunset sails, and dog-friendly voyages with Little Norway Boats.";
 
-export const SITE_AREA = "Liberty Bay, Washington";
+export const SITE_AREA = "D Dock, 18809 Front St NE, Poulsbo, WA 98370";
 
 export const INSTAGRAM_URL = "https://www.instagram.com/littlenorwayboats";
 

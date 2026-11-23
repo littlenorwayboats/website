@@ -9,6 +9,7 @@ import { withBasePath } from "@/lib/paths";
  * Entries are `content/logbook/YYYY-MM-DD-slug.md`; the first `# Heading` is the title.
  * Optional frontmatter (flat `key: value` lines between `---` fences):
  *   type: article | note   (default note; articles get their own page at /logbook/<slug>/)
+ *   tags: Wildlife, Boating   (comma-separated; articles are filterable by tag on /logbook/)
  *   description, image, imageAlt, updated (YYYY-MM-DD), draft (true hides it from builds)
  */
 const LOGBOOK_DIR = path.join(process.cwd(), "content", "logbook");
@@ -25,6 +26,7 @@ export type LogbookEntry = {
   updated?: string;
   title: string;
   description: string;
+  tags: string[];
   image?: string;
   imageAlt?: string;
   html: string;
@@ -149,6 +151,16 @@ function excerptFrom(html: string) {
   return "";
 }
 
+function parseTags(value: string | undefined) {
+  if (!value) return [];
+  const tags = value
+    .replace(/^\[(.*)\]$/, "$1")
+    .split(",")
+    .map((tag) => tag.trim().replace(/^(["'])(.*)\1$/, "$2"))
+    .filter(Boolean);
+  return [...new Set(tags)];
+}
+
 async function readEntry(file: string): Promise<LogbookEntry | null> {
   const match = file.match(FILENAME_PATTERN);
   if (!match) return null;
@@ -170,6 +182,7 @@ async function readEntry(file: string): Promise<LogbookEntry | null> {
     updated: data.updated || undefined,
     title,
     description: data.description || excerptFrom(html),
+    tags: parseTags(data.tags),
     image: data.image || undefined,
     imageAlt: data.imageAlt || undefined,
     html,

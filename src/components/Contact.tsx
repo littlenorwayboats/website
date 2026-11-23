@@ -39,7 +39,7 @@ export function Contact() {
               Address
             </p>
             <p className="mt-2">
-              {SITE_AREA}
+              <a className="underline" href="https://maps.app.goo.gl/XjWCvHrNLzANRiK98" target="_blank" rel="noreferrer noopener">{SITE_AREA}</a>
               <br />
               Exact dock directions arrive with your booking confirmation.
             </p>
