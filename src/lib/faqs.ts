@@ -95,7 +95,12 @@
         {
           question: "Where can we take the boat?",
           answer:
-            "Stay within Liberty Bay and the harbor limits we outline at check-in. No shoreline docking, no shallow areas and no open-sound expeditions — this is a scenic coastal cruise, not a North Sea crossing.",
+            "Stay inside Liberty Bay, within the harbor limits we outline at check-in — typically the protected waters off downtown Poulsbo and the Port of Poulsbo marina, not past the bay mouth into open Puget Sound. No shoreline docking, no shallow flats, and no open-sound expeditions. Your skipper briefing covers the exact boundaries for the day.",
+        },
+        {
+          question: "Where can we grab food or coffee before boarding?",
+          answer:
+            'Front Street is a short walk from D Dock. Popular pre-voyage stops include <a class="underline" href="https://sluyspoulsbobakery.com/" rel="noreferrer noopener">Sluys Poulsbo Bakery</a> for coffee and pastries, cafés along historic Front Street, and waterfront spots near the Port of Poulsbo — including the Brass Kraken right by our slip. Picnics are welcome aboard; leave glass cups ashore. For more pairings and a downtown walk-through, see our <a class="underline" href="/logbook/downtown-poulsbo-with-kids/">downtown Poulsbo guide</a>.',
         },
       ],
     },

@@ -17,4 +17,6 @@ export function visibleNavLinks(isLive: boolean): NavLink[] {
 }
 
 export const bookingHref = "/#booking";
+/** Pre-launch CTA: mailing list on the homepage (Coming Soon hero). */
+export const signupHref = "/#signup";
 export const packagesHref = "/#packages";

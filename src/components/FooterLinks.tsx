@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { useLivePreview } from "./PreviewProvider";
-import { bookingHref, visibleNavLinks } from "@/lib/nav";
+import { bookingHref, signupHref, visibleNavLinks } from "@/lib/nav";
 import { withBasePath } from "@/lib/paths";
 
 export function FooterLinks() {
   const isLive = useLivePreview();
-  const links = [
-    ...visibleNavLinks(isLive),
-    { href: bookingHref, label: "Book Now" },
-  ];
+  const cta = isLive
+    ? { href: bookingHref, label: "Book Now" }
+    : { href: signupHref, label: "Sign Up" };
+  const links = [...visibleNavLinks(isLive), cta];
 
   return (
     <ul className="mt-3 columns-2 gap-6 text-sm">

@@ -10,6 +10,20 @@ export const SITE_DESCRIPTION =
 
 export const SITE_AREA = "D Dock, 18809 Front St NE, Poulsbo, WA 98370";
 
+/** Port of Poulsbo / D Dock — used in LocalBusiness JSON-LD. */
+export const SITE_ADDRESS = {
+  streetAddress: "D Dock, 18809 Front St NE",
+  addressLocality: "Poulsbo",
+  addressRegion: "WA",
+  postalCode: "98370",
+  addressCountry: "US",
+} as const;
+
+export const SITE_GEO = {
+  latitude: 47.73358,
+  longitude: -122.64699,
+} as const;
+
 export const INSTAGRAM_URL = "https://www.instagram.com/littlenorwayboats";
 
 export const OG_IMAGE = {

@@ -29,6 +29,7 @@ export function Logo({
         <img
           src={withBasePath("/images/logo-color.svg")}
           alt=""
+          aria-hidden="true"
           width={435}
           height={417}
           loading={loading}
@@ -46,7 +47,7 @@ export function Logo({
         src={withBasePath(
           showColorLayer ? "/images/logo-lines.svg" : "/images/logo-mark.svg",
         )}
-        alt="Little Norway Boats"
+        alt="Little Norway Boats logo"
         width={435}
         height={417}
         loading={loading}

@@ -5,8 +5,9 @@ import { logbookArticlePath } from "./paths";
 import {
   INSTAGRAM_URL,
   OG_IMAGE,
-  SITE_AREA,
+  SITE_ADDRESS,
   SITE_DESCRIPTION,
+  SITE_GEO,
   SITE_NAME,
   absoluteUrl,
   getSiteUrl,
@@ -28,15 +29,29 @@ export function organizationJsonLd() {
         publisher: { "@id": `${siteUrl}/#business` },
       },
       {
-        "@type": ["LocalBusiness", "TouristAttraction"],
+        "@type": ["LocalBusiness", "BoatRental", "TouristAttraction"],
         "@id": `${siteUrl}/#business`,
         name: SITE_NAME,
         url: `${siteUrl}/`,
         description: SITE_DESCRIPTION,
         image: absoluteUrl(OG_IMAGE.url),
+        address: {
+          "@type": "PostalAddress",
+          ...SITE_ADDRESS,
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: SITE_GEO.latitude,
+          longitude: SITE_GEO.longitude,
+        },
         areaServed: {
           "@type": "Place",
-          name: SITE_AREA,
+          name: "Liberty Bay, Poulsbo, WA",
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: SITE_GEO.latitude,
+            longitude: SITE_GEO.longitude,
+          },
         },
         sameAs: [INSTAGRAM_URL],
         hasOfferCatalog: {

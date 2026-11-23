@@ -30,7 +30,18 @@ Plan to arrive about 10 minutes before your start time. That leaves room for pap
 
 ## Where can we go?
 
-Liberty Bay, within the harbor limits we outline at check-in. It's a scenic coastal cruise: no shoreline docking, no shallow areas, and no trips out into the open sound. On a clear day, keep an eye out for Mount Rainier, and for the seals that live in the bay.
+Stay inside Liberty Bay, within the harbor limits we outline at check-in — typically the protected waters off downtown Poulsbo and the Port of Poulsbo marina, not past the bay mouth into open Puget Sound. No shoreline docking, no shallow flats, and no open-sound trips. On a clear day, keep an eye out for Mount Rainier and for the seals that live in the bay. Your skipper briefing covers the exact boundaries for the day.
+
+## Coffee, bakery, and bites before you board
+
+D Dock sits right on the Port of Poulsbo waterfront, so you can fuel up without a long detour:
+
+- **Sluys Poulsbo Bakery** on Front Street — coffee, Viking donuts, and pastries a short walk from the marina.
+- **Front Street cafés** — espresso and light breakfast stops along historic Little Norway.
+- **Brass Kraken** — waterfront spot steps from our slip; handy if your crew wants something closer to the dock.
+- **Picnic aboard** — snacks and drinks are welcome on the boat (skip glass cups; wine bottles are fine with care).
+
+For a fuller downtown loop with kids, sweets, and playgrounds before or after your cruise, read our [downtown Poulsbo with kids guide](/logbook/downtown-poulsbo-with-kids/).
 
 ## What about the weather?
 
