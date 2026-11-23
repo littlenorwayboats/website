@@ -9,7 +9,7 @@ import { withBasePath } from "@/lib/paths";
  * Entries are `content/logbook/YYYY-MM-DD-slug.md`; the first `# Heading` is the title.
  * Optional frontmatter (flat `key: value` lines between `---` fences):
  *   type: article | note   (default note; articles get their own page at /logbook/<slug>/)
- *   tags: Wildlife, Boating   (comma-separated; articles are filterable by tag on /logbook/)
+ *   tags: Wildlife, Boating   (comma-separated; filterable on /logbook/; "Pinned" floats to the top and shows on cards only)
  *   description, image, imageAlt, updated (YYYY-MM-DD), draft (true hides it from builds)
  */
 const LOGBOOK_DIR = path.join(process.cwd(), "content", "logbook");

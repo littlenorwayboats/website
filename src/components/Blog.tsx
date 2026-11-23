@@ -7,7 +7,26 @@ import {
   isLogbookArticle,
   type LogbookEntry,
 } from "@/lib/logbook";
+import { filterableTags, visibleTags } from "@/lib/logbook-tags";
 import { logbookArticlePath } from "@/lib/paths";
+
+function TagList({ tags }: { tags: string[] }) {
+  const shown = visibleTags(tags);
+  if (shown.length === 0) return null;
+
+  return (
+    <ul aria-label="Tags" className="mt-2 flex flex-wrap gap-1.5">
+      {shown.map((tag) => (
+        <li
+          key={tag}
+          className="rounded-full bg-iron/10 px-2 py-0.5 text-[10px] leading-tight font-bold tracking-label text-rust uppercase"
+        >
+          {tag}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 function ArticleTeaser({ entry }: { entry: LogbookEntry }) {
   const href = logbookArticlePath(entry.slug);
@@ -39,18 +58,7 @@ function ArticleTeaser({ entry }: { entry: LogbookEntry }) {
             {entry.title}
           </Link>
         </h3>
-        {entry.tags.length > 0 ? (
-          <ul aria-label="Tags" className="mt-3 flex flex-wrap gap-2">
-            {entry.tags.map((tag) => (
-              <li
-                key={tag}
-                className="rounded-full bg-iron/10 px-3 py-1 text-xs font-bold tracking-label text-rust uppercase"
-              >
-                {tag}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        <TagList tags={entry.tags} />
         {entry.description ? (
           <p className="mt-3 font-alegreya-sans text-norse-950">
             {entry.description}
@@ -86,6 +94,7 @@ function Note({ entry }: { entry: LogbookEntry }) {
       >
         {entry.title}
       </h3>
+      <TagList tags={entry.tags} />
       <div
         className="logbook-prose mt-4"
         dangerouslySetInnerHTML={{ __html: entry.html }}
@@ -94,53 +103,24 @@ function Note({ entry }: { entry: LogbookEntry }) {
   );
 }
 
-function SectionHeading({ id, children }: { id: string; children: string }) {
-  return (
-    <h2
-      id={id}
-      className="pb-3 text-xl font-bold tracking-[0.08em] text-norse-950 uppercase"
-    >
-      {children}
-    </h2>
-  );
-}
-
 export async function Blog() {
   const entries = await getLogbookEntries();
-  const news = entries.filter((entry) => !isLogbookArticle(entry));
-  const articles = entries.filter(isLogbookArticle);
-  const tags = [...new Set(articles.flatMap((article) => article.tags))].sort(
-    (a, b) => a.localeCompare(b),
-  );
+  const tags = [
+    ...new Set(entries.flatMap((entry) => filterableTags(entry.tags))),
+  ].sort((a, b) => a.localeCompare(b));
+  const posts = entries.map((entry) => ({
+    slug: entry.slug,
+    tags: entry.tags,
+    teaser: isLogbookArticle(entry) ? (
+      <ArticleTeaser entry={entry} />
+    ) : (
+      <Note entry={entry} />
+    ),
+  }));
 
   return (
-    <div className="mx-auto flex max-w-3xl flex-col gap-16 px-4">
-      {news.length > 0 ? (
-        <section aria-labelledby="logbook-news">
-          <SectionHeading id="logbook-news">News</SectionHeading>
-          <div className="mt-6 flex flex-col gap-8">
-            {news.map((entry) => (
-              <Note key={entry.slug} entry={entry} />
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {articles.length > 0 ? (
-        <section aria-labelledby="logbook-articles">
-          <SectionHeading id="logbook-articles">Articles</SectionHeading>
-          <div className="mt-6">
-            <ArticleTagFilter
-              tags={tags}
-              articles={articles.map((article) => ({
-                slug: article.slug,
-                tags: article.tags,
-                teaser: <ArticleTeaser entry={article} />,
-              }))}
-            />
-          </div>
-        </section>
-      ) : null}
-    </div>
+    <section aria-label="Logbook posts" className="mx-auto max-w-3xl px-4">
+      <ArticleTagFilter tags={tags} posts={posts} />
+    </section>
   );
 }
