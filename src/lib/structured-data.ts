@@ -4,6 +4,7 @@ import type { LogbookArticle } from "./logbook";
 import { logbookArticlePath } from "./paths";
 import {
   INSTAGRAM_URL,
+  YOUTUBE_URL,
   OG_IMAGE,
   SITE_ADDRESS,
   SITE_DESCRIPTION,
@@ -53,7 +54,7 @@ export function organizationJsonLd() {
             longitude: SITE_GEO.longitude,
           },
         },
-        sameAs: [INSTAGRAM_URL],
+        sameAs: [INSTAGRAM_URL, YOUTUBE_URL],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Voyage packages",

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FooterLinks } from "./FooterLinks";
 import { Logo } from "./Logo";
 import { Wordmark } from "./Wordmark";
-import { INSTAGRAM_URL, SITE_AREA } from "@/lib/site";
+import { INSTAGRAM_URL, SITE_AREA, YOUTUBE_URL } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -58,6 +58,21 @@ export function Footer() {
                   <path
                     fill="currentColor"
                     d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 4.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 2A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5zM17.2 6.8a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"
+                  />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                className="inline-flex size-10 items-center justify-center rounded-full border border-parchment/70 text-parchment hover:border-rust hover:text-rust"
+                href={YOUTUBE_URL}
+                rel="noreferrer noopener"
+              >
+                <span className="sr-only">YouTube</span>
+                <svg viewBox="0 0 24 24" className="size-4" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.8 15.5v-7l6.2 3.5-6.2 3.5z"
                   />
                 </svg>
               </a>

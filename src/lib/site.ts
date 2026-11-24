@@ -26,6 +26,8 @@ export const SITE_GEO = {
 
 export const INSTAGRAM_URL = "https://www.instagram.com/littlenorwayboats";
 
+export const YOUTUBE_URL = "https://www.youtube.com/@LittleNorwayBoats";
+
 export const OG_IMAGE = {
   url: "/images/og-image.jpg",
   width: 1200,
