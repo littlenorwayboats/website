@@ -19,6 +19,8 @@ export const SITE_ADDRESS = {
   addressCountry: "US",
 } as const;
 
+export const SITE_PHONE = "+1-360-755-8552";
+
 export const SITE_GEO = {
   latitude: 47.73358,
   longitude: -122.64699,

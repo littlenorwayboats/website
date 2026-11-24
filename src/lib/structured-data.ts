@@ -1,3 +1,4 @@
+import { socialImage } from "./images";
 import { voyagePackages } from "./packages";
 import { faqs } from "./faqs";
 import type { LogbookArticle } from "./logbook";
@@ -10,6 +11,7 @@ import {
   SITE_DESCRIPTION,
   SITE_GEO,
   SITE_NAME,
+  SITE_PHONE,
   absoluteUrl,
   getSiteUrl,
 } from "./site";
@@ -36,6 +38,7 @@ export function organizationJsonLd() {
         url: `${siteUrl}/`,
         description: SITE_DESCRIPTION,
         image: absoluteUrl(OG_IMAGE.url),
+        telephone: SITE_PHONE,
         address: {
           "@type": "PostalAddress",
           ...SITE_ADDRESS,
@@ -84,7 +87,11 @@ export function articleJsonLd(article: LogbookArticle) {
         mainEntityOfPage: url,
         headline: article.title,
         description: article.description,
-        image: absoluteUrl(article.image ?? OG_IMAGE.url),
+        image: absoluteUrl(
+          (article.image && socialImage(article.image)?.url) ??
+            article.image ??
+            OG_IMAGE.url,
+        ),
         datePublished: article.date,
         dateModified: article.updated ?? article.date,
         inLanguage: "en-US",

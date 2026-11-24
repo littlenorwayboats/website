@@ -1,5 +1,6 @@
 export const TARGET_WIDTHS = [640, 828, 1080, 1920] as const;
 export const OPTIMIZED_PREFIX = "/optimized";
+export const SOCIAL_WIDTH = 1200;
 
 export type ImageManifestEntry = {
   width: number;
@@ -22,6 +23,11 @@ export function optimizedVariantPath(
   const dir = src.slice(0, lastSlash);
   const filename = src.slice(lastSlash + 1);
   return `${OPTIMIZED_PREFIX}${dir}/${filename}-${width}.${format}`;
+}
+
+/** JPEG used for og:image / twitter:image / JSON-LD, which crawlers fetch without srcset. */
+export function socialVariantPath(src: string): string {
+  return `${OPTIMIZED_PREFIX}${src}-social.jpg`;
 }
 
 export function widthsForSource(sourceWidth: number): number[] {

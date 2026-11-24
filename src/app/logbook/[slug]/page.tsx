@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { getImageEntry } from "@/lib/images";
+import { socialImage } from "@/lib/images";
 import {
   formatLogbookDate,
   getLogbookArticle,
@@ -31,15 +31,12 @@ export async function generateMetadata({
   if (!article) return {};
 
   const path = logbookArticlePath(article.slug);
-  const imageEntry = article.image ? getImageEntry(article.image) : undefined;
+  const social = article.image ? socialImage(article.image) : undefined;
   const images = article.image
     ? [
         {
-          url: article.image,
+          ...(social ?? { url: article.image }),
           alt: article.imageAlt ?? article.title,
-          ...(imageEntry
-            ? { width: imageEntry.width, height: imageEntry.height }
-            : {}),
         },
       ]
     : undefined;

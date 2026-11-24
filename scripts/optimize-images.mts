@@ -4,7 +4,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import {
+  SOCIAL_WIDTH,
   optimizedVariantPath,
+  socialVariantPath,
   widthsForSource,
   type ImageManifest,
   type ImageManifestEntry,
@@ -13,6 +15,7 @@ import {
 const CACHE_VERSION = 1;
 const WEBP_QUALITY = 80;
 const AVIF_QUALITY = 50;
+const SOCIAL_JPEG_QUALITY = 82;
 const SOURCE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -51,8 +54,9 @@ async function main() {
       continue;
     }
 
-    const width = meta.width ?? 0;
-    const height = meta.height ?? 0;
+    // EXIF-rotated phone photos report sensor dimensions; variants are rotated, so record display size.
+    const width = meta.autoOrient?.width ?? meta.width ?? 0;
+    const height = meta.autoOrient?.height ?? meta.height ?? 0;
     if (width < 1 || height < 1) {
       console.warn(`skip image with unknown dimensions ${src}`);
       continue;
@@ -67,6 +71,7 @@ async function main() {
       expectedOutputs.add(outputAbsPath(src, targetWidth, "avif"));
       expectedOutputs.add(outputAbsPath(src, targetWidth, "webp"));
     }
+    expectedOutputs.add(socialAbsPath(src));
 
     const cached = cache.entries[src];
     const canReuse =
@@ -107,11 +112,20 @@ function outputAbsPath(
   return path.join(publicDir, optimizedVariantPath(src, width, format).slice(1));
 }
 
+function socialAbsPath(src: string): string {
+  return path.join(publicDir, socialVariantPath(src).slice(1));
+}
+
 function sameWidths(left: number[], right: number[]): boolean {
   return left.length === right.length && left.every((value, index) => value === right[index]);
 }
 
 async function allFilesExist(widths: number[], src: string): Promise<boolean> {
+  try {
+    await fs.access(socialAbsPath(src));
+  } catch {
+    return false;
+  }
   for (const width of widths) {
     for (const format of ["avif", "webp"] as const) {
       try {
@@ -143,6 +157,15 @@ async function writeVariants(
       }
     }
   }
+
+  const socialFile = socialAbsPath(src);
+  await fs.mkdir(path.dirname(socialFile), { recursive: true });
+  await sharp(bytes, { failOn: "none" })
+    .rotate()
+    .resize({ width: SOCIAL_WIDTH, withoutEnlargement: true })
+    .flatten({ background: "#ffffff" })
+    .jpeg({ quality: SOCIAL_JPEG_QUALITY, mozjpeg: true })
+    .toFile(socialFile);
 }
 
 async function findSourceImages(dir: string): Promise<string[]> {

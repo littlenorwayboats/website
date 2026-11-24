@@ -1,6 +1,8 @@
 import imageManifestJson from "./image-manifest.json";
 import {
+  SOCIAL_WIDTH,
   optimizedVariantPath,
+  socialVariantPath,
   type ImageManifest,
   type ImageManifestEntry,
 } from "./image-paths";
@@ -13,6 +15,19 @@ export const imageManifest = imageManifestJson as ImageManifest;
 
 export function getImageEntry(src: string): ImageManifestEntry | undefined {
   return imageManifest[src];
+}
+
+export function socialImage(
+  src: string,
+): { url: string; width: number; height: number } | undefined {
+  const entry = getImageEntry(src);
+  if (!entry) return undefined;
+  const width = Math.min(entry.width, SOCIAL_WIDTH);
+  return {
+    url: socialVariantPath(src),
+    width,
+    height: Math.round((entry.height * width) / entry.width),
+  };
 }
 
 export function cssImageSet(src: string): string {

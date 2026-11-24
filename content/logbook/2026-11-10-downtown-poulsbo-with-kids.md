@@ -17,7 +17,7 @@ Start on the water at [Muriel Iverson Williams Waterfront Park](https://poulsbo.
 
 Watch the shoreline and open water. Harbor seals surface in Liberty Bay, and on clear days bald eagles are a common sight along the waterfront.
 
-![Bald eagle along the Poulsbo waterfront at Muriel Iverson Williams Waterfront Park on Liberty Bay.](/images/blog/eagle-at-waterfront-park.png)
+![Bald eagle along the Poulsbo waterfront at Muriel Iverson Williams Waterfront Park on Liberty Bay.](/images/blog/eagle-at-waterfront-park.jpg)
 
 
 ## Boardwalk walk to American Legion Park

@@ -17,7 +17,7 @@ Gliding out from the Poulsbo Marina into the calm, sheltered waters of Liberty B
 
 The undisputed stars of Liberty Bay. Because the bay is a protected pupping ground, seeing curious, spotted heads bobbing near your boat—or spotting groups hauled out on log booms and sandbars—is virtually guaranteed year-round.
 
-<video class="logbook-video" src="/images/blog/seals-movie.MP4" loop muted playsinline autoplay controls title="Harbor seals surfacing in Liberty Bay"></video>
+<video class="logbook-video" src="/images/blog/seals-in-liberty-bay.mp4" poster="/images/blog/seals-in-liberty-bay-poster.jpg" width="960" height="540" preload="none" loop muted playsinline autoplay controls title="Harbor seals surfacing in Liberty Bay"></video>
 
 ### North American River Otters
 
@@ -33,7 +33,7 @@ While extremely infrequent, Bigg's (transient) orcas do occasionally make headli
 
 Nearly impossible to miss, bald eagles perch like sentinels atop the tall Douglas firs ringing the bay and swoop low over the water to snatch fish.
 
-![Bald eagle soaring over Liberty Bay near Poulsbo.](/images/blog/liberty-bay-eagle.png)
+![Bald eagle soaring over Liberty Bay near Poulsbo.](/images/blog/liberty-bay-eagle.jpg)
 
 ### Bufflehead Ducks
 
