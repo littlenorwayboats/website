@@ -9,6 +9,14 @@
       1920
     ]
   },
+  "/images/blog/downtown-poulsbo-rainbow-front-street.jpg": {
+    "width": 768,
+    "height": 1024,
+    "widths": [
+      640,
+      768
+    ]
+  },
   "/images/blog/eagle-at-waterfront-park.png": {
     "width": 1934,
     "height": 1430,
@@ -57,6 +65,15 @@
       828,
       1080,
       1382
+    ]
+  },
+  "/images/blog/poulsbo-marina-olympic-mountains-sunrise.jpg": {
+    "width": 1024,
+    "height": 768,
+    "widths": [
+      640,
+      828,
+      1024
     ]
   },
   "/images/blog/sunset-with-mountains.JPG": {
