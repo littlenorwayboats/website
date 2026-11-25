@@ -48,6 +48,16 @@ export function Hero({ action }: { action?: ReactNode }) {
           className="hero-legible w-full min-w-0 max-w-full overflow-hidden text-center md:w-[54%] md:pr-6 lg:w-[48%]"
           image={<HeroPhoto />}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element -- static export serves SVGs as-is */}
+          <img
+            src={withBasePath("/images/primary-icon-hover-without-text.svg")}
+            alt=""
+            aria-hidden="true"
+            width={489}
+            height={356}
+            decoding="async"
+            className="mx-auto mt-16 mb-4 block h-auto w-28 sm:mt-20 sm:w-36"
+          />
           <h1
             id="hero-heading"
             className="w-full max-w-full font-hero text-[clamp(1.85rem,5.6vw,3.65rem)] leading-[1.18] font-semibold tracking-[0.06em] text-balance text-gold-bright sm:tracking-[0.08em]"
