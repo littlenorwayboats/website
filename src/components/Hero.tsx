@@ -56,7 +56,7 @@ export function Hero({ action }: { action?: ReactNode }) {
             width={489}
             height={356}
             decoding="async"
-            className="mx-auto mt-16 mb-4 block h-auto w-28 sm:mt-20 sm:w-36"
+            className="hero-icon mx-auto mt-16 mb-4 block h-auto w-28 sm:mt-20 sm:w-36"
           />
           <h1
             id="hero-heading"
