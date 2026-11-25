@@ -48,29 +48,16 @@ export function Hero({ action }: { action?: ReactNode }) {
           className="hero-legible w-full min-w-0 max-w-full overflow-hidden text-center md:w-[54%] md:pr-6 lg:w-[48%]"
           image={<HeroPhoto />}
         >
-          <span
-            className="group/helmet relative mx-auto mt-16 mb-4 block aspect-[489/356] w-28 sm:mt-20 sm:w-36"
+          {/* eslint-disable-next-line @next/next/no-img-element -- static export serves SVGs as-is */}
+          <img
+            src={withBasePath("/images/primary-icon-without-text-cream.svg")}
+            alt=""
             aria-hidden="true"
-          >
-            {/* eslint-disable @next/next/no-img-element -- static export serves SVGs as-is */}
-            <img
-              src={withBasePath("/images/primary-icon-hover-without-text.svg")}
-              alt=""
-              width={489}
-              height={356}
-              decoding="async"
-              className="absolute inset-0 size-full opacity-0 transition-opacity duration-200 ease-out group-hover/helmet:opacity-100"
-            />
-            <img
-              src={withBasePath("/images/primary-icon-without-text-cream.svg")}
-              alt=""
-              width={489}
-              height={356}
-              decoding="async"
-              className="absolute inset-0 size-full transition-opacity duration-200 ease-out group-hover/helmet:opacity-0"
-            />
-            {/* eslint-enable @next/next/no-img-element */}
-          </span>
+            width={489}
+            height={356}
+            decoding="async"
+            className="mx-auto mt-16 mb-4 block h-auto w-28 sm:mt-20 sm:w-36"
+          />
           <h1
             id="hero-heading"
             className="w-full max-w-full font-hero text-[clamp(1.85rem,5.6vw,3.65rem)] leading-[1.18] font-semibold tracking-[0.06em] text-balance text-gold-bright sm:tracking-[0.08em]"
