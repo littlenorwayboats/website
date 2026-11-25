@@ -1,4 +1,22 @@
 {
+  "/images/blog/bainbridge-island-ferry-ride-at-sunset.jpg": {
+    "width": 1024,
+    "height": 723,
+    "widths": [
+      640,
+      828,
+      1024
+    ]
+  },
+  "/images/blog/child-looking-out-ferry-window-at-sunset.jpg": {
+    "width": 1024,
+    "height": 900,
+    "widths": [
+      640,
+      828,
+      1024
+    ]
+  },
   "/images/blog/downtown-phone-booth.jpg": {
     "width": 1800,
     "height": 2400,
@@ -15,6 +33,15 @@
     "widths": [
       640,
       768
+    ]
+  },
+  "/images/blog/driving-past-gig-harbor-with-rainbow.jpg": {
+    "width": 1024,
+    "height": 762,
+    "widths": [
+      640,
+      828,
+      1024
     ]
   },
   "/images/blog/eagle-at-waterfront-park.jpg": {
